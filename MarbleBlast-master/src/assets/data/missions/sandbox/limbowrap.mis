@@ -1,0 +1,1583 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         time = "0";
+         type = "Sandbox";
+         desc = "You have been stuck in Limbo--can you find the gems in this dark, mad place?";
+         goldTime = "25000";
+         artist = "Whirligig231";
+         level = "6";
+         music = "limbo.ogg";
+         name = "Toroidal Limbo";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "108";
+      useSkyTextures = "0";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.000000 0.000000 0.000000 1.000000";
+      fogDistance = "72";
+      fogColor = "0.000000 0.000000 0.000000 1.000000";
+      fogVolume1 = "-1 0 0";
+      fogVolume2 = "-1 0 0";
+      fogVolume3 = "-1 0 0";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 0.000000";
+   };
+   new ScriptObject() {
+         powerUp = "0";
+         pad = "1801";
+         bonusTime = "0";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+   };
+   new Sun() {
+      direction = "0 -0.85 -1";// 0 -0.8 -1
+      color = "0.200000 0.200000 0.200000 1.000000";
+      ambient = "0.200000 0.200000 0.200000 1.000000";//0.300000 0.300000 0.300000 1.000000
+   };
+   new Sun() {
+      direction = "0 -0.5 1"; // 0 -0.5 1
+      color = "0.200000 0.200000 0.200000 1.000000";
+      ambient = "0.200000 0.200000 0.200000 1.000000";
+   };
+   new Trigger(Bounds) {
+      position = "-100 100 -11.5";
+      rotation = "1 0 0 0";
+      scale = "200 200 43";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new SimGroup(main_group1) {
+
+      new StaticShape() {
+         position = "0.15162 -11.9794 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "SignFinish";
+      };
+      new StaticShape(StartPoint) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "StartPad";
+      };
+      new StaticShape(EndPoint) {
+         position = "0 -12 10";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "EndPad";
+      };
+      new Item() {
+         position = "0.15162 -11.9794 20.7516";
+         rotation = "1 0 0 0";
+         scale = "0.5 0.5 0.5";
+         dataBlock = "SkillPointItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            particles = "2629";
+      };
+      new InteriorInstance() {
+         position = "0 0 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "-12 -12 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "GemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "12 12 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "GemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "0 12 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "GemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+             myIndex = 1;
+      };
+      new Item() {
+         position = "0 6 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "-12 0 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "GemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group2) {
+
+      new StaticShape() {
+         position = "-35.8484 -11.9794 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "-36 0 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "-48 -12 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "-24 12 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "-36 12 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "-36 6 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "-48 0 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group3) {
+
+      new StaticShape() {
+         position = "36.1516 -11.9794 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "36 0 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "24 -12 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "48 12 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "36 12 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "36 6 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "24 0 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group4) {
+
+      new StaticShape() {
+         position = "-35.8484 24.0206 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "-36 36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "-48 24 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "-24 48 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "-36 48 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "-36 42 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "-48 36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group44) {
+
+      new StaticShape() {
+         position = "-71.8484 24.0206 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "-72 36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "-84 24 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+         myIndex = 2;
+      };
+      new Item() {
+         position = "-60 48 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+         myIndex = 3;
+      };
+      new Item() {
+         position = "-72 48 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+         myIndex = 1;
+      };
+      new Item() {
+         position = "-72 42 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+         reliant = "2895";
+      };
+      new Item() {
+         position = "-84 36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+         reliant = "2897";
+      };
+   };
+   new SimGroup(main_group45) {
+
+      new StaticShape() {
+         position = "72.8484 24.0206 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "72 36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "84 24 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "60 48 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "72 48 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "72 42 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "84 36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group47) {
+
+      new StaticShape() {
+         position = "72.1516 -47.9794 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "72 -36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "60 -48 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "84 -24 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "72 -24 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "72 -30 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "60 -36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group48) {
+
+      new StaticShape() {
+         position = "0.1516 60.0206 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "0 72 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "-12 60 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new TSStatic() {
+         position = "0 72 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         shapeName = "~/data/shapes/pads/startarea.dts";
+      };
+      new Item() {
+         position = "12 84 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "0 84 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "0 78 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "-12 72 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group5) {
+
+      new StaticShape() {
+         position = "0.15162 24.0206 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "0 36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "-12 24 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "12 48 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "0 48 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "0 42 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "-12 36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group6) {
+
+      new StaticShape() {
+         position = "-35.8484 -47.9794 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "-36 -36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "-48 -48 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "-24 -24 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "-36 -24 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "-36 -30 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "-48 -36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group7) {
+
+      new StaticShape() {
+         position = "0.15162 -47.9794 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "0 -36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "-12 -48 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "12 -24 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+         myIndex = 3;
+      };
+      new Item() {
+         position = "0 -24 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "0 -30 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "-12 -36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group8) {
+
+      new StaticShape() {
+         position = "36.1516 24.0206 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "36 36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "24 24 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "48 48 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "36 48 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "36 42 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "24 36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group9) {
+
+      new InteriorInstance() {
+         position = "36 -36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped2/wrapped2.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "24 -48 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "48 -24 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "36 -24 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "36 -30 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "24 -36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+      new StaticShape() {
+         position = "36.1516 -47.9794 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+   };
+   new ScriptObject() {
+         powerUp = "0";
+         pad = "2420";
+         bonusTime = "0";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+   };
+   new ScriptObject() {
+         powerUp = "0";
+         pad = "2475";
+         bonusTime = "0";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+   };
+   new ScriptObject() {
+         powerUp = "0";
+         pad = "2497";
+         bonusTime = "0";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+   };
+   new ScriptObject() {
+         powerUp = "0";
+         pad = "2499";
+         bonusTime = "0";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+   };
+   new TSStatic() {
+      position = "-36 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/startarea.dts";
+   };
+   new TSStatic() {
+      position = "-36 -12 10";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/endarea.dts";
+   };
+   new TSStatic() {
+      position = "-36 36 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/startarea.dts";
+   };
+   new TSStatic() {
+      position = "-36 24 10";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/endarea.dts";
+   };
+   new TSStatic() {
+      position = "0 36 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/startarea.dts";
+   };
+   new TSStatic() {
+      position = "0 24 10";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/endarea.dts";
+   };
+   new TSStatic() {
+      position = "36 36 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/startarea.dts";
+   };
+   new TSStatic() {
+      position = "36 24 10";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/endarea.dts";
+   };
+   new TSStatic() {
+      position = "36 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/startarea.dts";
+   };
+   new TSStatic() {
+      position = "36 -12 10";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/endarea.dts";
+   };
+   new TSStatic() {
+      position = "36 -36 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/startarea.dts";
+   };
+   new TSStatic() {
+      position = "36 -48 10";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/endarea.dts";
+   };
+   new TSStatic() {
+      position = "0 -36 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/startarea.dts";
+   };
+   new TSStatic() {
+      position = "0 -48 10";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/endarea.dts";
+   };
+   new TSStatic() {
+      position = "-36 -36 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/startarea.dts";
+   };
+   new TSStatic() {
+      position = "-36 -48 10";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/endarea.dts";
+   };
+   new SimGroup(main_group10) {
+
+      new StaticShape() {
+         position = "-71.8484 24.0206 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "-72 36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped3/wrapped3.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "-84 24 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "-60 48 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "-72 48 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "-72 42 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "-84 36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+      new StaticShape() {
+         position = "-71.8484 -12.7294 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "-72 -0.75 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped3/wrapped3.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "-84 -12.75 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "-60 11.25 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "-72 11.25 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "-72 5.25 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "-84 -0.75 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+      new StaticShape() {
+         position = "-71.8484 -47.9794 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "-72 -36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped3/wrapped3.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "-84 -48 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "-60 -24 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "-72 -24 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "-72 -30 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "-84 -36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new SimGroup(main_group11) {
+
+      new StaticShape() {
+         position = "72.1516 24.0206 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "72 36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped3/wrapped3.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "60 24 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "84 48 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "72 48 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "72 42 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "60 36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+      new StaticShape() {
+         position = "72.1516 -12.7294 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "72 -0.75 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped3/wrapped3.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "60 -12.75 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "84 11.25 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "72 11.25 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "72 5.25 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "60 -0.75 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+      new StaticShape() {
+         position = "72.1516 -47.9794 18.7516";
+         rotation = "0 0 1 32";
+         scale = "1 1 1";
+         dataBlock = "DummySignFinish";
+      };
+      new InteriorInstance() {
+         position = "72 -36 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/toroidal/wrapped3/wrapped3.dif";
+         showTerrainInside = "0";
+      };
+      new Item() {
+         position = "60 -48 -8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 2;
+      };
+      new Item() {
+         position = "84 -24 8";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 3;
+      };
+      new Item() {
+         position = "72 -24 -2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            myIndex = 1;
+      };
+      new Item() {
+         position = "72 -30 6.2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "SuperJumpItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2895";
+      };
+      new Item() {
+         position = "60 -36 2";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "DummyGemItem";
+         collideable = "0";
+         static = "1";
+         rotate = "1";
+            reliant = "2897";
+      };
+   };
+   new ScriptObject() {
+         powerUp = "0";
+         pad = "2483";
+         bonusTime = "0";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+   };
+   new Trigger() {
+      position = "-17.8924 19.215 -6.25089";
+      rotation = "1 0 0 0";
+      scale = "0.1 34.4236 30.7454";
+      dataBlock = "TeleportTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         keepvelocity = "1";
+         destination = "spawn1";
+         keepangular = "1";
+         keepcamera = "1";
+   };
+   new ScriptObject() {
+         powerUp = "0";
+         pad = "2412";
+         bonusTime = "0";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+   };
+   new Trigger(spawn1) {
+      position = "17.3576 19.215 -6.25089";
+      rotation = "1 0 0 0";
+      scale = "0.1 34.4236 30.7454";
+      dataBlock = "DestinationTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Trigger() {
+      position = "17.8576 19.215 -6.25089";
+      rotation = "1 0 0 0";
+      scale = "0.1 34.4236 30.7454";
+      dataBlock = "TeleportTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         keepvelocity = "1";
+         destination = "spawn2";
+         keepangular = "1";
+         keepcamera = "1";
+   };
+   new Trigger(spawn2) {
+      position = "-16.8924 19.215 -6.25089";
+      rotation = "1 0 0 0";
+      scale = "0.1 34.4236 30.7454";
+      dataBlock = "DestinationTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new ScriptObject() {
+         powerUp = "0";
+         pad = "2414";
+         bonusTime = "0";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+   };
+   new ScriptObject() {
+         powerUp = "0";
+         pad = "2414";
+         bonusTime = "0";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+   };
+   new Trigger() {
+      position = "-16.5428 18.2619 -7.58652";
+      rotation = "1 0 0 0";
+      scale = "34.4236 0.1 32.2092";
+      dataBlock = "TeleportTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         keepvelocity = "1";
+         destination = "spawn3";
+         keepangular = "1";
+         keepcamera = "1";
+   };
+   new Trigger(spawn3) {
+      position = "-16.5428 -17.4881 -7.58652";
+      rotation = "1 0 0 0";
+      scale = "34.4236 0.1 32.2092";
+      dataBlock = "DestinationTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Trigger(spawn4) {
+      position = "-16.5428 17.5119 -7.94483";
+      rotation = "1 0 0 0";
+      scale = "34.4236 0.1 32.5675";
+      dataBlock = "DestinationTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Trigger() {
+      position = "-16.5428 -18.2381 -7.94483";
+      rotation = "1 0 0 0";
+      scale = "34.4236 0.1 32.5675";
+      dataBlock = "TeleportTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         keepvelocity = "1";
+         destination = "spawn4";
+         keepangular = "1";
+         keepcamera = "1";
+   };
+   new ScriptObject() {
+         powerUp = "0";
+         pad = "2726";
+         bonusTime = "0";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+   };
+};
+//--- OBJECT WRITE END ---

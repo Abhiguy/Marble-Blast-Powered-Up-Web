@@ -1,0 +1,147 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         type = "Sandbox";
+         time = "0";
+         desc = "Trapped in Limbo for the final time, use the rotating platforms to jump to freedom!";
+         name = "Angular Limbo";
+         level = "18";
+         goldTime = "25000";
+         music = "limbo.ogg";
+         artist = "Whirligig231";
+         requireGravity = "1";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "72";
+      useSkyTextures = "0";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.000000 0.000000 0.000000 1.000000";
+      fogDistance = "72";
+      fogColor = "0.000000 0.000000 0.000000 1.000000";
+      fogVolume1 = "-1 0 0";
+      fogVolume2 = "-1 0 0";
+      fogVolume3 = "-1 0 0";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 0.000000";
+   };
+   new Sun() {
+      direction = "0.57735 0.57735 -0.57735";
+      color = "0.300000 0.300000 0.300000 1.000000";
+      ambient = "0.100000 0.100000 0.100000 1.000000";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/limboangle.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape(StartPoint) {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new StaticShape(EndPoint) {
+      position = "0 0 -0.5";
+      rotation = "0 1 0 180";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new Trigger(Bounds) {
+      position = "-33.5 54 -5.62929";
+      rotation = "1 0 0 0";
+      scale = "46 59.5 23.7586";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new StaticShape() {
+      position = "0.259747 -0.268198 -6.92571";
+      rotation = "1 0 0 180";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new StaticShape() {
+      position = "-7 21 -0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "RotatingPlatform2";
+      x_axisrot = 1;
+      y_axisrot = 0;
+      z_axisrot = 0;
+      rotmultiplier = 6000;
+   };
+   new StaticShape() {
+      position = "-12 26 -0.25";
+      rotation = "0 1 0 0.665582";
+      scale = "1 1 1";
+      dataBlock = "RotatingPlatform2";
+      x_axisrot = 0;
+      y_axisrot = 1;
+      z_axisrot = 0;
+      rotmultiplier = 6000;
+   };
+   new StaticShape() {
+      position = "-6.70242 43.9771 -0.802254";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "RotatingPlatform1";
+   };
+   new StaticShape() {
+      position = "-24.214 46.1612 0.463345";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "RotatingPlatform1";
+   };
+   new StaticShape() {
+      position = "-28 26.5 -0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "RotatingPlatform2";
+      x_axisrot = 0;
+      y_axisrot = 1;
+      z_axisrot = 0;
+      keepgravity = 1;
+      rotmultiplier = 6000;
+      keeppauses = 1;
+   };
+   new ScriptObject() {
+         bonusTime = "0";
+         powerUp = "0";
+         time = "0";
+         gemCount = "0";
+         penaltyTime = "0";
+         pad = "1832";
+   };
+   new Item() {
+      position = "-7 21 3";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkillPointItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+};
+//--- OBJECT WRITE END ---

@@ -1,0 +1,335 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         artist = "Threefolder, Whirligig231";
+         level = "20";
+         music = "whale lullaby.ogg";
+         startHelpText = "You can jump higher underwater.";
+         type = "Sandbox";
+         name = "Getting Used to the Water";
+         goldTime = "40000";
+         desc = "Oh, no! You\'ve sunk to the bottom of the ocean!";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "0";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.000000 0.100000 0.200000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+         locked = "true";
+   };
+   new Sun() {
+      direction = "0.544508 0.439467 -0.714409";
+      color = "0.000000 0.200000 0.400000 1.000000";
+      ambient = "0.100000 0.100000 0.300000 1.000000";
+         position = "0 0 0";
+         locked = "true";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+   };
+   new SimGroup(CheckPoints) {
+
+      new StaticShape(StartPoint) {
+         position = "-29.5937 -20.9921 496.415";
+         rotation = "0 0 1 89.9544";
+         scale = "1 1 1";
+         dataBlock = "StartPad";
+      };
+      new StaticShape(EndPoint) {
+         position = "-8.58141 -2.482 518.92";
+         rotation = "1 0 0 180";
+         scale = "1 1 1";
+         dataBlock = "EndPad";
+      };
+   };
+   new Trigger(Bounds) {
+      position = "-42.7224 45.5372 495.72";
+      rotation = "1 0 0 0";
+      scale = "50 125 75";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new StaticShape(EndSign) {
+      position = "-9.11489 -0.830809 533.706";
+      rotation = "0 0 1 210.939";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new InteriorInstance() {
+      position = "-101.573 -88.9828 494.42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/ocean.dif";
+      showTerrainInside = "0";
+   };
+   new Trigger(fly) {
+      position = "-15.5376 -59.5026 510.909";
+      rotation = "1 0 0 0";
+      scale = "5 5 20";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Jump and speed over to the platform with the yellow arrow.";
+   };
+   new Item() {
+      position = "-13.0669 -20.979 501.459";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-13.0961 -45.4609 501.466";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-13.0691 -62.0051 518.941";
+      rotation = "1 0 0 0";
+      scale = "2 2 2";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-13.0007 35.6991 514.126";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "-10.8575 -59.782 512.153";
+      rotation = "0 0 1 72.7656";
+      scale = "1 1 1";
+      dataBlock = "SignPlainLeft";
+   };
+   new Item() {
+      position = "-13.0156 13.0566 510.919";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-8.56771 21.116 526.996";
+      rotation = "1 0 0 0";
+      scale = "2 2 2";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-8.55928 2.38517 524.963";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-8.54497 21.0276 519.455";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-8.56873 -1.43193 519.479";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "-6.42121 -8.47552 525.953";
+      rotation = "0.0368314 -0.242392 0.969479 163.24";
+      scale = "1 1 1";
+      dataBlock = "SignPlainDown";
+   };
+   new StaticShape() {
+      position = "-10.3641 -6.37817 520.496";
+      rotation = "-0.0531127 -0.227656 0.972292 205.561";
+      scale = "1 1 1";
+      dataBlock = "SignPlainDown";
+   };
+   new Trigger(longjump) {
+      position = "-15.5595 -24.9632 501.415";
+      rotation = "1 0 0 0";
+      scale = "5 0.5 5";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Making long jumps underwater is a snap!";
+   };
+   new Trigger(slope) {
+      position = "-15.5585 -47.431 501.418";
+      rotation = "1 0 0 0";
+      scale = "5 0.5 5";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Use the slope to your advantage!";
+   };
+   new Item() {
+      position = "-13.0934 -61.959 511.285";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Trigger(air) {
+      position = "-10.8192 0.217943 519.402";
+      rotation = "1 0 0 0";
+      scale = "4.75 5 5";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "The finish is right below you!";
+   };
+   new Trigger(wiggly) {
+      position = "-15.5608 17.5318 510.92";
+      rotation = "1 0 0 0";
+      scale = "5 0.5 5";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Wall-hit off the wiggly, squiggly... stuff...\n...to get up to the floating gem.";
+   };
+   new Trigger(air) {
+      position = "-11.0607 -1.52741 524.922";
+      rotation = "1 0 0 0";
+      scale = "5 0.5 5";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Air movement is a lot easier underwater.";
+   };
+   new ParticleEmitterNode() {
+      position = "-7.75 -20.5656 354.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "FireWorkNode";
+      emitter = "BubbleLocalEmitter";
+      velocity = "1";
+   };
+   new Item() {
+      position = "-8.53077 0.278519 518.402";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkillPointItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         particles = "2238";
+   };
+   new StaticShape(Mover) {
+      position = "-32.5617 -2.02234 498.081";
+      rotation = "0 0 1 45.8367";
+      scale = "1 1 1";
+      dataBlock = "FishMine";
+         resetTime = "Default";
+      my_x = 60;
+      my_y = -48;
+      my_z = 0;
+      my_speed = 1;
+   };
+   new StaticShape(Mover) {
+      position = "-26.2901 21.791 523.473";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "FishMine";
+         resetTime = "Default";
+      my_x = 30;
+      my_y = 0;
+      my_z = 0;
+      my_speed = 2.5;
+   };
+   new StaticShape(Mover) {
+      position = "-4.47503 10.6263 514.525";
+      rotation = "0 0 1 143.812";
+      scale = "1 1 1";
+      dataBlock = "FishMine";
+         resetTime = "Default";
+      my_x = -30;
+      my_y = -30;
+      my_z = 0;
+      my_speed = 2;
+   };
+   new StaticShape(Mover) {
+      position = "4.61031 -49.1114 507.535";
+      rotation = "0 0 1 203.01";
+      scale = "1 1 1";
+      dataBlock = "FishMine";
+         resetTime = "Default";
+      my_x = -30;
+      my_y = 30;
+      my_z = 0;
+      my_speed = 1.92;
+   };
+   new StaticShape(Mover) {
+      position = "3.84618 -10.4271 522.829";
+      rotation = "0 0 1 180";
+      scale = "1 1 1";
+      dataBlock = "FishMine";
+         resetTime = "Default";
+      my_x = -30;
+      my_y = 0;
+      my_z = 0;
+      my_speed = 1.3;
+   };
+   new StaticShape(Mover) {
+      position = "-23.3304 5.76052 528.887";
+      rotation = "0 0 -1 40.68";
+      scale = "1 1 1";
+      dataBlock = "FishMine";
+         resetTime = "Default";
+      my_x = 30;
+      my_y = 0;
+      my_z = 0;
+      my_speed = 1;
+   };
+};
+//--- OBJECT WRITE END ---
+
+setMarbleAttributes("gravity", 5);

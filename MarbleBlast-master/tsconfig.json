@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"outDir": "./js",
+		"module": "es6",
+		"moduleResolution": "Node",
+		"target": "es2019",
+		"strict": true,
+		"strictNullChecks": false,
+		"lib": ["ESNext", "DOM", "DOM.Iterable", "WebWorker"],
+		"allowSyntheticDefaultImports": true,
+		"types": ["@types/wicg-file-system-access", "@types/dom-webcodecs", "@types/dom-screen-wake-lock"]
+	},
+	"include": [
+		"src/ts/**/*",
+		"src/node_modules/**/*",
+		"server/ts/**/*"
+	]
+}

@@ -1,0 +1,1025 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         desc = "Use the Stopped Time watches to freeze everything in this level!";
+         artist = "Aaron Youch, Whirligig231";
+         level = "15";
+         name = "A Different Kind of Watch";
+         goldTime = "1500";
+         type = "Sandbox";
+         time = "0";
+         music = "cookout.ogg";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 7.45949e-031 1.3684e-038";
+      fogVolume2 = "-1 1.07208e-014 8.756e-014";
+      fogVolume3 = "-1 5.1012e-010 2.05098e-008";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000004";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 14435505.000000";
+   };
+   new Sun() {
+      direction = "0.57735 0.57735 -0.57735";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/puStop.dif";
+      showTerrainInside = "0";
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "57.75 2.75 0";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "69.75 2.75 0";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "57.75 2.75 0";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "500";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/sandbox/puStop.dif";
+         interiorIndex = "0";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialTargetPosition = "-1";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "69.75 12.75 0";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "69.75 4.75 0";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "500";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "69.75 12.75 0";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "500";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/sandbox/puStop.dif";
+         interiorIndex = "1";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialTargetPosition = "-1";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "65.25 26.75 1.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "200";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "62.25 26.75 1.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "200";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "65.25 26.75 1.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "200";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/sandbox/puStop.dif";
+         interiorIndex = "2";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            initialTargetPosition = "-1";
+      };
+   };
+   new StaticShape(StartPoint) {
+      position = "1.8 -2.2 0.199996";
+      rotation = "0 0 1 90";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+         frozen = "0";
+   };
+   new StaticShape(EndPoint) {
+      position = "51.75 35.77 0.24";
+      rotation = "0 0 -1 90";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+         frozen = "0";
+   };
+   new Trigger(Bounds) {
+      position = "-3.75 41.25 -3.25";
+      rotation = "1 0 0 0";
+      scale = "1085.6 57 24.5";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new StaticShape() {
+      position = "27.8164 -13.9411 0.313009";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "Tornado";
+         frozen = "0";
+   };
+   new StaticShape() {
+      position = "12.7153 1.25749 1.26654";
+      rotation = "-1 0 0 90";
+      scale = "1 1 1";
+      dataBlock = "DuctFan";
+         frozen = "0";
+   };
+   new StaticShape() {
+      position = "8.775 1.26094 1.26032";
+      rotation = "-1 0 0 90";
+      scale = "1 1 1";
+      dataBlock = "DuctFan";
+         frozen = "0";
+   };
+   new StaticShape() {
+      position = "10.7482 1.25028 1.24";
+      rotation = "-1 0 0 90";
+      scale = "1 1 1";
+      dataBlock = "DuctFan";
+         frozen = "0";
+   };
+   new ScriptObject() {
+         gemCount = "0";
+         powerUp = "0";
+         pad = "1762";
+         bonusTime = "0";
+         time = "0";
+         penaltyTime = "0";
+   };
+   new StaticShape() {
+      position = "55.7466 37.278 3.19658";
+      rotation = "0 -1 0 90";
+      scale = "1 1 1";
+      dataBlock = "DuctFan";
+         frozen = "0";
+   };
+   new StaticShape() {
+      position = "21.1138 -12.95 0.26671";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "Tornado";
+         frozen = "0";
+   };
+   new StaticShape() {
+      position = "34.3865 -13.2189 0.15552";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "Tornado";
+         frozen = "0";
+   };
+   new StaticShape() {
+      position = "55.7437 34.2454 1.23971";
+      rotation = "0 -1 0 90";
+      scale = "1 1 1";
+      dataBlock = "DuctFan";
+         frozen = "0";
+   };
+   new StaticShape() {
+      position = "55.7218 34.2719 3.20481";
+      rotation = "0 -1 0 90";
+      scale = "1 1 1";
+      dataBlock = "DuctFan";
+         frozen = "0";
+   };
+   new StaticShape() {
+      position = "55.7496 35.7468 2.25762";
+      rotation = "0 -1 0 90";
+      scale = "1 1 1";
+      dataBlock = "DuctFan";
+         frozen = "0";
+   };
+   new StaticShape() {
+      position = "55.75 37.2614 1.24281";
+      rotation = "0 -1 0 90.0002";
+      scale = "1 1 1";
+      dataBlock = "DuctFan";
+         frozen = "0";
+   };
+   new StaticShape() {
+      position = "46.7627 -3.23272 0.204428";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "52.919 35.7709 7.75707";
+      rotation = "0 0 1 90";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+         frozen = "0";
+   };
+   new StaticShape() {
+      position = "44.7288 -3.24092 0.21203";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "44.7311 -1.23933 0.238515";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "46.765 -1.23113 0.230913";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new ScriptObject() {
+         gemCount = "0";
+         powerUp = "0";
+         pad = "2587";
+         bonusTime = "0";
+         time = "0";
+         penaltyTime = "0";
+   };
+   new StaticShape() {
+      position = "51.7412 -2.7054 0.236996";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "50.7628 -1.2519 0.241355";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "48.7289 -1.2601 0.248957";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "48.7266 -3.26169 0.222472";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "50.7605 -3.25349 0.21487";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "52.8021 -3.30037 0.223048";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "52.8044 -1.29878 0.249533";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "46.18 -2.19466 0.249339";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "45.4273 -2.31549 0.245443";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "45.7297 -1.99743 0.242175";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "45.7618 -2.36677 0.240308";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "45.7218 -2.72305 0.239802";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "47.6845 -1.94848 0.23755";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "48.1348 -2.14571 0.244714";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "47.7166 -2.31782 0.235683";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "47.3821 -2.26654 0.240818";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "47.6766 -2.6741 0.235177";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "49.7638 -1.99381 0.239608";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "50.2141 -2.19104 0.246772";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "49.7959 -2.36315 0.237741";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "49.4614 -2.31187 0.242876";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "49.7559 -2.71943 0.237235";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "51.7491 -1.97978 0.239369";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "52.1994 -2.17701 0.246533";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "51.7812 -2.34912 0.237502";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "51.4467 -2.29784 0.242637";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LandMine";
+         frozen = "0";
+         resetTime = "Default";
+   };
+   new Item() {
+      position = "5.75 -2.25 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new Item() {
+      position = "19.75 -2.25 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new Item() {
+      position = "39.75 -2.25 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new Item() {
+      position = "57.75 -2.25 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new Item() {
+      position = "63.75 17.75 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new Item() {
+      position = "63.75 35.75 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new Item() {
+      position = "69.2006 2.77733 0.997484";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkillPointItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new InteriorInstance() {
+      position = "1000 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/puStop.dif";
+      showTerrainInside = "0";
+   };
+   new TSStatic() {
+      position = "1001.8 -2.2 0.199996";
+      rotation = "0 0 1 90.0002";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/startarea.dts";
+   };
+   new ScriptObject() {
+         gemCount = "0";
+         powerUp = "0";
+         pad = "2429";
+         bonusTime = "0";
+         time = "0";
+         penaltyTime = "0";
+   };
+   new TSStatic() {
+      position = "1008.78 1.26094 1.26032";
+      rotation = "-1 0 0 90.0002";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/ductfan.dts";
+   };
+   new TSStatic() {
+      position = "1010.75 1.25028 1.24";
+      rotation = "-1 0 0 90.0002";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/ductfan.dts";
+   };
+   new TSStatic() {
+      position = "1012.72 1.25749 1.26654";
+      rotation = "-1 0 0 90.0002";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/ductfan.dts";
+   };
+   new TSStatic() {
+      position = "1021.11 -12.95 0.26671";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/tornado.dts";
+   };
+   new ScriptObject() {
+         gemCount = "0";
+         powerUp = "0";
+         pad = "2429";
+         bonusTime = "0";
+         time = "0";
+         penaltyTime = "0";
+   };
+   new TSStatic() {
+      position = "1027.82 -13.9411 0.313009";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/tornado.dts";
+   };
+   new TSStatic() {
+      position = "1034.39 -13.2189 0.15552";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/tornado.dts";
+   };
+   new TSStatic() {
+      position = "1044.73 -1.23933 0.238515";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1046.77 -1.23113 0.230913";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1048.73 -1.2601 0.248957";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1050.76 -1.2519 0.241355";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1050.76 -3.25349 0.21487";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1052.8 -3.30037 0.223048";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1052.8 -1.29878 0.249533";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1044.73 -3.24092 0.21203";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1046.76 -3.23272 0.204428";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1048.73 -3.26169 0.222472";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1046.18 -2.19466 0.249339";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1048.13 -2.14571 0.244714";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1050.21 -2.19104 0.246772";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1052.2 -2.17701 0.246533";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1045.73 -1.9974 0.249339";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1045.82 -2.34998 0.249339";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1045.72 -2.71503 0.249339";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1045.34 -2.34637 0.249339";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1047.7 -1.96318 0.244714";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1047.74 -2.31879 0.244714";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1047.81 -2.68915 0.244714";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1047.34 -2.37163 0.244714";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1049.79 -1.93715 0.246772";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1049.79 -2.33027 0.246772";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1049.7 -2.75301 0.246772";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1049.34 -2.38048 0.246772";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1051.73 -1.96306 0.246533";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1051.78 -2.36868 0.246533";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1051.78 -2.74686 0.246533";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new TSStatic() {
+      position = "1051.32 -2.39936 0.246533";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/landmine.dts";
+   };
+   new ScriptObject() {
+         gemCount = "0";
+         powerUp = "0";
+         pad = "2429";
+         bonusTime = "0";
+         time = "0";
+         penaltyTime = "0";
+   };
+   new TSStatic() {
+      position = "1055.72 34.2719 3.20481";
+      rotation = "0 -1 0 90.0002";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/ductfan.dts";
+   };
+   new TSStatic() {
+      position = "1055.75 37.278 3.19658";
+      rotation = "0 -1 0 90.0002";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/ductfan.dts";
+   };
+   new TSStatic() {
+      position = "1055.75 37.2614 1.24281";
+      rotation = "0 -1 0 90.0002";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/ductfan.dts";
+   };
+   new TSStatic() {
+      position = "1055.75 35.7468 2.25762";
+      rotation = "0 -1 0 90.0002";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/ductfan.dts";
+   };
+   new TSStatic() {
+      position = "1055.74 34.2454 1.23971";
+      rotation = "0 -1 0 90.0002";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/hazards/ductfan.dts";
+   };
+   new ScriptObject() {
+         gemCount = "0";
+         powerUp = "0";
+         pad = "2429";
+         bonusTime = "0";
+         time = "0";
+         penaltyTime = "0";
+   };
+   new TSStatic() {
+      position = "1051.75 35.77 0.24";
+      rotation = "0 0 -1 90.0002";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/pads/endarea.dts";
+   };
+   new StaticShape() {
+      position = "1052.92 35.7709 7.75707";
+      rotation = "0 0 1 90.0002";
+      scale = "1 1 1";
+      dataBlock = "DummySignFinish";
+         frozen = "0";
+   };
+   new Item() {
+      position = "1005.75 -2.25 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new Item() {
+      position = "1019.75 -2.25 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new Item() {
+      position = "1039.75 -2.25 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new Item() {
+      position = "1057.75 -2.25 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new Item() {
+      position = "1063.75 17.75 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new Item() {
+      position = "1063.75 35.75 0.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StopWatchItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+   };
+   new InteriorInstance() {
+      position = "1061.07 3.49847 -3.71914";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/puStop1.dif";
+      showTerrainInside = "0";
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/Beach Party.ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+   new InteriorInstance() {
+      position = "1069.82 8.99847 -3.71914";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/puStop1.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "1064.75 26.8376 -0.86477";
+      rotation = "0 0 1 90.0002";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/puStop2.dif";
+      showTerrainInside = "0";
+   };
+   new ScriptObject() {
+         gemCount = "0";
+         powerUp = "0";
+         pad = "2429";
+         bonusTime = "0";
+         time = "0";
+         penaltyTime = "0";
+   };
+   new Item() {
+      position = "1069.2 2.77733 0.997484";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkillPointItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         frozen = "0";
+         particles = "2669";
+   };
+};
+//--- OBJECT WRITE END ---

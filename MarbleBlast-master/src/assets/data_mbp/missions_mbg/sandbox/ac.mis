@@ -1,0 +1,2043 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         time = "0";
+         desc = "Things are not always what they seem...";
+         name = "Marble Chambers";
+         startHelpText = "Every journey is a series of choices. The first is to begin the journey.";
+         artist = "HiGuy";
+         level = "19";
+         type = "Sandbox";
+	 music = "mysterious chamber.ogg";
+         goldTime = "60000";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "0";
+      renderBottomTexture = "1";
+      SkySolidColor = "1 1 1 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 2.54245e-09 -0.825056";
+      fogVolume2 = "-1 0.634539 0.349074";
+      fogVolume3 = "-1 -0.376286 2.54555e-09";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 0.807891";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.349238";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -0.405057";
+   };
+   new Sun() {
+      direction = "0 0 -1";
+      color = "0.100000 0.100000 0.100000 1.000000";
+      ambient = "0.900000 0.900000 0.900000 1.000000";
+         startDirection = "0 0 -1";
+   };
+   new StaticShape(StartPoint) {
+      position = "10 0 -5";
+      rotation = "0 0 1 180";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new StaticShape(EndPoint) {
+      position = "-347.5 37 107";
+      rotation = "0 0 1 90.0002";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new SimGroup(Interiors) {
+
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/AC/ac.dif";
+         showTerrainInside = "0";
+      };
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/AC/ac2.dif";
+         showTerrainInside = "0";
+      };
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/AC/ac2-1.dif";
+         showTerrainInside = "0";
+      };
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/AC/ac3.dif";
+         showTerrainInside = "0";
+      };
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/AC/ac4.dif";
+         showTerrainInside = "0";
+      };
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/AC/ac5-1.dif";
+         showTerrainInside = "0";
+      };
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/AC/ac5-2.dif";
+         showTerrainInside = "0";
+      };
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/AC/ac5-3.dif";
+         showTerrainInside = "0";
+      };
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/AC/ac5-4.dif";
+         showTerrainInside = "0";
+      };
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/AC/ac6.dif";
+         showTerrainInside = "0";
+      };
+      new InteriorInstance() {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         interiorFile = "~/data/interiors/sandbox/AC/ac6-2.dif";
+         showTerrainInside = "0";
+      };
+   };
+   new SimGroup(MotionTriggers) {
+
+      new SimGroup(ManyPathsToNowhere) {
+
+         new Trigger() {
+            position = "2 -8 -4.5";
+            rotation = "1 0 0 0";
+            scale = "3 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+               callback = "ac_str_cb";
+         };
+         new Trigger() {
+            position = "7.5 47 7.5";
+            rotation = "1 0 0 0";
+            scale = "3 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               yaw = "3.1415926";
+               rot = "0 0 1 3.1415926";
+               offset = "-5.5 -55 -7";
+               callback = "ac_ptn_cb";
+         };
+         new Trigger() {
+            position = "2.5 47 -6.5";
+            rotation = "1 0 0 0";
+            scale = "3 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               yaw = "3.1415926";
+               rot = "0 0 1 3.1415926";
+               offset = "-0.5 -55 7";
+               callback = "ac_ptn_cb";
+         };
+      };
+      new SimGroup(CornerTower) {
+
+         new Trigger() {
+            position = "16 5 0.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "14.25 0 15.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "17 6 0.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "18 7 0.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "19 8 0.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "14.6 8 5.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -5";
+         };
+         new Trigger() {
+            position = "16 2.4 5.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "16 4 10.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -5";
+         };
+         new Trigger() {
+            position = "19 -3 10.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "18 -2 10.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "17 -1 10.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "16 0 10.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "16 1.75 15.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -5";
+         };
+         new Trigger() {
+            position = "16 0 20.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -5";
+         };
+         new Trigger() {
+            position = "11 0 20.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "10 -1 20.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "9 -2 20.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "8 -3 20.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "12.5 0 25.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -5";
+         };
+         new Trigger() {
+            position = "8 1.75 25.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "8 0 30.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -5";
+         };
+         new Trigger() {
+            position = "8 8 30.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "9 7 30.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "10 6 30.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "11 5 30.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "8 3.5 35.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -5";
+         };
+         new Trigger() {
+            position = "12.5 8 35.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "11 8 40.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -5";
+         };
+      };
+      new SimGroup(Spiral) {
+
+         new Trigger() {
+            position = "-121 -22.25 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-29.25 -41.875 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-148.75 -64.125 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "29.25 41.875 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-150.25 -13.875 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "29.25 -40.875 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-122.5 -54.75 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-29.25 40.875 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-150.062 17.75 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-52.75 -0.375 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-204.312 17.375 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "52.75 0.375 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-150.062 -95.75 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-51.75 2.5 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-203.312 -93.25 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "51.75 -2.5 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-198.875 -65.15 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-49 -5.625 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-246.375 -70.775 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "49 5.625 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-199.875 -10.65 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-48 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-246.375 -10.65 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "48 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-249 -94.275 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-33.5 14 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-284.125 -80.275 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "33.5 -14 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-250.125 12.725 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-31.875 -15 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-283.5 -2.275 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "31.875 15 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-281 -21.675 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-32 -2.5 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-311.5 -24.175 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "32 2.5 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-281.6 -60.75 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-30.4 3.25 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-310.5 -57.5 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "30.4 -3.25 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-314 -73 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-22.25 2.05 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-337.75 -70.95 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "22.25 -2.05 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-333.4 -59.35 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-24.5 -0.05 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-356.4 -60 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "24.5 0.05 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-366.15 -68.8 110.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-390.2 -64.6 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-397.375 -42 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "10.625 -25.75 0 ";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-389.2 -63.5 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-388.2 -62.6 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-365.15 -68.05 110.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-364.15 -67.05 110.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-385.3 -67.75 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-10.625 25.75 0 ";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-387.2 -62.6 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-314 -8.675 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "3.5 -23 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-312 -31.675 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-3.5 23 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-330.65 -42.75 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "24.5 -0.05 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-307.65 -43.6 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-24.5 0.05 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-365.2 -38.6 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-340.15 -37.05 110.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-338.15 -39.05 110.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-339.15 -38.05 110.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-364.2 -38.6 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-363.2 -39.5 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-362.2 -40.6 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "23.5 0 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-359.25 -34.75 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               yaw = "3.1415926";
+               rot = "0 0 1 3.1415926";
+               offset = "-16.75 -7.5 0";
+               sc = "1";
+         };
+         new Trigger() {
+            position = "-374.5 -42.25 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               yaw = "3.1415926";
+               rot = "0 0 1 3.1415926";
+               offset = "13.75 7.5 0";
+               sc = "1";
+         };
+      };
+      new SimGroup(Final) {
+
+         new Trigger() {
+            position = "-397.625 -8.5 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0.125 0 5";
+               callback = "ac_final_left";
+         };
+         new Trigger() {
+            position = "-384 -8.5 110.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-13.5 0 5";
+               callback = "ac_final_right";
+         };
+         new Trigger(FinalLeft) {
+            position = "-396 -8.5 115.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "-0.125 0 -5";
+         };
+         new Trigger(FinalRight) {
+            position = "-396 -8.5 115.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "13.5 0 -5";
+         };
+      };
+   };
+   new SimGroup(HelpTriggers) {
+
+      new Trigger(ht0) {
+         position = "-2 1 0.5";
+         rotation = "1 0 0 0";
+         scale = "4 1 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "A choice can be as simple as going left or going right.";
+      };
+      new Trigger(ht1) {
+         position = "-2 -3 0.5";
+         rotation = "1 0 0 0";
+         scale = "4 1 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "The choice doesn\'t matter if the outcome is the same.";
+      };
+      new Trigger(ht3) {
+         position = "8 -7 0.5";
+         rotation = "1 0 0 0";
+         scale = "4 1 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "When you return to where you have been, things aren\'t always as remembered.";
+      };
+      new Trigger(ht4) {
+         position = "16 -5.5 40.5";
+         rotation = "1 0 0 0";
+         scale = "4 1 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "Some choices leave us running around a lot without really getting anywhere.";
+      };
+      new Trigger(ht5) {
+         position = "-31.5 -26.5 40.5";
+         rotation = "1 0 0 0";
+         scale = "1 4 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "Moving through a problem slower may help find the solution.";
+      };
+      new Trigger(ht5) {
+         position = "-76.5 -38.5 110.5";
+         rotation = "1 0 0 0";
+         scale = "1 4 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "If you never stop trying, you will get there eventually.";
+      };
+      new Trigger(ht6) {
+         position = "-189.5 1.5 110.5";
+         rotation = "1 0 0 0";
+         scale = "4 1 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "Some choices can leave us running around in circles.";
+      };
+      new Trigger(ht7) {
+         position = "-188.25 -79 110.5";
+         rotation = "1 0 0 0";
+         scale = "4 1 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "Some choices can leave us running around in circles.";
+      };
+      new Trigger(ht8) {
+         position = "-380.5 -34.5 110.5";
+         rotation = "1 0 0 0";
+         scale = "4 1 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "Raw persistence may be the only option other than giving up entirely.";
+      };
+      new Trigger(ht9) {
+         position = "-394.125 -34.5 110.5";
+         rotation = "1 0 0 0";
+         scale = "4 1 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "Raw persistence may be the only option other than giving up entirely.";
+      };
+      new Trigger(ht10) {
+         position = "-398 18 115.5";
+         rotation = "1 0 0 0";
+         scale = "1 4 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "Life isn\'t about getting to the end.";
+      };
+      new Trigger(ht11) {
+         position = "-398 39 115.5";
+         rotation = "1 0 0 0";
+         scale = "1 4 4";
+         dataBlock = "HelpTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+            text = "Every journey comes to an end.";
+      };
+   };
+   new SimGroup(bridgeGroup) {
+
+      new Trigger(bridge) {
+         position = "-18 -23 38";
+         rotation = "1 0 0 0";
+         scale = "22 11 1";
+         dataBlock = "BridgeTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+      };
+      new Trigger() {
+         position = "-18 -23 10";
+         rotation = "1 0 0 0";
+         scale = "22 11 20";
+         dataBlock = "OutOfBoundsTrigger";
+         polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+      };
+   };
+   new SimGroup(ac_section4) {
+
+      new SimGroup(Maze) {
+
+         new Trigger() {
+            position = "-72.5 -47.5 40.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 15";
+         };
+         new Trigger() {
+            position = "-72.5 -49 55.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -15";
+         };
+         new Trigger() {
+            position = "-75.5 -43.5 55.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -5";
+         };
+         new Trigger() {
+            position = "-73.5 -43.5 50.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Marker(FTS_Detect3) {
+            position = "-62 -49.5 62.5";
+            rotation = "1 0 0 0";
+            scale = "8 0 8";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Trigger() {
+            position = "-96 -47 40.5";
+            rotation = "1 0 0 0";
+            scale = "13.5 13.5 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               requireHidden = "FTS_Detect1";
+               yaw = "1.570796";
+               rot = "0 0 1 1.570796";
+               offset = "19 -0.5 0";
+         };
+         new Marker(FTS_Detect1) {
+            position = "-82.75 -53.5 42.5";
+            rotation = "1 0 0 0";
+            scale = "0 8 8";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Trigger() {
+            position = "-88 -39 50.5";
+            rotation = "1 0 0 0";
+            scale = "13.5 13.5 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               requireHidden = "FTS_Detect2";
+               yaw = "1.570796";
+               rot = "0 0 1 1.570796";
+               offset = "11 -8.5 -10";
+         };
+         new Marker(FTS_Detect2) {
+            position = "-74.5 -45.5 52.5";
+            rotation = "1 0 0 0";
+            scale = "0 8 8";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Trigger() {
+            position = "-64 -49 45.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 15";
+         };
+         new Trigger() {
+            position = "-64 -47.5 60.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -15";
+         };
+         new Trigger() {
+            position = "-68.5 -49.5 60.5";
+            rotation = "1 0 0 0";
+            scale = "13.5 13.5 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               requireHidden = "FTS_Detect3";
+               offset = "-8.5 2 -20";
+         };
+         new Trigger() {
+            position = "-68.25 -43.5 55.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -10";
+         };
+         new Trigger() {
+            position = "-69.75 -43.5 45.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 10";
+         };
+         new Trigger() {
+            position = "-56.5 -38.5 45.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 20";
+         };
+         new Trigger() {
+            position = "-58 -38.5 65.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -20";
+         };
+         new Trigger() {
+            position = "-55 -42.75 65.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "-55 -41.25 70.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -5";
+         };
+         new Trigger() {
+            position = "-55 -53 75.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -5";
+         };
+         new Trigger() {
+            position = "-55 -54.5 70.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 5";
+         };
+         new Trigger() {
+            position = "-59.5 -55 75.5";
+            rotation = "1 0 0 0";
+            scale = "13.5 13.5 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               requireHidden = "FTS_Detect4";
+               offset = "-17.5 7.5 -35";
+         };
+         new Marker(FTS_Detect4) {
+            position = "-53 -55.1 77.5";
+            rotation = "1 0 0 0";
+            scale = "8 0 8";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Trigger() {
+            position = "-57.5 -49 105.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -35";
+         };
+         new Trigger() {
+            position = "-59 -49 70.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 35";
+         };
+         new Trigger() {
+            position = "-70.5 -44.5 105.5";
+            rotation = "1 0 0 0";
+            scale = "13.5 13.5 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               requireHidden = "FTS_Detect5";
+               yaw = "1.570796";
+               rot = "0 0 1 1.570796";
+               offset = "-6.5 -3 -65";
+         };
+         new Marker(FTS_Detect5) {
+            position = "-57 -51 107.5";
+            rotation = "1 0 0 0";
+            scale = "0 8 8";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Trigger() {
+            position = "-48 -49 70.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 10";
+         };
+         new Trigger() {
+            position = "-49.5 -49 80.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -10";
+         };
+         new Trigger() {
+            position = "-49 -44 80.5";
+            rotation = "1 0 0 0";
+            scale = "13.5 13.5 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               requireHidden = "FTS_Detect6";
+               yaw = "-1.570796";
+               rot = "0 0 1 -1.570796";
+               offset = "-28 -3.5 -40";
+         };
+         new Marker(FTS_Detect6) {
+            position = "-48.5 -51 82.5";
+            rotation = "1 0 0 0";
+            scale = "0 8 8";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Trigger() {
+            position = "-48 -38.5 65.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 20";
+         };
+         new Trigger() {
+            position = "-49.5 -38.5 85.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -20";
+         };
+         new Marker(FTS_Detect7) {
+            position = "-48.5 -40.5 87.5";
+            rotation = "1 0 0 0";
+            scale = "0 8 8";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Trigger() {
+            position = "-49 -33.5 85.5";
+            rotation = "1 0 0 0";
+            scale = "13.5 13.5 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               requireHidden = "FTS_Detect7";
+               yaw = "-1.570796";
+               rot = "0 0 1 -1.570796";
+               offset = "-28 -14 -45";
+         };
+         new Trigger() {
+            position = "-55 -35 65.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 25";
+         };
+         new Trigger() {
+            position = "-55 -36.75 90.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -25";
+         };
+         new Marker(FTS_Detect8) {
+            position = "-53 -36.5 92.5";
+            rotation = "1 0 0 0";
+            scale = "8 0 8";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Trigger() {
+            position = "-60 -23 90.5";
+            rotation = "1 0 0 0";
+            scale = "13.5 13.5 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               requireHidden = "FTS_Detect8";
+               yaw = "3.14159";
+               rot = "0 0 1 3.1415926";
+               offset = "-17 -24.5 -50";
+         };
+         new Trigger() {
+            position = "-64 -37 45.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 65";
+         };
+         new Trigger() {
+            position = "-64 -38.5 110.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -65";
+         };
+         new Trigger() {
+            position = "-60 -29.5 110.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -10";
+         };
+         new Trigger() {
+            position = "-60 -31 100.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 10";
+         };
+         new Trigger() {
+            position = "-65 -18 100.5";
+            rotation = "1 0 0 0";
+            scale = "13.5 13.5 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               requireHidden = "FTS_Detect9";
+               yaw = "3.14159";
+               rot = "0 0 1 3.1415926";
+               offset = "-12 -29.5 -60";
+         };
+         new Marker(FTS_Detect9) {
+            position = "-58 -31.5 102.5";
+            rotation = "1 0 0 0";
+            scale = "8 0 8";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Trigger() {
+            position = "-76 -29.5 110.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 -15";
+         };
+         new Trigger() {
+            position = "-76 -31 95.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               offset = "0 0 15";
+         };
+         new Trigger() {
+            position = "-81 -18 95.5";
+            rotation = "1 0 0 0";
+            scale = "13.5 13.5 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               requireHidden = "FTS_Detect10";
+               yaw = "3.14159";
+               rot = "0 0 1 3.1415926";
+               offset = "4 -29.5 -55";
+         };
+         new Marker(FTS_Detect10) {
+            position = "-74 -31.5 97.5";
+            rotation = "1 0 0 0";
+            scale = "8 0 8";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Trigger() {
+            position = "-90.5 -37.5 40.5";
+            rotation = "1 0 0 0";
+            scale = "4 4 4";
+            dataBlock = "SeamlessMotionTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               yaw = "1.570796";
+               rot = "0 0 1 1.570796";
+               offset = "4 -14 0";
+         };
+      };
+      new SimGroup(ScreenshotPath) {
+
+         new Trigger() {
+            position = "-72.5 -46.25 40.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "... What? How did you...";
+         };
+         new Trigger() {
+            position = "-64.5 -43.5 40.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "Well great. You\'ve exposed the magic. I hope you\'re happy with yourself.";
+         };
+         new Trigger() {
+            position = "-103.5 -33.5 40.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "What? Did you honestly expect the skill point to be here? Try harder.";
+         };
+         new Trigger() {
+            position = "-64 -42 40.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "You\'re not supposed to be seeing this! Get back inside the level, stop screenshot-glitching!";
+         };
+         new Trigger() {
+            position = "-65.5 -33.5 40.5";
+            rotation = "1 0 0 0";
+            scale = "1 4 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "Well fine, just don\'t blame me if you clip a trigger while you\'re on your \"excursion.\"";
+         };
+         new Trigger() {
+            position = "-76.5 -23.5 50";
+            rotation = "1 0 0 0";
+            scale = "1 1.5 2";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "You\'ve still got a ways to go before you reach the top.";
+         };
+         new Trigger() {
+            position = "-59 -52 45.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "I guess we\'ve established that the signs will lead you to the skill point... Be ready for a long journey!";
+         };
+         new Trigger() {
+            position = "-29.5 -51 65";
+            rotation = "1 0 0 0";
+            scale = "4 4 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "Looks a lot less flat from the outside, don\'t you think?";
+         };
+         new Trigger() {
+            position = "-55 -67 80.5";
+            rotation = "1 0 0 0";
+            scale = "4 4 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "Jump! Oh come on, it\'s a skill point. Show some skill.";
+         };
+         new Trigger() {
+            position = "-73 -71.5 80";
+            rotation = "1 0 0 0";
+            scale = "4 4 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "These look kind of like marble apartments. Aim for the fourth floor!";
+         };
+         new Trigger() {
+            position = "-68.5 -28.5 95";
+            rotation = "1 0 0 0";
+            scale = "4 4 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "Mind the teleport triggers! Super jump straight upwards.";
+         };
+         new Trigger() {
+            position = "-94.5 -26 105";
+            rotation = "1 0 0 0";
+            scale = "4 4 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "No help for the last floor, go find that skill point!";
+         };
+         new Trigger() {
+            position = "10.5 34 7.5";
+            rotation = "1 0 0 0";
+            scale = "4 1 4";
+            dataBlock = "HelpTrigger";
+            polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+               text = "What exactly are you trying to prove by coming over here? The skill point is on the tower, ya moron!";
+         };
+         new Item() {
+            position = "-54.75 -44.25 40.7";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            dataBlock = "SuperJumpItem";
+            collideable = "0";
+            static = "1";
+            rotate = "1";
+         };
+         new Item() {
+            position = "-44.75 -47.75 45.65";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            dataBlock = "SuperJumpItem";
+            collideable = "0";
+            static = "1";
+            rotate = "1";
+         };
+         new Item() {
+            position = "-79.5 -24.5 50.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            dataBlock = "SuperJumpItem";
+            collideable = "0";
+            static = "1";
+            rotate = "1";
+         };
+         new Item() {
+            position = "-80.5 -80 55.2";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            dataBlock = "SuperJumpItem";
+            collideable = "0";
+            static = "1";
+            rotate = "1";
+         };
+         new Item() {
+            position = "-27.5 -52.25 65.2";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            dataBlock = "SuperJumpItem";
+            collideable = "0";
+            static = "1";
+            rotate = "1";
+         };
+         new Item() {
+            position = "-71 -74.5 80.4";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            dataBlock = "SuperJumpItem";
+            collideable = "0";
+            static = "1";
+            rotate = "1";
+         };
+         new Item() {
+            position = "-66.5 -30.5 95.2";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            dataBlock = "SuperJumpItem";
+            collideable = "0";
+            static = "1";
+            rotate = "1";
+         };
+         new Item() {
+            position = "-92.5 -28.5 105.2";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            dataBlock = "SuperJumpItem";
+            collideable = "0";
+            static = "1";
+            rotate = "1";
+         };
+         new StaticShape() {
+            position = "-84 -55.5 46.25";
+            rotation = "0 0 1 180";
+            scale = "1 1 1";
+            dataBlock = "SignPlainLeft";
+         };
+         new StaticShape() {
+            position = "-56.25 -53.75 46.75";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            dataBlock = "SignPlainLeft";
+         };
+         new StaticShape() {
+            position = "-44.85 -43.5 46.75";
+            rotation = "0 0 -1 90.0002";
+            scale = "1 1 1";
+            dataBlock = "SignPlainLeft";
+         };
+         new StaticShape() {
+            position = "-54.75 -42.75 51.25";
+            rotation = "0 0 1 180";
+            scale = "1 1 1";
+            dataBlock = "SignPlainRight";
+         };
+         new StaticShape() {
+            position = "-63.75 -38.25 51.75";
+            rotation = "0 0 -1 90.0002";
+            scale = "1 1 1";
+            dataBlock = "SignPlainRight";
+         };
+         new StaticShape() {
+            position = "-78.75 -40.25 56.75";
+            rotation = "0 0 1 90.0002";
+            scale = "1 1 1";
+            dataBlock = "SignPlainRight";
+         };
+         new StaticShape() {
+            position = "-78.5 -69.5 66.25";
+            rotation = "0 0 1 90.0002";
+            scale = "1 1 1";
+            dataBlock = "SignPlainLeft";
+         };
+         new StaticShape() {
+            position = "-60.25 -46.25 66.75";
+            rotation = "0 0 1 90.0002";
+            scale = "1 1 1";
+            dataBlock = "SignPlainRight";
+         };
+         new StaticShape() {
+            position = "-28.75 -65.5 81.25";
+            rotation = "0 0 -1 90.0002";
+            scale = "1 1 1";
+            dataBlock = "SignPlainLeft";
+         };
+         new StaticShape() {
+            position = "-65.75 -56.75 96.75";
+            rotation = "0 0 1 90.0002";
+            scale = "1 1 1";
+            dataBlock = "SignPlainLeft";
+         };
+         new StaticShape() {
+            position = "-58.75 -33.75 96.75";
+            rotation = "0 0 1 90.0002";
+            scale = "1 1 1";
+            dataBlock = "SignPlainLeft";
+         };
+         new Item() {
+            position = "-48 -45.5 111.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            dataBlock = "SkillPointItem";
+            collideable = "0";
+            static = "1";
+            rotate = "1";
+         };
+      };
+   };
+   new Trigger() {
+      position = "-525 75 -50";
+      rotation = "1 0 0 0";
+      scale = "800 200 400";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Trigger() {
+      position = "-221 55 13";
+      rotation = "1 0 0 0";
+      scale = "200 200 20";
+      dataBlock = "OutOfBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new TSStatic() {
+      position = "-6.95914 -28.8399 36.1183";
+      rotation = "1 0 0 0";
+      scale = "12.1569 9.89698 0.938002";
+      dataBlock = "InBoundsTrigger";
+      shapeName = "~/data/shapes/colmesh.dts";
+   };
+   new SimGroup(ac_door_group1) {
+
+      new SimGroup(MustChange_g) {
+
+         new Path() {
+
+            new Marker() {
+               position = "-401 0.00977159 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "0";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-404 0.00977159 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "1";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-401 0.00977159 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "2";
+               msToNext = "0";
+               smoothingType = "Accelerate";
+            };
+         };
+         new Trigger(MustChange) {
+            position = "-400.5 0.00977159 120.894";
+            rotation = "1 0 0 0";
+            scale = "1 1 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+               targetTime = "500";
+         };
+         new Trigger(MustChange) {
+            position = "-400.5 11.7598 119.644";
+            rotation = "1 0 0 0";
+            scale = "1 1 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+                targetTime = "0";
+         };
+         new PathedInterior(MustChange) {
+            position = "-401 8.00977 115.5";
+            rotation = "1 0 0 0";
+            scale = "0.5 0.5 0.5";
+            dataBlock = "PathedDefault";
+            interiorResource = "marble/data/interiors/sandbox/ac/ac_door_left.dif";
+            interiorIndex = "0";
+            basePosition = "-401 8.00977 115.5";
+            baseRotation = "1 0 0 0";
+            baseScale = "0.5 0.5 0.5";
+               trackTime = "797193750";
+         };
+      };
+      new SimGroup(MustChange_g) {
+
+         new Path() {
+
+            new Marker() {
+               position = "-401 0.00977159 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "0";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-397.75 0.00977159 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "1";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-401 0.00977159 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "2";
+               msToNext = "0";
+               smoothingType = "Accelerate";
+            };
+         };
+         new Trigger(MustChange) {
+            position = "-400.5 0.00977159 120.894";
+            rotation = "1 0 0 0";
+            scale = "1 1 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+               targetTime = "500";
+         };
+         new Trigger(MustChange) {
+            position = "-400.5 11.7598 119.644";
+            rotation = "1 0 0 0";
+            scale = "1 1 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+                targetTime = "0";
+         };
+         new PathedInterior(MustChange) {
+            position = "-401 8.00977 119.5";
+            rotation = "0 1 0 180";
+            scale = "0.5 0.5 0.5";
+            dataBlock = "PathedDefault";
+            interiorResource = "marble/data/interiors/sandbox/ac/ac_door_left.dif";
+            interiorIndex = "0";
+            basePosition = "-401 8.00977 119.5";
+            baseRotation = "0 1 0 180";
+            baseScale = "0.5 0.5 0.5";
+               trackTime = "797193750";
+         };
+      };
+   };
+   new SimGroup(ac_door_group2) {
+
+      new SimGroup(MustChange_g) {
+
+         new Path() {
+
+            new Marker() {
+               position = "-405.703 15.9953 115.25";
+               rotation = "0 0 1 89.9544";
+               scale = "1 1 1";
+               seqNum = "0";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-405.706 18.9953 115.25";
+               rotation = "0 0 1 89.9544";
+               scale = "1 1 1";
+               seqNum = "1";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-405.703 15.9953 115.25";
+               rotation = "0 0 1 89.9544";
+               scale = "1 1 1";
+               seqNum = "2";
+               msToNext = "0";
+               smoothingType = "Accelerate";
+            };
+         };
+         new Trigger(MustChange) {
+            position = "-399.203 16.0004 120.394";
+            rotation = "0 0 1 89.9544";
+            scale = "0.4 0.4 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+               targetTime = "500";
+         };
+         new Trigger(MustChange) {
+            position = "-400.953 15.999 120.394";
+            rotation = "0 0 1 89.9544";
+            scale = "0.4 0.4 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+                targetTime = "0";
+         };
+         new PathedInterior(MustChange) {
+            position = "-397.703 16.0016 115.5";
+            rotation = "0 0 1 89.9544";
+            scale = "0.5 0.5 0.5";
+            dataBlock = "PathedDefault";
+            interiorResource = "marble/data/interiors/sandbox/ac/ac_door_left.dif";
+            interiorIndex = "0";
+            basePosition = "-397.703 16.0016 115.5";
+            baseRotation = "0 0 1 89.9544";
+            baseScale = "0.5 0.5 0.5";
+               trackTime = "797193750";
+         };
+      };
+      new SimGroup(MustChange_g) {
+
+         new Path() {
+
+            new Marker() {
+               position = "-405.703 15.9953 115.25";
+               rotation = "0 0 1 89.9544";
+               scale = "1 1 1";
+               seqNum = "0";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-405.701 12.7452 115.25";
+               rotation = "0 0 1 89.9544";
+               scale = "1 1 1";
+               seqNum = "1";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-405.703 15.9953 115.25";
+               rotation = "0 0 1 89.9544";
+               scale = "1 1 1";
+               seqNum = "2";
+               msToNext = "0";
+               smoothingType = "Accelerate";
+            };
+         };
+         new Trigger(MustChange) {
+            position = "-399.203 16.0004 120.394";
+            rotation = "0 0 1 89.9544";
+            scale = "0.4 0.4 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+               targetTime = "500";
+         };
+         new Trigger(MustChange) {
+            position = "-400.953 15.999 120.394";
+            rotation = "0 0 1 89.9544";
+            scale = "0.4 0.4 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+                targetTime = "0";
+         };
+         new PathedInterior(MustChange) {
+            position = "-397.703 16.0016 119.5";
+            rotation = "0.706825 0.707388 -3.08963e-008 180";
+            scale = "0.5 0.5 0.5";
+            dataBlock = "PathedDefault";
+            interiorResource = "marble/data/interiors/sandbox/ac/ac_door_left.dif";
+            interiorIndex = "0";
+            basePosition = "-397.703 16.0016 119.5";
+            baseRotation = "0.706825 0.707388 -3.08963e-008 180";
+            baseScale = "0.5 0.5 0.5";
+               trackTime = "797193750";
+         };
+      };
+   };
+   new SimGroup(ac_door_group3) {
+
+      new SimGroup(MustChange_g) {
+
+         new Path() {
+
+            new Marker() {
+               position = "-401 16.2598 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "0";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-404 16.2598 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "1";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-401 16.2598 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "2";
+               msToNext = "0";
+               smoothingType = "Accelerate";
+            };
+         };
+         new Trigger(MustChange) {
+            position = "-396.5 21.0098 120.894";
+            rotation = "1 0 0 0";
+            scale = "1 1 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+               targetTime = "500";
+         };
+         new Trigger(MustChange) {
+            position = "-400.5 28.0098 119.644";
+            rotation = "1 0 0 0";
+            scale = "1 1 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+                targetTime = "0";
+         };
+         new PathedInterior(MustChange) {
+            position = "-401 24.2598 115.5";
+            rotation = "1 0 0 0";
+            scale = "0.5 0.5 0.5";
+            dataBlock = "PathedDefault";
+            interiorResource = "marble/data/interiors/sandbox/ac/ac_door_left.dif";
+            interiorIndex = "0";
+            basePosition = "-401 24.2598 115.5";
+            baseRotation = "1 0 0 0";
+            baseScale = "0.5 0.5 0.5";
+               trackTime = "797193750";
+         };
+      };
+      new SimGroup(MustChange_g) {
+
+         new Path() {
+
+            new Marker() {
+               position = "-401 16.2598 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "0";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-397.75 16.2598 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "1";
+               msToNext = "500";
+               smoothingType = "Accelerate";
+            };
+            new Marker() {
+               position = "-401 16.2598 115.25";
+               rotation = "1 0 0 0";
+               scale = "1 1 1";
+               seqNum = "2";
+               msToNext = "0";
+               smoothingType = "Accelerate";
+            };
+         };
+         new Trigger(MustChange) {
+            position = "-396.5 21.0098 120.894";
+            rotation = "1 0 0 0";
+            scale = "1 1 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+               targetTime = "500";
+         };
+         new Trigger(MustChange) {
+            position = "-400.5 28.0098 119.644";
+            rotation = "1 0 0 0";
+            scale = "1 1 10.2875";
+            dataBlock = "TriggerGotoTarget";
+            polyhedron = "-7.5000000 2.0000000 0.5000000 0.0000000 -4.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 15.0000000 0.0000000 0.0000000";
+                targetTime = "0";
+         };
+         new PathedInterior(MustChange) {
+            position = "-401 24.2598 119.5";
+            rotation = "0 1 0 180";
+            scale = "0.5 0.5 0.5";
+            dataBlock = "PathedDefault";
+            interiorResource = "marble/data/interiors/sandbox/ac/ac_door_left.dif";
+            interiorIndex = "0";
+            basePosition = "-401 24.2598 119.5";
+            baseRotation = "0 1 0 180";
+            baseScale = "0.5 0.5 0.5";
+               trackTime = "797193750";
+         };
+      };
+   };
+};
+//--- OBJECT WRITE END ---

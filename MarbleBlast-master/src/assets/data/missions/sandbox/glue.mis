@@ -1,0 +1,201 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         time = "0";
+         type = "Sandbox";
+         desc = "Spider marble, spider marble, does whatever a spider marble does ...";
+         artist = "Aaron Youch, Whirligig231";
+         level = "12";
+         goldTime = "20000";
+         startHelpText = "Time to get glued!";
+         name = "Super Glue";
+         music = "summer gathering.ogg";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 -1.99514e+38 -2.02183e+38";
+      fogVolume2 = "-1 -2.14204e+38 -2.15538e+38";
+      fogVolume3 = "-1 -2.24889e+38 -2.26219e+38";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -210195007640218172394920879239016218624.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 -220880937116769280519470456209812750336.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -231561674296461853816391502684280061952.000000";
+   };
+   new Sun() {
+      direction = "0.433884 0.614021 -0.659336";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new StaticShape(StartPoint) {
+      position = "-15.2 -9 -0.15";
+      rotation = "0 0 1 90";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+         fixedscale = "1";
+   };
+   new StaticShape(EndPoint) {
+      position = "-24.6 -51.5 3.6";
+      rotation = "-1 0 0 90";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+         fixedscale = "1";
+   };
+   new ScriptObject() {
+         pad = "1492";
+         time = "0";
+         penaltyTime = "0";
+         gemCount = "0";
+         powerUp = "0";
+         bonusTime = "0";
+   };
+   new StaticShape() {
+      position = "-24.4208 -54.0183 19.5564";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new ScriptObject() {
+         pad = "1632";
+         time = "0";
+         penaltyTime = "0";
+         gemCount = "0";
+         powerUp = "0";
+         bonusTime = "0";
+   };
+   new ScriptObject() {
+         pad = "2843";
+         time = "0";
+         penaltyTime = "0";
+         gemCount = "0";
+         powerUp = "0";
+         bonusTime = "0";
+   };
+   new Item() {
+      position = "-19.6165 -13.6625 -3.04008";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Trigger() {
+      position = "-41.4008 1.78872 -7.68344";
+      rotation = "1 0 0 0";
+      scale = "50 75 50";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new InteriorInstance() {
+      position = "-9.1028 -6.84194 -0.395589";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/glue.dif";
+      showTerrainInside = "0";
+   };
+   new Item() {
+      position = "-9.05204 -9.11271 11.7564";
+      rotation = "1 0 0 180";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-25.5541 -13.1156 1.88324";
+      rotation = "0 -1 0 90";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-5.20154 -9.13137 -0.0905894";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GlueItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-21.6445 -9.12249 -0.1";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GlueItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-24.5907 -25.6833 0.268916";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GlueItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-24.4501 -34.7997 7.05171";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GlueItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new ScriptObject() {
+         pad = "1799";
+         time = "0";
+         penaltyTime = "0";
+         gemCount = "0";
+         bonusTime = "0";
+         powerUp = "0";
+   };
+   new Item() {
+      position = "-24.5724 -42.8175 6.94806";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-3.2307 -9.16619 13.3514";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkillPointItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+};
+//--- OBJECT WRITE END ---

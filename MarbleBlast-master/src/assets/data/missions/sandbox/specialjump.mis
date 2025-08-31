@@ -1,0 +1,173 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         goldTime = "10000";
+         type = "Sandbox";
+         time = "0";
+         desc = "Use three new jumping techniques to navigate higher jumps!";
+         startHelpText = "Press <func:bind jump> while in the air to do a second jump!";
+         artist = "Whirligig231";
+         name = "Special Jumps";
+         level = "16";
+         music = "classic vibe.ogg";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "1000";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 -1.73483e+09 -1.73483e+09";
+      fogVolume2 = "-1 -1.73483e+09 -1.73483e+09";
+      fogVolume3 = "-1 -1.73483e+09 -1.73483e+09";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -1734829824.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 -1734829824.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -1734829824.000000";
+   };
+   new Sun() {
+      direction = "0.280868 0.579493 -0.76505";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.400000 0.400000 0.400000 1.000000";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/newjumps.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape(StartPoint) {
+      position = "0 -2 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new StaticShape(EndPoint) {
+      position = "4 -2 32";
+      rotation = "0 0 1 90";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new Trigger(Bounds) {
+      position = "-21.5 27.5 -19";
+      rotation = "1 0 0 0";
+      scale = "47 35 100";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new StaticShape() {
+      position = "-2.74595 -3.51116 27.1661";
+      rotation = "0 0 1 105";
+      scale = "1 1 1";
+      dataBlock = "SignCautionDanger";
+   };
+   new StaticShape() {
+      position = "3.94376 -1.82978 39.72";
+      rotation = "0 0 -1 70";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new Trigger(jumpgap) {
+      position = "-2.90399 25.3459 -0.44159";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "This is called the Double Jump. Use it to cross this long gap!";
+   };
+   new Trigger(jumpsteps) {
+      position = "16.8776 4.53688 3.15841";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "Use the Double Jump technique to climb these platforms!";
+   };
+   new Trigger(jumpheight) {
+      position = "16.8774 25.3446 -0.44159";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "For maximum height, jump at the highest point of your first jump.";
+   };
+   new Trigger(amplifyjump) {
+      position = "-15.7061 17.9441 15.3584";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "The Bounce Jump is the second type of special jump. Jump, then hit <func:bind jump> immediately before you hit the ground!";
+   };
+   new Trigger(walljump) {
+      position = "-15.703 5.93669 19.1584";
+      rotation = "1 0 0 0";
+      scale = "7 7 4";
+      dataBlock = "HelpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         text = "The last type of jump is the Wall Jump. To do a Wall Jump, jump up this wall, then hit <func:bind jump> while on it!";
+   };
+   new StaticShape() {
+      position = "2.14498 23.5999 1.24521";
+      rotation = "0 0 -1 20";
+      scale = "1 1 1";
+      dataBlock = "SignPlainRight";
+   };
+   new StaticShape() {
+      position = "21.6942 21.188 1.05627";
+      rotation = "0 0 1 70";
+      scale = "1 1 1";
+      dataBlock = "SignPlainRight";
+   };
+   new StaticShape() {
+      position = "18.4339 -3.09207 5.13398";
+      rotation = "0 0 1 235";
+      scale = "1 1 1";
+      dataBlock = "SignCautionCaution";
+   };
+   new StaticShape() {
+      position = "-10.4128 9.24337 17.1208";
+      rotation = "0 0 1 160";
+      scale = "1 1 1";
+      dataBlock = "SignPlainUp";
+   };
+   new StaticShape() {
+      position = "-10.7428 0.668035 21.0599";
+      rotation = "0 0 1 110";
+      scale = "1 1 1";
+      dataBlock = "SignPlainUp";
+   };
+   new Item() {
+      position = "18.0394 -3.47673 5.08221";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkillPointItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+};
+//--- OBJECT WRITE END ---
+
+setMarbleAttributes("enableCustomJumpAndDash", 1);

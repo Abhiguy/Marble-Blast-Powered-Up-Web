@@ -1,0 +1,940 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         music = "wooden vibe.ogg";
+         type = "sandbox";
+         name = "Marblepark";
+         startHelpText = "Ready... Set... GO GO GO!";
+         desc = "Rack up as many points as you can before the timer runs out!";
+         artist = "Uil, Whirligig231";
+         level = "5";
+         backwardClock = "true";
+         qualifyscore = "100000";
+         time = "120000";
+         goldScore = "1000000";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 -2.40897e+038 -2.40892e+038";
+      fogVolume2 = "-1 -2.38223e+038 -2.38218e+038";
+      fogVolume3 = "-1 -2.34215e+038 -2.34215e+038";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -238223269471504420000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 -235549196024539770000000000000000000000.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -231551107161058350000000000000000000000.000000";
+   };
+   new Sun() {
+      direction = "0.433884 0.614021 -0.659336";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new ScriptObject() {
+         pad = "2123";
+         penaltyTime = "0";
+         gemCount = "0";
+         time = "0";
+         bonusTime = "0";
+         powerUp = "0";
+   };
+   new ScriptObject() {
+         pad = "7423";
+         penaltyTime = "0";
+         gemCount = "0";
+         time = "0";
+         bonusTime = "0";
+         powerUp = "0";
+   };
+   new ScriptObject() {
+         pad = "2242";
+         penaltyTime = "0";
+         gemCount = "0";
+         time = "0";
+         bonusTime = "0";
+         powerUp = "0";
+   };
+   new StaticShape(StartPoint) {
+      position = "10 -2 0.5";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new Item() {
+      position = "-30 0 0.8";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/SkateparkPart1.dif";
+      showTerrainInside = "0";
+   };
+   new Trigger(Bounds) {
+      position = "-55.574 39.7446 -21.5658";
+      rotation = "1 0 0 0";
+      scale = "89.3574 77.5899 2000";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new TSStatic() {
+      position = "-4 2 -12.25";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      shapeName = "~/data/shapes/platforms/platform_fake2.dts";
+   };
+   new ScriptObject() {
+         pad = "2268";
+         penaltyTime = "0";
+         gemCount = "0";
+         time = "0";
+         bonusTime = "0";
+         powerUp = "0";
+   };
+   new Item() {
+      position = "7.79393 8.23249 -11.1728";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "22.4513 8.0351 11.428";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "17.8513 8.0351 11.4279";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "20.1148 8.01067 15.225";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemYellow";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-34.7941 -3.10885 24.0039";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-34.7941 2.89115 24.0039";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-34.7941 1.29115 24.0039";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemYellow";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-34.7941 -1.50885 24.0039";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemYellow";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-34.7941 -0.10885 24.0039";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemBlue";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-8 15.8 0.8";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "2 -4.2 0.8";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "12.6 -21.8 0.8";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Path(Path1) {
+
+      new Marker() {
+         position = "23.3157 -18 23.0768";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "0";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+      new Marker() {
+         position = "23.3157 -24 23.0768";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "1";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+   };
+   new Item(Mover) {
+      position = "23.3157 -18 23.0768";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemBlue";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+      my_x = 0;
+      my_y = -6;
+      my_z = 0;
+      mySpeed = 4;
+   };
+   new StaticShape() {
+      position = "22.023 -6.57041 12.0759";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "18.423 -6.57041 12.0759";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "20.823 -6.57041 13.8759";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "19.223 -6.57041 16.2759";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "23.023 -6.57041 14.8759";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "17.223 -6.57041 14.8759";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "20.823 -6.57041 19.4759";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new Trigger() {
+      position = "-24.5782 18.0935 10.6948";
+      rotation = "1 0 0 0";
+      scale = "1 12.0427 1";
+      dataBlock = "TrickTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         trick = "Loop the Loop";
+         points = "5000";
+         color = "#001effff";
+   };
+   new Trigger() {
+      position = "-24.5782 -6.1065 10.6948";
+      rotation = "1 0 0 0";
+      scale = "1 12.0427 1";
+      dataBlock = "TrickTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         trick = "Loop the Loop";
+         points = "5000";
+         color = "#001effff";
+   };
+   new Trigger() {
+      position = "-24.0872 2.0768 13.4";
+      rotation = "1 0 0 0";
+      scale = "0.141895 3.6946 0.246026";
+      dataBlock = "TrickTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         trick = "On the Rafters";
+         points = "5000";
+         color = "#001effff";
+   };
+   new StaticShape() {
+      position = "-1.79788 -6.40171 8.39943";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "-1.79788 -13.4017 8.39943";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new Item() {
+      position = "-1.89996 -10.0698 3.79502";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-1 30 3.2";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "DoublerItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "16.8442 -2.3828 -7.04333";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "-6.2 2 -10.75";
+      rotation = "0 0 1 90.0002";
+      scale = "1 1 1";
+      dataBlock = "SignPlainDown";
+   };
+   new StaticShape() {
+      position = "13.6718 2.07386 1.53323";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SignCautionCaution";
+   };
+   new StaticShape() {
+      position = "18.8248 -23.4452 1.7";
+      rotation = "0 0 1 165";
+      scale = "1 1 1";
+      dataBlock = "SignPlainLeft";
+   };
+   new StaticShape() {
+      position = "17.0869 -7.94514 8.73366";
+      rotation = "0 0 -1 45.0001";
+      scale = "1 1 1";
+      dataBlock = "SignPlainRight";
+   };
+   new Trigger() {
+      position = "0.18396 -15.4264 -9.34406";
+      rotation = "1 0 0 0";
+      scale = "1.67703 1 1";
+      dataBlock = "TrickTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         trick = "Wicker Man";
+         points = "2500";
+         color = "#00FFFF";
+   };
+   new Trigger() {
+      position = "10.184 -15.4264 -9.34406";
+      rotation = "1 0 0 0";
+      scale = "1.67703 1 1";
+      dataBlock = "TrickTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         trick = "Wicker Man";
+         points = "2500";
+         color = "#00FFFF";
+   };
+   new Item() {
+      position = "-3.94437 1.96846 -9.09558";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-3.91878 1.96352 -7.72506";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemYellow";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-3.93141 1.95881 -6.31771";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemBlue";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "2.98056 16.0368 -8.25944";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "3.5435 17.7263 -8.40893";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "9.76563 17.8102 -8.27025";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "7.1058 20.1625 -8.18535";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemYellow";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "2.53478 19.7935 -7.9369";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "7.14471 16.2999 -7.11906";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "8.89715 19.2875 -7.54902";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "5.12435 20.9117 -7.44785";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new StaticShape() {
+      position = "6.02976 17.7296 -7.72433";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+         resetTime = "Default";
+   };
+   new Path(Path2) {
+
+      new Marker() {
+         position = "-7.5 26.3483 3.3348";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "0";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+      new Marker() {
+         position = "-3.5 26.3483 3.3348";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "1";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+   };
+   new Item(Mover) {
+      position = "-7.5 26.3483 3.3348";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+      my_x = 4;
+      my_y = 0;
+      my_z = 0;
+      mySpeed = 3;
+   };
+   new Path(Path3) {
+
+      new Marker() {
+         position = "0.5 25.864 4.08271";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "0";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+      new Marker() {
+         position = "4.5 25.864 4.08271";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "1";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+   };
+   new Item(Mover) {
+      position = "0.5 25.864 4.08271";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+      my_x = 4;
+      my_y = 0;
+      my_z = 0;
+      mySpeed = 4;
+   };
+   new Path(Path4) {
+
+      new Marker() {
+         position = "-5.5 26.2794 6.24085";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "0";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+      new Marker() {
+         position = "-1.5 26.2794 6.24085";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "1";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+   };
+   new Item(Mover) {
+      position = "-5.5 26.2794 6.24085";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemYellow";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+      my_x = 4;
+      my_y = 0;
+      my_z = 0;
+      mySpeed = 2.6;
+   };
+   new Path(Path5) {
+
+      new Marker() {
+         position = "-6.5 26.3662 11.8996";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "0";
+         msToNext = "2000";
+         smoothingType = "Accelerate";
+      };
+      new Marker() {
+         position = "5.5 26.3662 11.8996";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "1";
+         msToNext = "2000";
+         smoothingType = "Accelerate";
+      };
+   };
+   new Item(Mover) {
+      position = "-6.5 26.3662 11.8996";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemBlue";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+      my_x = 11;
+      my_y = 0;
+      my_z = 0;
+      mySpeed = 2;
+   };
+   new Trigger() {
+      position = "18.0303 22.3802 -11.8978";
+      rotation = "1 0 0 0";
+      scale = "4.28679 4.4413 6.7114";
+      dataBlock = "CornerTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         pos = "2";
+   };
+   new Trigger() {
+      position = "18.0303 -18.0198 -11.8978";
+      rotation = "1 0 0 0";
+      scale = "4.28679 4.4413 6.7114";
+      dataBlock = "CornerTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         pos = "3";
+   };
+   new Trigger() {
+      position = "-22.3697 -18.0198 -11.8978";
+      rotation = "1 0 0 0";
+      scale = "4.28679 4.4413 6.7114";
+      dataBlock = "CornerTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         pos = "4";
+   };
+   new Trigger() {
+      position = "-22.3697 22.3802 -11.8978";
+      rotation = "1 0 0 0";
+      scale = "4.28679 4.4413 6.7114";
+      dataBlock = "CornerTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         pos = "1";
+   };
+   new Path(Path6) {
+
+      new Marker() {
+         position = "-14 8 -12.3578";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "0";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+      new Marker() {
+         position = "-14 -4 -12.3578";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "1";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+   };
+   new Item(Mover) {
+      position = "-14 8 -12.3578";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+      my_x = 0;
+      my_y = -12;
+      my_z = 0;
+      mySpeed = 4;
+   };
+   new Path(Path7) {
+
+      new Marker() {
+         position = "-12 -4 -12.0563";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "0";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+      new Marker() {
+         position = "-12 8 -12.0563";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "1";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+   };
+   new StaticShape(Mover) {
+      position = "-12 -4 -12.0563";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+      my_x = 0;
+      my_y = 12;
+      my_z = 0;
+      mySpeed = 4;
+   };
+   new Path(Path8) {
+
+      new Marker() {
+         position = "-16 -4 -12.0563";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "0";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+      new Marker() {
+         position = "-16 8 -12.0563";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "1";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+   };
+   new StaticShape(Mover) {
+      position = "-16 -4 -12.0563";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+      my_x = 0;
+      my_y = 12;
+      my_z = 0;
+      mySpeed = 4;
+   };
+   new Path(Path9) {
+
+      new Marker() {
+         position = "-16 6 -12.2158";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "0";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+      new Marker() {
+         position = "-12 6 -12.2158";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "1";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+   };
+   new StaticShape(Mover) {
+      position = "-16 6 -12.2158";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+      my_x = 4;
+      my_y = 0;
+      my_z = 0;
+      mySpeed = 4;
+   };
+   new Path(Path10) {
+
+      new Marker() {
+         position = "-16 -2 -12.1077";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "0";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+      new Marker() {
+         position = "-12 -2 -12.1077";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "1";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+   };
+   new StaticShape(Mover) {
+      position = "-16 -2 -12.1077";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkyMine";
+      my_x = 4;
+      my_y = 0;
+      my_z = 0;
+      mySpeed = 4;
+   };
+   new Path(Path11) {
+
+      new Marker() {
+         position = "-12 2 -12.3198";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "0";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+      new Marker() {
+         position = "-16 2 -12.3198";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         seqNum = "1";
+         msToNext = "1000";
+         smoothingType = "Accelerate";
+      };
+   };
+   new Item(Mover) {
+      position = "-12 2 -12.3198";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemYellow";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+      my_x = -4;
+      my_y = 0;
+      my_z = 0;
+      mySpeed = 4;
+   };
+   new Item() {
+      position = "16.8391 6.36273 -6.60455";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemRed";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Trigger() {
+      position = "-3.69873 12.3145 2.6";
+      rotation = "1 0 0 0";
+      scale = "9.33752 0.123227 0.1";
+      dataBlock = "TrickTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         trick = "FS Marbleslide";
+         points = "5000";
+         color = "#001effff";
+   };
+   new Trigger() {
+      position = "-6.14364 3.97272 -13.9";
+      rotation = "1 0 0 0";
+      scale = "4.09248 3.89372 1";
+      dataBlock = "TrololoTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Trigger() {
+      position = "16 7.5 135";
+      rotation = "1 0 0 0";
+      scale = "8 15 1";
+      dataBlock = "TrickTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+         trick = "Up and Away";
+         points = "50000";
+         color = "#001effff";
+   };
+   new ScriptObject() {
+         pad = "1122034";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+         bonusTime = "0";
+         powerUp = "0";
+   };
+   new ScriptObject() {
+         pad = "1201289";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+         bonusTime = "0";
+         powerUp = "0";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/SkateparkPart2.dif";
+      showTerrainInside = "0";
+   };
+   new Item() {
+      position = "20.95 -17 -5.05";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkillPointItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         particles = "50322";
+   };
+   new ScriptObject() {
+         pad = "32061";
+         penaltyTime = "0";
+         time = "0";
+         gemCount = "0";
+         bonusTime = "0";
+         powerUp = "0";
+   };
+};
+//--- OBJECT WRITE END ---

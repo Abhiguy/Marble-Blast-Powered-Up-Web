@@ -1,0 +1,301 @@
+//-----------------------------------------------------------------------------
+// Code within this comment range by Jeff Hutchinson
+//
+// Jeff: you may use my code to learn from, but if used, please credit me :)
+//-----------------------------------------------------------------------------
+
+// Jeff: used to store the jump impulse so that we can use it again 
+// when we are out of the trigger.
+$JumpMod::jumpImpulse = -1;
+
+datablock TriggerData(NoJumpTrigger) {
+	tickPeriodMs = 100;
+};
+
+function NoJumpTrigger::onEnterTrigger(%this, %trigger, %marble) {
+    $JumpMod::jumpImpulse = %marble.getDataBlock().jumpImpulse;
+	%marble.getDataBlock().jumpImpulse = 0;
+	addHelpLine("You have entered a no jump zone.", true);
+}
+
+function NoJumpTrigger::onLeaveTrigger(%this, %trigger, %marble) {
+	%marble.getDataBlock().jumpImpulse = $JumpMod::jumpImpulse;
+	addHelpLine("You have left a no jump zone.", true);
+}
+
+//-----------------------------------------------------------------------------
+// End Code
+//-----------------------------------------------------------------------------
+
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         time = "60000";
+         artist = "Jeff Hutchinson, Whirligig231";
+         desc = "Can you pass this simple but complex challenge?  I hope so!  You\'re under a time limit, so don\'t be slow!";
+         level = "46";
+         type = "Advanced";
+         name = "Simply Complex";
+         goldTime = "25000";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0.349971";
+      cloudHeightPer[1] = "0.3";
+      cloudHeightPer[2] = "0.199973";
+      cloudSpeed1 = "0.0005";
+      cloudSpeed2 = "0.001";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.900000 0.900000 0.900000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "0 0 0";
+      fogVolume2 = "0 0 0";
+      fogVolume3 = "0 0 0";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 1 0";
+      windEffectPrecipitation = "1";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -222768174765569860000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -170698929442160050000000000000000000000.000000";
+         locked = "true";
+   };
+   new Sun() {
+      direction = "0.544508 0.439467 -0.714409";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+         scale = "1 1 1";
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         locked = "true";
+   };
+   new SimGroup(CheckPoints) {
+
+      new StaticShape(StartPoint) {
+         position = "-0.101771 -5.24418 505.413";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "StartPad";
+      };
+      new StaticShape(EndPoint) {
+         position = "18.3956 -50.044 527.44";
+         rotation = "0 0 1 179.518";
+         scale = "1 1 1";
+         dataBlock = "EndPad";
+      };
+   };
+   new InteriorInstance() {
+      position = "-2.08792 -7.22925 502.446";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/addon/whirligig.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape(EndSign) {
+      position = "18.3272 -50.26 534.22";
+      rotation = "0 0 1 15";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new Trigger(Bounds) {
+      position = "-13.4267 56.8154 475.502";
+      rotation = "1 0 0 0";
+      scale = "50 120 100";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Item() {
+      position = "18.3403 14.6589 514.071";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         lastRand = "9";
+   };
+   new Item() {
+      position = "18.4037 4.75629 527.646";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperSpeedItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "18.3314 14.7718 511.714";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperJumpItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Trigger(noJump) {
+      position = "16.4183 18.7625 510.717";
+      rotation = "1 0 0 0";
+      scale = "4 8 10";
+      dataBlock = "NoJumpTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new Item() {
+      position = "18.3644 21.1591 527.856";
+      rotation = "0 -1 0 90";
+      scale = "1 1 1";
+      dataBlock = "DoublerItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new ScriptObject() {
+         time = "0";
+         penaltyTime = "0";
+         powerUp = "0";
+         pad = "1748";
+         bonusTime = "0";
+         gemCount = "0";
+   };
+   new Item() {
+      position = "-6.81906 42.5094 522.724";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         lastRand = "7";
+   };
+   new Item() {
+      position = "-4.7616 37.3631 524.37";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TimeTravelItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-4.67658 47.6931 524.44";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "TimeTravelItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         time = "3000";
+   };
+   new Item() {
+      position = "-0.0995612 0.711642 505.663";
+      rotation = "0 1 0 90";
+      scale = "1 1 1";
+      dataBlock = "DoublerItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-0.0379534 10.7574 505.349";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "HelicopterItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new ScriptObject() {
+         time = "0";
+         penaltyTime = "0";
+         powerUp = "0";
+         pad = "1851";
+         bonusTime = "0";
+         gemCount = "0";
+   };
+   new Item() {
+      position = "14.3439 44.851 523.706";
+      rotation = "1 0 0 90";
+      scale = "1 1 1";
+      dataBlock = "DoublerItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "18.3521 44.6492 523.669";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "ShockAbsorberItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "19.6533 10.9077 512.413";
+      rotation = "0 0 1 180";
+      scale = "1 1 1";
+      dataBlock = "SignPlainUp";
+   };
+   new Item() {
+      position = "18.4278 32.7531 527.52";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         lastRand = "8";
+   };
+   new Item() {
+      position = "18.36 -3.12406 527.451";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItemBlue";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         lastRand = "8";
+   };
+   new StaticShape() {
+      position = "-1.85484 13.0025 506.67";
+      rotation = "0 0 -1 20";
+      scale = "1 1 1";
+      dataBlock = "SignPlainUp";
+   };
+   new StaticShape() {
+      position = "16.5769 34.968 524.684";
+      rotation = "0 0 1 180";
+      scale = "1 1 1";
+      dataBlock = "SignPlainUp";
+   };
+   new StaticShape() {
+      position = "20.5685 10.6919 528.711";
+      rotation = "0 0 1 160";
+      scale = "1 1 1";
+      dataBlock = "SignPlainDown";
+   };
+   new StaticShape() {
+      position = "16.3023 10.6781 528.691";
+      rotation = "0 0 1 200";
+      scale = "1 1 1";
+      dataBlock = "SignPlainDown";
+   };
+   new AudioProfile(MusicProfile) {
+      fileName = "~/data/sound/Shell.ogg";
+      description = "AudioMusic";
+      preload = "0";
+   };
+};
+//--- OBJECT WRITE END ---

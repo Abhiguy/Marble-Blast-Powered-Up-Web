@@ -1,0 +1,214 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         music = "space vibe.ogg";
+         startHelpText = "Hunt for the gems in spherical geometry!";
+         time = "0";
+         name = "Super Marble Galaxy";
+         desc = "Roll around all angles of this faraway planet ...";
+         artist = "Whirligig231";
+         level = "14";
+         goldTime = "40000";
+         type = "Sandbox";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 -1.99514e+038 -2.02183e+038";
+      fogVolume2 = "-1 -2.14204e+038 -2.15538e+038";
+      fogVolume3 = "-1 -2.24889e+038 -2.26219e+038";
+      materialList = "~/data/skies/sky_space.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 -210195007640218170000000000000000000000.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 -220880937116769280000000000000000000000.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -231561674296461850000000000000000000000.000000";
+   };
+   new Sun() {
+      direction = "-0.953939 0 -0.3";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new StaticShape(StartPoint) {
+      position = "0 0 30.5";
+      rotation = "0 0 1 90";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+         fixedscale = "1";
+   };
+   new StaticShape(EndPoint) {
+      position = "0 0 -39.5";
+      rotation = "0 1 0 180";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+         fixedscale = "1";
+   };
+   new Item() {
+      position = "33.7767 -1.01337 -2.87751";
+      rotation = "0 1 0 90";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "29.9662 -0.966282 -2.49747";
+      rotation = "0 -1 0 90";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "17.1774 -17.7963 23.5804";
+      rotation = "-0.719368 -0.694629 0 46.842";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "0.77171 -0.0262812 -48.0796";
+      rotation = "0.0340361 0.999421 0 180.92";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new StaticShape() {
+      position = "-27.8016 -5.33989 -9.94413";
+      rotation = "-0.188624 0.982049 0 109.354";
+      scale = "1 1 1";
+      dataBlock = "Tornado";
+   };
+   new StaticShape() {
+      position = "-28.732 6.39379 -5.90311";
+      rotation = "0.217218 0.976123 0 101.34";
+      scale = "1 1 1";
+      dataBlock = "Tornado";
+   };
+   new StaticShape() {
+      position = "-22.2598 0.48527 -20.2394";
+      rotation = "0.0217951 0.999762 0 132.271";
+      scale = "1 1 1";
+      dataBlock = "Tornado";
+   };
+   new Item() {
+      position = "-28.9727 0.797265 -8.20697";
+      rotation = "0.0790426 0.996871 0 105.873";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "35.4762 -1.13591 -2.91727";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkillPointItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+         particles = "2454";
+   };
+   new StaticShape() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "6 6 6";
+      dataBlock = "Planet";
+   };
+   new InteriorInstance() {
+      position = "-0.0160506 0.00809741 22.4968";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/planet/planet1.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "5.16325 0.00809741 22.9672";
+      rotation = "0 -1 0 13.751";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/planet/planet1.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "12.9622 -14.7633 17.3255";
+      rotation = "-0.276805 -0.672261 0.686618 65.9095";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/planet/planet2.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "10.6767 0.00809741 21.8989";
+      rotation = "0 -1 0 25.7831";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/planet/planet1.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "14.9129 -0.981041 19.4637";
+      rotation = "0 -1 0 34.9504";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/planet/planet2.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "17.5483 -2.62381 18.1178";
+      rotation = "-0.0229761 -0.994817 0.0990535 41.5187";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/planet/planet2.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "18.9102 -5.96723 17.18";
+      rotation = "-0.107 -0.936901 0.332819 48.1066";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/planet/planet2.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "16.4979 -11.0897 17.2124";
+      rotation = "-0.213039 -0.796353 0.566072 54.4451";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/planet/planet2.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "-2.01605 2.0081 -46.5032";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/planet/planet4.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "24.2777 -0.491591 -2.72464";
+      rotation = "0.577195 -0.577198 0.577658 119.974";
+      scale = "1 1 1.29599";
+      interiorFile = "~/data/interiors/sandbox/planet/planet3.dif";
+      showTerrainInside = "0";
+   };
+};
+//--- OBJECT WRITE END ---

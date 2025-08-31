@@ -1,0 +1,1289 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         goldTime = "100000";
+         time = "0";
+         name = "回転の城 KAITEN\'S CASTLE";
+         desc = "Conquer each of the challenges and defeat Kaiten\'s Castle!";
+         artist = "回転歯車 (Whirligig231)";
+         level = "65";
+         type = "Advanced";
+         music = "beach party.ogg";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 4.35804e-043 4.34403e-043";
+      fogVolume2 = "-1 4.17587e-043 -0.866026";
+      fogVolume3 = "-1 0.499999 -2.62729e-008";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.000000";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 0.866024";
+   };
+   new Sun() {
+      direction = "0.433884 0.614021 -0.659336";
+      color = "1.400000 1.200000 0.400000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new StaticShape() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "KaitenSupport";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/addon/kaiten1.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/addon/kaiten2.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/addon/kaiten3.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/addon/kaiten4.dif";
+      showTerrainInside = "0";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/addon/kaiten5.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape(EndPoint) {
+      position = "56 34 0";
+      rotation = "0 0 1 90.0002";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "62 9.5 2.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "7000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "62 9.5 2.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "62 10 2";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "2000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "62 10 2";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            msToNext = "500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "62 9.5 2.5";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            msToNext = "0";
+            smoothingType = "Accelerate";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten4.dif";
+         interiorIndex = "3";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "123640948";
+      };
+   };
+   new StaticShape(StartPoint) {
+      position = "14 -30 0";
+      rotation = "0 0 -1 90";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new Item() {
+      position = "62 18 6";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-56 -32 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "34 34 4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "34 34 0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "34 34 4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten5.dif";
+         interiorIndex = "7";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackPos = "1000";
+            trackTime = "123640948";
+            initialPosition = "1000";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "0 -20 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "14.1421 -14.1421 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "20 0 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "14.1421 14.1421 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "3";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "0 20 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "4";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-14.1421 14.1421 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "5";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-20 0 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "6";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-14.1421 -14.1421 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "7";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "0 -20 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "8";
+            msToNext = "0";
+            smoothingType = "Spline";
+         };
+      };
+      new PathedInterior(KeyMPlatform) {//MustChangemain
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten2.dif";
+         interiorIndex = "0";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "86725234";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "20.0008 -0.0186403 -0.25";
+            rotation = "0 0 -1 94.538";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "13.0423 13.6157 -0.25";
+            rotation = "0 0 -1 94.538";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-1.51892 18.3362 -0.25";
+            rotation = "0 0 -1 94.538";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-15.1532 11.3778 -0.25";
+            rotation = "0 0 -1 94.538";
+            scale = "1 1 1";
+            seqNum = "3";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-19.8738 -3.18348 -0.25";
+            rotation = "0 0 -1 94.538";
+            scale = "1 1 1";
+            seqNum = "4";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-12.9153 -16.8178 -0.25";
+            rotation = "0 0 -1 94.538";
+            scale = "1 1 1";
+            seqNum = "5";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "1.64591 -21.5384 -0.25";
+            rotation = "0 0 -1 94.538";
+            scale = "1 1 1";
+            seqNum = "6";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "15.2802 -14.5799 -0.25";
+            rotation = "0 0 -1 94.538";
+            scale = "1 1 1";
+            seqNum = "7";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "20.0008 -0.0186403 -0.25";
+            rotation = "0 0 -1 94.538";
+            scale = "1 1 1";
+            seqNum = "8";
+            msToNext = "0";
+            smoothingType = "Spline";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0.0493584 -1.55843 3.85988e-007";
+         rotation = "0 0 -1 94.538";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten2.dif";
+         interiorIndex = "0";
+         basePosition = "0.0493584 -1.55843 3.85988e-007";
+         baseRotation = "0 0 -1 94.538";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "86725234";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "2.53517 20.0175 -0.25";
+            rotation = "0 0 1 183.529";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-11.9407 15.0412 -0.25";
+            rotation = "0 0 1 183.529";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-18.658 1.28651 -0.25";
+            rotation = "0 0 1 183.529";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-13.6817 -13.1894 -0.25";
+            rotation = "0 0 1 183.529";
+            scale = "1 1 1";
+            seqNum = "3";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "0.0730207 -19.9066 -0.25";
+            rotation = "0 0 1 183.529";
+            scale = "1 1 1";
+            seqNum = "4";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "14.5489 -14.9304 -0.25";
+            rotation = "0 0 1 183.529";
+            scale = "1 1 1";
+            seqNum = "5";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "21.2662 -1.17564 -0.25";
+            rotation = "0 0 1 183.529";
+            scale = "1 1 1";
+            seqNum = "6";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "16.2899 13.3002 -0.25";
+            rotation = "0 0 1 183.529";
+            scale = "1 1 1";
+            seqNum = "7";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "2.53517 20.0175 -0.25";
+            rotation = "0 0 1 183.529";
+            scale = "1 1 1";
+            seqNum = "8";
+            msToNext = "0";
+            smoothingType = "Spline";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "0 0 1 183.529";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten2.dif";
+         interiorIndex = "0";
+         basePosition = "0 0 0";
+         baseRotation = "0 0 1 183.529";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "86725234";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "-17.7733 -1.82423 -0.25";
+            rotation = "0 0 1 91.2828";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-12.2335 -16.0939 -0.25";
+            rotation = "0 0 1 91.2828";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "1.77393 -22.267 -0.25";
+            rotation = "0 0 1 91.2828";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "16.0436 -16.7272 -0.25";
+            rotation = "0 0 1 91.2828";
+            scale = "1 1 1";
+            seqNum = "3";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "22.2167 -2.71971 -0.25";
+            rotation = "0 0 1 91.2828";
+            scale = "1 1 1";
+            seqNum = "4";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "16.6768 11.55 -0.25";
+            rotation = "0 0 1 91.2828";
+            scale = "1 1 1";
+            seqNum = "5";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "2.66941 17.723 -0.25";
+            rotation = "0 0 1 91.2828";
+            scale = "1 1 1";
+            seqNum = "6";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-11.6003 12.1832 -0.25";
+            rotation = "0 0 1 91.2828";
+            scale = "1 1 1";
+            seqNum = "7";
+            msToNext = "2500";
+            smoothingType = "Spline";
+         };
+         new Marker() {
+            position = "-17.7733 -1.82423 -0.25";
+            rotation = "0 0 1 91.2828";
+            scale = "1 1 1";
+            seqNum = "8";
+            msToNext = "0";
+            smoothingType = "Spline";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "0 0 1 91.2831";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten2.dif";
+         interiorIndex = "0";
+         basePosition = "0 0 0";
+         baseRotation = "0 0 1 91.2828";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "86725234";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "-56 -8 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "5000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-56 -24 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "5000";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "-56 -8 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Accelerate";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten3.dif";
+         interiorIndex = "0";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "123640948";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "36 0 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "3000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "36 -4 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "36 0 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten4.dif";
+         interiorIndex = "0";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "123640948";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "42 0 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "3000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "42 4 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "42 0 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten4.dif";
+         interiorIndex = "1";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "123640948";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "48 0 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "3000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "48 -4 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "500";
+            smoothingType = "Accelerate";
+         };
+         new Marker() {
+            position = "48 0 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten4.dif";
+         interiorIndex = "2";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "123640948";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "40 34 4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "40 34 0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "40 34 4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten5.dif";
+         interiorIndex = "8";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "123640948";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "10 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "10 34 -4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "10 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten5.dif";
+         interiorIndex = "0";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "123640948";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "16 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "16 34 -4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "16 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten5.dif";
+         interiorIndex = "1";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackPos = "1000";
+            trackTime = "123640948";
+            initialPosition = "1000";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "22 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "22 34 -4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "22 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten5.dif";
+         interiorIndex = "2";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "123640948";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "28 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "28 34 -4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "28 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten5.dif";
+         interiorIndex = "3";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackPos = "1000";
+            trackTime = "123640948";
+            initialPosition = "1000";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "40 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "40 34 -4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "40 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten5.dif";
+         interiorIndex = "4";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "123640948";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "34 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "34 34 -4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "34 34 -0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten5.dif";
+         interiorIndex = "5";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackPos = "1000";
+            trackTime = "123640948";
+            initialPosition = "1000";
+      };
+   };
+   new SimGroup(MustChange_g) {
+
+      new Path() {
+
+         new Marker() {
+            position = "28 34 4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "0";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "28 34 0.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "1";
+            msToNext = "1000";
+            smoothingType = "Linear";
+         };
+         new Marker() {
+            position = "28 34 4.25";
+            rotation = "1 0 0 0";
+            scale = "1 1 1";
+            seqNum = "2";
+            msToNext = "0";
+            smoothingType = "Linear";
+         };
+      };
+      new PathedInterior(MustChange) {
+         position = "0 0 0";
+         rotation = "1 0 0 0";
+         scale = "1 1 1";
+         dataBlock = "PathedDefault";
+         interiorResource = "marble/data/interiors/addon/kaiten5.dif";
+         interiorIndex = "6";
+         basePosition = "0 0 0";
+         baseRotation = "1 0 0 0";
+         baseScale = "1 1 1";
+            trackTarget = "-1";
+            initialTargetPosition = "-1";
+            trackTime = "123640948";
+      };
+   };
+   new StaticShape() {
+      position = "0 0 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "0 20 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "0 -20 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "20 -20 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "20 0 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "20 20 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "-20 -20 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "-20 0 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "-20 20 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "-40 0 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "-60 0 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "-60 -20 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "-60 -40 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "0 40 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "20 40 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "40 40 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "60 40 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "40 0 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new StaticShape() {
+      position = "60 0 -42";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "LavaFloor";
+   };
+   new Trigger(Bounds) {
+      position = "-69.9925 55.3449 -16.4848";
+      rotation = "1 0 0 0";
+      scale = "142.951 114.043 155.35";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new StaticShape() {
+      position = "1.38227 -24.643 1.25";
+      rotation = "0 0 1 30.0001";
+      scale = "1 1 1";
+      dataBlock = "SignCautionFire";
+   };
+   new StaticShape() {
+      position = "0.0598541 21.478 8.61852";
+      rotation = "-1 0 0 30.0001";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new TSStatic() {
+      position = "63.85 -1 -3";
+      rotation = "1 0 0 0";
+      scale = "0.15 3 1";
+      shapeName = "~/data/shapes/colmesh.dts";
+   };
+   new Item() {
+      position = "63.5003 1.52023 -1.17777";
+      rotation = "0 0 1 90.0002";
+      scale = "1 1 1";
+      dataBlock = "HelicopterItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "0 0 0.2";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkillPointItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+};
+//--- OBJECT WRITE END ---

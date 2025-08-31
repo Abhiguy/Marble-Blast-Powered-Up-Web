@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+	<head>
+		<meta charset="utf-8">
+		<title>Marble Blast Powered Up Web</title>
+		<meta name="description" content="A web port of Marble Blast Powered Up: In this 3D platformer classic, race your marble to the finish as fast as possible while escaping from dangerous hazards and grabbing new collectibles.. Marble Blast powered Up is a mod of Marble blast Gold , focused on introducing new power-ups and features to remix existing levels and create new ones. Play Marble Blast Powered Up online right in your browser or on your mobile device.">
+		<meta name="keywords" content="marble, blast, gold, platinum, MBPU, poweredup, marbleblast, marbleblastgold, marbleblastplatinum, marbleblastpoweredup, mbg, mbp, mbpu, garagegames, torque, web, mbpuwebport, puwebport, webport, port, online, mbpuonline">
+		<meta name="author" content="Abhishek">
+		<meta property="og:title" content="Marble Blast Powered Up Web">
+		<meta property="og:type" content="website">
+		<meta property="og:description" content="A web port of Marble Blast Powered Up: In this 3D platformer classic, race your marble to the finish as fast as possible while escaping from dangerous hazards and grabbing new collectibles.. Marble Blast powered Up is a mod of Marble blast Gold , focused on introducing new power-ups and features to remix existing levels and create new ones. Play Marble Blast Powered Up online right in your browser or on your mobile device.">
+		<meta property="og:image" content="https://marbleblast.vaniverse.io/assets/img/mbp.png">
+		<!--<meta name="DISABLED twitter:card" content="summary_large_image">-->
+		<link rel="shortcut icon" href="./assets/img/mbp.png" id="favicon">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="manifest" href="/manifest.json">
+		<link rel="apple-touch-icon" href="./assets/img/app-icon/180x180.png">
+		<link rel="apple-touch-icon image_src" href="./assets/img/app-icon/180x180.png">
+
+		<link rel="stylesheet" href="./css/main.css">
+		<link rel="stylesheet" href="./css/popup.css">
+		<link rel="stylesheet" href="./css/home.css">
+		<link rel="stylesheet" href="./css/home_mbp.css">
+		<link rel="stylesheet" href="./css/level_select.css">
+		<link rel="stylesheet" href="./css/level_select_mbp.css">
+		<link rel="stylesheet" href="./css/loading.css">
+		<link rel="stylesheet" href="./css/loading_mbp.css">
+		<link rel="stylesheet" href="./css/help.css">
+		<link rel="stylesheet" href="./css/help_mbp.css">
+		<link rel="stylesheet" href="./css/options.css">
+		<link rel="stylesheet" href="./css/options_mbp.css">
+		<link rel="stylesheet" href="./css/hud.css">
+		<link rel="stylesheet" href="./css/touch_controls.css">
+		<link rel="stylesheet" href="./css/pause_screen.css">
+		<link rel="stylesheet" href="./css/pause_screen_mbp.css">
+		<link rel="stylesheet" href="./css/finish_screen.css">
+		<link rel="stylesheet" href="./css/finish_screen_mbp.css">
+		<link rel="stylesheet" href="./css/video_renderer.css">
+	</head>
+	<body>
+		<!-- https://stackoverflow.com/questions/18524177/strange-click-event-bubble-on-iphone-safari-that-it-stop-before-bubbling-to-docu -->
+		<div onclick="void 0;" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1000;"></div>
+
+		<canvas id="main-canvas" class="hidden"></canvas>
+		<canvas id="decoy-canvas" width="1" height="1"></canvas>
+
+		<div id="loading-message">Loading...</div>
+		<div id="loading-detail">Loading core...</div>
+		<div id="switching-message" class="hidden">Switching...</div>
+		<div id="start-game-dialog" style="display: none;">
+			<div style="font-size: 24px;"></div>
+			<div style="font-size: 16px; opacity: 0.5;">Alternatively, click anywhere to continue in windowed mode</div>
+		</div>
+		<div id="fullscreen-enforcer" class="hidden">
+			Tap to enter fullscreen<br><span style="opacity: 0.5; font-size: 18px;">(recommended for touch devices)</span>
+			<img src="./assets/svg/close_white_24dp.svg">
+		</div>
+		<img src="./assets/svg/fullscreen_white_24dp.svg" id="enter-fullscreen" class="hidden">
+		<div id="popup-container" style="display: none;"></div>
+
+		<div id="game-ui" class="hidden">
+			<canvas id="hud-canvas"></canvas>
+
+			<div id="touch-input-container">
+				<div id="movement-area"></div>
+				<div id="movement-joystick">
+					<div id="movement-joystick-handle"></div>
+				</div>
+				<div id="camera-area"></div>
+				<div id="action-buttons">
+					<img src="./assets/img/up-arrow.png" id="jump-button" class="touch-button">
+					<img src="./assets/img/energy.png" id="use-button" class="touch-button">
+					<img src="./assets/img/explosion.png" id="blast-button" class="touch-button">
+				</div>
+				<img src="./assets/img/pause-button.png" id="pause-button" class="touch-button">
+				<div class="touch-button" id="restart-button"><img src="./assets/img/refresh.png"></div>
+				<img src="./assets/img/video-camera.png" id="free-look-button" class="touch-button">
+			</div>
+			<div id="fps-meter">
+				<img src="./assets/ui_mbp/game/transparency_fps-flipped.png" id="fps-meter-background">
+				<div id="fps-meter-value">FPS: -</div>
+			</div>
+
+			<div id="pause-screen" class="hidden">
+				<img src="./assets/ui/common/dialog.png">
+				<p>Exit from this Level?</p>
+				<img id="pause-yes">
+				<img id="pause-no">
+				<img id="pause-restart">
+				<img src="./assets/img/round_videocam_black_18dp.png" id="pause-replay" title="Click to view replay up until this point, Alt-Click to download it">
+			</div>
+
+			<div id="mbp-pause-screen" class="hidden">
+				<div class="_background"></div>
+				<div class="_center">
+					<img src="./assets/ui_mbp/play/window.png">
+					<p>Exit from this Level?</p>
+					<img id="mbp-pause-yes">
+					<img id="mbp-pause-no">
+					<img id="mbp-pause-restart">
+					<img id="mbp-pause-replay" title="Click to view replay up until this point, Alt-Click to download it">
+				</div>
+				<img src="./assets/ui_mbp/jukebox/jb_pausemenu_n.png" id="mbp-pause-jukebox">
+
+				<div id="jukebox" class="hidden">
+					<img src="./assets/ui_mbp/jukebox/window.png">
+					<div id="jukebox-songs"></div>
+					<p id="jukebox-text"></p>
+					<img id="jukebox-close">
+					<img id="jukebox-prev">
+					<img id="jukebox-play">
+					<img id="jukebox-next">
+				</div>
+			</div>
+
+			<div id="finish-screen" class="hidden">
+				<img src="./assets/ui/play/playgui.png">
+				<div id="finish-screen-time">
+                    <p id="finish-screen-time-label">Final Time:</p>
+                    <p id="finish-screen-time-time"></p>
+				</div>
+				<div style="clear: both;"></div>
+				<p id="finish-message"></p>
+				<div class="finish-row">
+					<p id="finish-qualify-label">Qualify Time:</p>
+					<p id="finish-qualify-time"></p>
+				</div>
+				<div class="finish-row">
+					<p id="finish-gold-label">Gold Time:</p>
+					<p id="finish-gold-time" style="color: #fff700; text-shadow: 1px 1px 0px black;"></p>
+				</div>
+				<div class="finish-row">
+					<p>Elapsed Time:</p>
+					<p id="finish-elapsed-time"></p>
+				</div>
+				<div class="finish-row">
+					<p>Bonus Time:</p>
+					<p id="finish-bonus-time"></p>
+				</div>
+				<div style="width: 1px; height: 15px;"></div>
+				<div class="finish-row" style="margin-top: 30px;">
+					<p>Best Times:</p>
+					<p></p>
+				</div>
+				<div id="finish-best-times" style="clear: both; position: relative;"></div>
+				<img id="finish-replay">
+				<img id="finish-continue">
+				<img src="./assets/img/round_videocam_black_18dp.png" id="finish-view-replay" title="Click to view replay, Alt-Click to download it">
+			</div>
+			<div id="name-entry-screen" class="hidden">
+				<img src="./assets/ui/common/dialog.png">
+				<p>Congratulations!</p>
+				<p></p>
+				<img src="./assets/ui/common/window.png" id="name-entry-input-background">
+				<input type="text" id="name-entry-input" maxlength="16" autocomplete="off" autocorrect="off" spellcheck="false">
+				<img id="name-entry-confirm">
+			</div>
+
+			<div id="mbp-finish-screen" class="hidden">
+				<img src="./assets/ui_mbp/endgame/base.png">
+				<p id="mbp-finish-screen-time">Your Time: <span id="mbp-finish-screen-time-time"></span></p>
+				<p id="mbp-finish-message"></p>
+				<div id="mbp-finish-time-rows"></div>
+				<p id="mbp-finish-screen-top-times-heading">Top 5 Times:</p>
+				<div id="mbp-finish-screen-top-times"></div>
+				<img id="mbp-finish-replay">
+				<img id="mbp-finish-continue">
+				<img id="mbp-finish-next-level-image">
+				<img id="mbp-finish-next-level">
+				<img id="mbp-finish-view-replay" title="Click to view replay, Alt-Click to download it">
+			</div>
+			<div id="mbp-name-entry-screen" class="hidden">
+				<img src="./assets/ui_mbp/endgame/enternamebox.png">
+				<p>Well Done!</p>
+				<p></p>
+				<img src="./assets/ui_mbp/endgame/window.png" id="mbp-name-entry-input-background">
+				<input type="text" id="mbp-name-entry-input" maxlength="16" autocomplete="off" autocorrect="off" spellcheck="false">
+				<img id="mbp-name-entry-confirm">
+			</div>
+		</div>
+
+		<div id="mbp-menu" class="hidden">
+			<img id="mbp-background-image">
+			<p id="mbp-version"></p>
+			<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Buy Me a Coffee', '#72a4f2', 'L4L71J89I2');kofiwidget2.draw();</script> 
+
+			<div id="mbp-home-screen" class="hidden">
+				<div class="_inner">
+					<img id="mbp-home-quit">
+					<img id="mbp-home-options">
+					<img src="./assets/ui_mbp/menu/online_i.png" id="mbp-home-online">
+					<img id="mbp-home-play">
+					<img id="mbp-show-changelog">
+					<img id="mbp-home-help">
+				</div>
+				<img src="./assets/ui_mbp/menu/mbp.png" id="mbp-logo">
+				<img src="./assets/img/marble-blast-gold-logo.png" class="modification-switcher" title="Switch to Marble Blast Gold">
+			</div>
+
+			<div id="mbp-changelog" class="hidden">
+				<div class="_click-preventer"></div>
+				<img src="./assets/ui_mbp/motd/messagewindow.png">
+				<div id="mbp-changelog-content"></div>
+				<img id="mbp-changelog-back">
+			</div>
+
+			<div id="mbp-level-select" class="hidden">
+				<img src="./assets/ui_mbp/play/window.png" style="pointer-events: none; display: block;">
+				<img id="mbp-level-select-home-button">
+				<img id="mbp-level-select-view-toggle" title="Show scores">
+				<img id="mbp-load-replay-button" title="Load replay from file (Shift-Click to render replay to video, Alt-Shift-Click to render compilation)">
+				<img id="mbp-shuffle-button" title="Go to random level">
+				<img id="mbp-level-select-prev">
+				<img id="mbp-level-select-play">
+				<img id="mbp-level-select-next">
+
+				<img id="mbp-level-image">
+				<img src="./assets/ui_mbp/play/levelframe.png" id="mbp-level-select-frame">
+				<img id="mbp-level-select-egg" class="hidden">
+				<div id="mbp-search-bar"></div>
+				<input id="mbp-search-input" maxlength="40" placeholder="Search levels" autocomplete="off" autocorrect="off" spellcheck="false">
+				<img id="mbp-sort-icon" src="./assets/svg/event_FILL0_wght400_GRAD0_opsz24.svg" title="Toggle sort">
+
+				<div id="mbp-difficulty-selector">
+					<img id="mbp-difficulty-selector-collapsed">
+					<img id="mbp-difficulty-selector-modification-icon">
+					<div id="mbp-difficulty-selector-window" class="hidden">
+						<div class="_click-preventer"></div>
+						<img src="./assets/ui_mbp/mp/menu/brown/tabt.png" id="mbp-difficulty-selector-window-tabt">
+						<div id="mbp-difficulty-selector-window-divider"></div>
+						<div class="_content"></div>
+					</div>
+				</div>
+				<div id="mbp-level-select-text-window" style="height: 150px;">
+					<p id="mbp-level-title"></p>
+					<div id="mbp-level-metadata">
+						<p id="mbp-level-artist"></p>
+						<p id="mbp-level-description"></p>
+					</div>
+					<div id="mbp-level-scores" class="hidden">
+						<div id="mbp-level-select-local-best-times"></div>
+						<p id="mbp-online-leaderboard-heading">Online Leaderboard:</p>
+						<p id="mbp-online-leaderboard-loading">Loading scores...</p>
+						<div id="mbp-leaderboard-scores" style="box-sizing: border-box;"></div>
+					</div>
+				</div>
+				<p id="mbp-level-qualify-time"></p>
+			</div>
+
+			<div id="mbp-loading" class="hidden">
+				<div id="mbp-loading-progress"></div>
+				<img src="./assets/ui_mbp/loading/loadinggui.png">
+				<img src="./assets/ui_mbp/loading/overlay.png" id="mbp-loading-overlay">
+				<img id="mbp-loading-cancel">
+				<p id="mbp-loading-level-name"></p>
+			</div>
+
+			<div id="mbp-options" class="hidden">
+				<img src="./assets/ui_mbp/options/window.png">
+				<img id="mbp-options-home">
+				<img id="mbp-options-apply">
+				<img id="mbp-options-general">
+				<img id="mbp-options-hotkeys">
+				<img src="./assets/ui_mbp/options/online_i.png" id="mbp-options-online">
+				<div id="mbp-options-container-wrapper">
+					<div class="_container" id="mbp-options-general-container"></div>
+					<div class="_container" id="mbp-options-hotkeys-container"></div>
+				</div>
+
+				<div id="mbp-rebind-dialog" class="hidden">
+					<img src="./assets/ui_mbp/play/window.png">
+					<p></p>
+				</div>
+				<div id="mbp-rebind-confirm" class="hidden">
+					<img src="./assets/ui_mbp/play/text_window.png">
+					<p></p>
+					<h6>WARNING</h6>
+					<img id="mbp-rebind-confirm-yes">
+					<img id="mbp-rebind-confirm-no">
+				</div>
+			</div>
+
+			<div id="mbp-help" class="hidden">
+				<img src="./assets/ui_mbp/manual/window.png">
+				<img id="mbp-help-home">
+				<div id="mbp-help-picker"></div>
+			</div>
+		</div>
+
+		<div id="menu" class="hidden">
+			<img src="./assets/ui/background.jpg" id="background-image">
+			<p id="version"></p>
+			
+			<style>
+				.btn-container {
+					position: absolute;
+					bottom: 10px;
+					right: 10px;
+					z-index: 1;
+				}
+			</style>
+			<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Buy Me a Coffee', '#72a4f2', 'L4L71J89I2');kofiwidget2.draw();</script> 
+
+			<div id="home-screen" class="hidden">
+				<div class="_inner">
+					<img src="./assets/ui/home/homegui.png">
+					<img id="home-play">
+					<img id="home-help">
+					<img id="home-options">
+					<img src="./assets/ui/home/exit_n.png" id="home-exit">
+				</div>
+				<img id="show-changelog">
+				<div id="show-changelog-text">Changelog</div>
+				<img src="./assets/img/mbp.png" class="modification-switcher" title="Switch to Marble Blast Platinum" style="display: none;">
+			</div>
+
+			<div id="changelog" class="hidden">
+				<img src="./assets/ui/play/playgui.png">
+				<div>
+					<div id="changelog-content"></div>
+				</div>
+				<img id="changelog-back">
+			</div>
+
+			<div id="level-select" class="hidden">
+				<img src="./assets/ui/play/playgui.png" style="pointer-events: none; display: block;">
+				<img src="./assets/ui/play/tab_begin.png" id="tab-beginner">
+				<img src="./assets/ui/play/tab_inter.png" id="tab-intermediate">
+				<img src="./assets/ui/play/tab_adv.png" id="tab-advanced">
+				<img src="./assets/ui/play/cust_tab.png" id="tab-custom">
+				<img src="./assets/ui/play/sandbox_n.png" id="tab-sandbox">
+				<div id="level-select-text-window">
+					<img src="./assets/ui/play/text_window.png" style="position: absolute; top: 0; left: 0; z-index: -1;">
+					<div id="level-select-text-window-scrollable">
+						<p id="level-title"></p>
+						<p id="level-artist"></p>
+						<p id="level-description"></p>
+						<p id="level-qualify-time"></p>
+						<p id="best-times-heading">Best Times:</p>
+						<div id="level-select-local-best-times"></div>
+						<p id="online-leaderboard-heading">Online Leaderboard:</p>
+						<p id="online-leaderboard-loading">Loading scores...</p>
+						<div id="leaderboard-scores" style="box-sizing: border-box;"></div>
+					</div>
+				</div>
+				<img src="./assets/ui/play/back_n.png" id="level-select-home-button">
+				<div id="level-select-level-window">
+					<img src="./assets/ui/play/level_window.png">
+					<img id="level-image">
+					<p id="level-number"></p>
+					<div id="search-bar"></div>
+					<input id="search-input" maxlength="40" placeholder="Search levels" autocomplete="off" autocorrect="off" spellcheck="false">
+					<img id="sort-icon" src="./assets/svg/event_FILL0_wght400_GRAD0_opsz24.svg" title="Toggle sort">
+					<p id="new-badge" class="hidden">New!</p>
+				</div>
+				<img id="level-select-prev">
+				<img id="level-select-play">
+				<img id="level-select-next">
+				<img src="./assets/img/round_play_circle_outline_black_18dp.png" id="load-replay-button" title="Load replay from file (Shift-Click to render replay to video, Alt-Shift-Click to render compilation)">
+				<img src="./assets/img/shuffle.png" id="shuffle-button" title="Go to random level">
+			</div>
+
+			<div id="loading" class="hidden">
+				<div id="loading-progress"></div>
+				<img src="./assets/ui/loading/loadinggui.png">
+				<img id="loading-cancel">
+				<p id="loading-level-name"></p>
+			</div>
+
+			<div id="help" class="hidden">
+				<img src="./assets/ui/play/playgui.png">
+				<div>
+					<div class="help-page">
+						<div class="help-heading">Overview</div>
+						<div class="help-paragraph">Roll your marble through a rich cartoon landscape of moving<br>platforms and dangerous hazards. Along the way find<br>power ups to increase your speed, jumping ability or flight<br>power, and use them to collect the hidden gems and race to<br>the finish for the fastest time.</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading">Basic Controls</div>
+						<div class="help-paragraph">The marble can be moved forward, back, left and right by pressing <span data-button="up"></span>, <span data-button="left"></span>, <span data-button="down"></span> and <span data-button="right"></span>, respectively. Pressing <span data-button="jump"></span> causes the marble to jump, and pressing <span data-button="use"></span> uses whatever powerup you currently have available. All movement is relative to view direction.</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading">Camera Controls</div>
+						<div class="help-paragraph">The camera direction can be changed by moving the mouse or by pressing <span data-button="cameraUp"></span>, <span data-button="cameraDown"></span>, <span data-button="cameraLeft"></span> or <span data-button="cameraRight"></span>. &nbsp;In order to look up and down freely with the mouse, hold down <span data-button="freeLook"></span>. You can turn free look on always from the Mouse pane of the Control Options screen.</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading">Goals</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="startPad"></canvas>
+							<div>Start Pad - this is where you start the level.</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="endPad"></canvas>
+							<div>End Pad - roll your marble here to end the level.</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="gems" style="margin-top: 18px;"></canvas>
+							<div>Gems - if a level has gems, you must pick them all<br>up before you can exit.</div>
+						</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading">Bonus Items (1/2)</div>
+						<div class="help-canvas-row" style="margin-top: -20px;">
+							<canvas width="80" height="80" data-scene="superSpeed"></canvas>
+							<div>Super Speed PowerUp - gives you a burst of speed.</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="superJump"></canvas>
+							<div>Super Jump PowerUp - gives you a big jump up.</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="shockAbsorber"></canvas>
+							<div>Shock Absorber PowerUp - absorbs bounce impacts.</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="superBounce"></canvas>
+							<div>Super Bounce PowerUp - makes you bounce higher.</div>
+						</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading">Bonus Items (2/2)</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="gyrocopter"></canvas>
+							<div>Gyrocopter PowerUp - slows your fall in the air.</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="timeTravel"></canvas>
+							<div>Time Travel - takes some time off the clock.</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="gravityModifier"></canvas>
+							<div>Gravity Modifier - Changes the direction of "down"<br>- the new down is in the direction of the arrow.</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="40" data-scene="doubler"></canvas>
+							<div>Doubler- Doubles strenght of any inventory powerUp.</div>
+						</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading">Hazards (1/2)</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="ductFan"></canvas>
+							<div>Duct Fan - be careful this does blow you away!</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="tornado"></canvas>
+							<div>Tornado - it'll pull you in and spit you out.</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="trapDoor" style="margin-top: 18px;"></canvas>
+							<div>Trap Door - keep moving when you're rolling over<br>one of these.</div>
+						</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading">Hazards (2/2)</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="bumper"></canvas>
+							<div>Bumper - this'll bounce you if you touch it.</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="mine"></canvas>
+							<div>Land Mine - Warning! &nbsp;Explodes on contact!</div>
+						</div>
+						<div class="help-canvas-row">
+							<canvas width="80" height="80" data-scene="oilslick" style="margin-top: 17px;"></canvas>
+							<div>Oil Slick - you won't have much traction on these<br>surfaces.</div>
+						</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading">About GarageGames</div>
+						<div class="help-paragraph" style="white-space: pre;">GarageGames is a unique Internet publishing label for<br>independent games and gamemakers. &nbsp;Our mission is to<br>provide the independent developer with tools, knowledge,<br>co-conspirators - whatever is needed to unleash the creative<br>spirit and get great innovative independent games to<br>market.</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading">About the Torque</div>
+						<div class="help-paragraph" style="white-space: pre;">The Torque Game Engine (TGE) is a full featured AAA<br>title engine with the latest in scripting, geometry, particle<br>effects, animation and texturing, as well as award winning<br>multi-player networking code. &nbsp;For $100 per programmer,<br>you get the source to the engine!</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading">The Marble Blast Team</div>
+						<div class="help-left-right" style="margin-top: 30px;">
+							<div>Alex Swanson</div>
+							<div>Mark Frohnmayer</div>
+						</div>
+						<div class="help-left-right">
+							<div>Jeff Tunnell</div>
+							<div>Brian Hahn</div>
+						</div>
+						<div class="help-left-right">
+							<div>Liam Ryan</div>
+							<div>Tim Gift</div>
+						</div>
+						<div class="help-left-right">
+							<div>Rick Overman</div>
+							<div>Kevin Ryan</div>
+						</div>
+						<div class="help-left-right">
+							<div>Timothy Clarke</div>
+							<div>Jay Moore</div>
+						</div>
+						<div class="help-left-right">
+							<div>Pat Wilson</div>
+							<div>John Quigley</div>
+						</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading">Special Thanks</div>
+						<div class="help-paragraph" style="white-space: pre;">We'd like to thank Nullsoft, for the SuperPiMP Install<br>System, and Markus F.X.J. Oberhumer, Laszlo Molnar and<br>the rest of the UPX team for the UPX executable packer.<br>Thanks also to Kurtis Seebaldt for his work on integrating<br>Ogg/Vorbis streaming into the Torque engine, and to the<br>Ogg/Vorbis team.</div>
+					</div>
+					<div class="help-page">
+						<div class="help-heading"> MBPU Web Port</div>
+						<div class="help-paragraph">This web port of Marble Blast Powered Up was done by Abhi - all the code is free to access on <a href="https://github.com/Vanilagy/MarbleBlast" target="_blank">GitHub</a>. Full rights go to GarageGames and other creators of this game. Special thanks to the maintainers of three.js and OimoPhysics for making this project possible!</div>
+					</div>
+				</div>
+				<img id="help-prev">
+				<img id="help-back">
+				<img id="help-next">
+			</div>
+
+			<div id="options" class="hidden">
+				<img src="./assets/ui/options/options_base.png" style="pointer-events: none; display: block;">
+				<img src="./assets/ui/options/graf_tab.png" id="tab-graphics">
+				<img src="./assets/ui/options/aud_tab.png" id="tab-audio">
+				<img src="./assets/ui/options/cntr_tab.png" id="tab-controls">
+				<img src="./assets/ui/options/mainm_n.png" id="options-home">
+
+				<div id="options-graphics">
+					<img src="./assets/ui/options/graf_txt.png" id="graphics-text">
+					<img id="graphics-640">
+					<img id="graphics-800">
+					<img id="graphics-1024">
+					<img id="graphics-opengl">
+					<img id="graphics-direct3d">
+					<img id="graphics-windowed">
+					<img id="graphics-full">
+					<img id="graphics-depth16">
+					<img id="graphics-depth32">
+					<img id="graphics-shadows">
+					<img id="graphics-apply">
+					<div id="graphics-marble-texture-heading">Custom Marble Texture:</div>
+					<img id="graphics-marble-texture-choose">
+					<div id="graphics-marble-texture-choose-text">Choose</div>
+					<img id="graphics-marble-texture-reset">
+					<div id="graphics-marble-texture-reset-text">Reset</div>
+					<p id="graphics-reflective-marble-heading">Reflective Marble:</p>
+					<img id="graphics-reflective-marble">
+				</div>
+
+				<div id="options-audio">
+					<img src="./assets/ui/options/aud_mus_slide.png" id="audio-music-track">
+					<img src="./assets/ui/options/aud_mus_knb.png" id="audio-music-knob">
+					<img src="./assets/ui/options/aud_snd_slide.png" id="audio-sound-track">
+					<img src="./assets/ui/options/aud_snd_knb.png" id="audio-sound-knob">
+					<img src="./assets/ui/options/aud_txt_wndo.png" id="audio-text-window">
+					<div id="audio-text">
+						Vendor: Creative Labs Inc.<br>
+						Version: OpenAL 1.0<br>
+						Renderer: Software<br>
+						Extensions: EAX 2.0, EAX 3.0, EAX Unified, and EAX-AC3
+					</div>
+				</div>
+
+				<div id="options-controls">
+					<img src="./assets/ui/options/cntrl_marb_bse.png" id="controls-background">
+					<div id="tab-marble"></div>
+					<div id="tab-camera"></div>
+					<div id="tab-mouse"></div>
+
+					<div id="rebind-dialog" class="hidden">
+						<img src="./assets/ui/common/dialog.png">
+						<p></p>
+					</div>
+					<div id="rebind-confirm" class="hidden">
+						<img src="./assets/ui/common/dialog.png">
+						<p></p>
+						<img id="rebind-confirm-yes">
+						<img id="rebind-confirm-no">
+					</div>
+
+					<div id="controls-marble">
+						<img id="button-marble-left">
+						<img id="button-marble-right">
+						<img id="button-marble-up">
+						<img id="button-marble-down">
+						<img id="button-marble-use">
+						<img id="button-marble-jump">
+						<p id="button-marble-left-content"></p>
+						<p id="button-marble-right-content"></p>
+						<p id="button-marble-up-content"></p>
+						<p id="button-marble-down-content"></p>
+						<p id="button-marble-use-content"></p>
+						<p id="button-marble-jump-content"></p>
+					</div>
+					<div id="controls-camera">
+						<img id="button-camera-left">
+						<img id="button-camera-right">
+						<img id="button-camera-up">
+						<img id="button-camera-down">
+						<p id="button-camera-left-content"></p>
+						<p id="button-camera-right-content"></p>
+						<p id="button-camera-up-content"></p>
+						<p id="button-camera-down-content"></p>
+					</div>
+					<div id="controls-mouse">
+						<img src="./assets/ui/options/cntrl_mous_knb.png" id="sensitivity-knob">
+						<img id="invert-y">
+						<img id="always-free-look">
+						<img id="free-look-key">
+						<p id="free-look-key-content"></p>
+					</div>
+
+					<div id="button-restart-level-label">Restart Key</div>
+					<img id="button-restart-level">
+					<p id="button-restart-level-content"></p>
+				</div>
+			</div>
+		</div>
+
+		<div id="video-renderer" class="hidden">	
+			<div>
+				<h1>Video Renderer</h1>
+				<div class="_config">
+					<button id="video-renderer-select-destination">Select destination video file</button>
+					<div>
+						<div style="margin-right: 20px;">
+							<div class="_config-row"><p>Width</p><input type="text" value="1280"></div>
+							<div class="_config-row"><p>Height</p><input type="text" value="720"></div>
+							<div class="_config-row"><p>Video bit rate (kbit/s)</p><input type="text" value="5000"></div>
+							<div class="_config-row"><p>Frame rate</p><input type="text" value="60"></div>
+							<div class="_config-row"><p>Playback speed</p><input type="text" value="1.0"></div>
+							<div class="_config-row"><p>Parallelize encoding</p><input type="checkbox" checked></div>
+							<div class="_config-row"><p>BT.709 color (slower)</p><input type="checkbox" checked></div>
+						</div>
+						<div>
+							<div class="_config-row"><p>Include audio</p><input type="checkbox" checked></div>
+							<div class="_config-row"><p>Audio bit rate (kbit/s)</p><input type="text" value="64"></div>
+							<div class="_config-row"><p>Music-to-sound volume</p><input type="range" min="0" max="1" value="0.5" step="0.025"><span>1:1</span></div>
+						</div>
+					</div>
+				</div>
+				<p id="video-renderer-overview">&nbsp;</p>
+				<div>
+					<button id="video-renderer-render" class="disabled">Render</button>
+					<button id="video-renderer-close">Close</button>
+				</div>
+				<progress style="display: none;" value="0"></progress>
+				<p id="video-renderer-status"></p>
+
+				<div id="video-renderer-compilation-loading" class="hidden">Loading...</div>
+			</div>
+		</div>
+		
+		<div id="image-cache" style="display: none;"></div>
+		<!-- Font load -->
+		<div style="font-family: DomCasualRegular; opacity: 0; pointer-events: none;">ABC</div>
+		<div style="font-family: Expo; opacity: 0; pointer-events: none;">ABC</div>
+		<div style="font-family: MarkerFelt; opacity: 0; pointer-events: none;">ABC</div>
+		<div style="font-family: Chakra Petch; opacity: 0; pointer-events: none;">ABC</div>
+		
+		<script src="./lib/oggdec.js" defer></script>
+		<script src="./lib/pako.js" defer></script>
+		<script src="./lib/jszip.js" defer></script>
+		<div></div> <!-- Force Sarcina to put these into different bundles -->
+		<!-- Main bundle -->
+		<script src="./js/bundle.js" defer></script>
+	</body>
+</html>

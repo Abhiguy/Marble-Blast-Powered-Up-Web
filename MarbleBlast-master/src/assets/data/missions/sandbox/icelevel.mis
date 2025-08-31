@@ -1,0 +1,217 @@
+//--- OBJECT WRITE BEGIN ---
+new SimGroup(MissionGroup) {
+
+   new ScriptObject(MissionInfo) {
+         artist = "Whirligig231";
+         goldTime = "30000";
+         level = "13";
+         type = "Sandbox";
+         time = "0";
+         music = "frosted chill.ogg";
+         name = "Icy Path";
+         desc = "You\'ll have to avoid icy slicks, igloo guns, and panes of ice to get to the goal!";
+   };
+   new MissionArea(MissionArea) {
+      area = "-360 -648 720 1296";
+      flightCeiling = "300";
+      flightCeilingRange = "20";
+         locked = "true";
+   };
+   new Sky(Sky) {
+      position = "336 136 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      cloudHeightPer[0] = "0";
+      cloudHeightPer[1] = "0";
+      cloudHeightPer[2] = "0";
+      cloudSpeed1 = "0.0001";
+      cloudSpeed2 = "0.0002";
+      cloudSpeed3 = "0.0003";
+      visibleDistance = "500";
+      useSkyTextures = "1";
+      renderBottomTexture = "1";
+      SkySolidColor = "0.600000 0.600000 0.600000 1.000000";
+      fogDistance = "300";
+      fogColor = "0.600000 0.600000 0.600000 1.000000";
+      fogVolume1 = "-1 2.54245e-09 -0.825056";
+      fogVolume2 = "-1 0.634539 0.349074";
+      fogVolume3 = "-1 -0.376286 2.54555e-09";
+      materialList = "~/data/skies/sky_day.dml";
+      windVelocity = "1 0 0";
+      windEffectPrecipitation = "0";
+      noRenderBans = "1";
+      fogVolumeColor1 = "128.000000 128.000000 128.000000 0.807891";
+      fogVolumeColor2 = "128.000000 128.000000 128.000000 0.349238";
+      fogVolumeColor3 = "128.000000 128.000000 128.000000 -0.405057";
+   };
+   new Sun() {
+      direction = "0.57735 0.57735 -0.57735";
+      color = "1.000000 1.400000 0.600000 1.000000";
+      ambient = "0.300000 0.300000 0.400000 1.000000";
+   };
+   new InteriorInstance() {
+      position = "0 0 0";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      interiorFile = "~/data/interiors/sandbox/icelevel.dif";
+      showTerrainInside = "0";
+   };
+   new StaticShape(StartPoint) {
+      position = "0 0 0";
+      rotation = "0 0 1 90";
+      scale = "1 1 1";
+      dataBlock = "StartPad";
+   };
+   new StaticShape(EndPoint) {
+      position = "-40 8 2";
+      rotation = "0 0 -1 90";
+      scale = "1 1 1";
+      dataBlock = "EndPad";
+   };
+   new Trigger(Bounds) {
+      position = "-45.5 51.5 -19";
+      rotation = "1 0 0 0";
+      scale = "61 83 44";
+      dataBlock = "InBoundsTrigger";
+      polyhedron = "0.0000000 0.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000 -1.0000000 0.0000000 0.0000000 0.0000000 1.0000000";
+   };
+   new StaticShape() {
+      position = "10.2047 0.0594909 2.01";
+      rotation = "0 0 -1 45";
+      scale = "1 1 1";
+      dataBlock = "IceSlick";
+   };
+   new StaticShape() {
+      position = "-10 6 4.51";
+      rotation = "1 0 0 90";
+      scale = "2.5 2.5 1";
+      dataBlock = "IcePane";
+   };
+   new StaticShape() {
+      position = "-39.4375 8.0669 8.82225";
+      rotation = "0 0 1 40";
+      scale = "1 1 1";
+      dataBlock = "SignFinish";
+   };
+   new Item() {
+      position = "-10 20 2";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-16 34 4";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "-4 34 4";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "-4 28 2";
+      rotation = "-0 -0 1 81.8699";
+      scale = "1 1 1";
+      dataBlock = "IglooItem";
+         isSnowy = "1";
+         i = "1123";
+   };
+   new StaticShape() {
+      position = "-16 28 2";
+      rotation = "-0 -0 1 60.2551";
+      scale = "1 1 1";
+      dataBlock = "IglooItem";
+         isSnowy = "1";
+         i = "1123";
+   };
+   new Item() {
+      position = "2 28 8";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new Item() {
+      position = "0 28 8.4";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SuperBounceItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new StaticShape() {
+      position = "1.89877 46.0637 2.01";
+      rotation = "0 0 -1 40.0077";
+      scale = "1 1 1";
+      dataBlock = "IceSlick";
+   };
+   new StaticShape() {
+      position = "-22.7673 27.9739 6.01";
+      rotation = "0 0 1 30";
+      scale = "1 1 1";
+      dataBlock = "IceSlick";
+   };
+   new StaticShape() {
+      position = "-32 20 5.01";
+      rotation = "0 -1 0 14";
+      scale = "1 1 1";
+      dataBlock = "IceSlick";
+   };
+   new StaticShape() {
+      position = "-40.1 -8 4.51";
+      rotation = "0 1 0 90";
+      scale = "2.5 2.5 1";
+      dataBlock = "IcePane";
+   };
+   new Item() {
+      position = "-32 28 6";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "GemItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new ScriptObject() {
+         powerUp = "0";
+         bonusTime = "0";
+         pad = "1832";
+         time = "0";
+         penaltyTime = "0";
+         gemCount = "0";
+   };
+   new Item() {
+      position = "-41.9814 -8.03755 2.30739";
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "SkillPointItem";
+      collideable = "0";
+      static = "1";
+      rotate = "1";
+   };
+   new ParticleEmitterNode() {
+      position = "-7.75 -20.5656 174.5";//"-113.331 30.2487 202.197";-118.581 21.4831 174.5
+      rotation = "1 0 0 0";
+      scale = "1 1 1";
+      dataBlock = "FireWorkNode";
+      emitter = "SnowLocalEmitter";
+      velocity = "1";
+   };
+
+};
+//--- OBJECT WRITE END ---

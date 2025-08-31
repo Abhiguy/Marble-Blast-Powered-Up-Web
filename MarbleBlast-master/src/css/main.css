@@ -1,0 +1,266 @@
+@font-face {
+	font-family: "DomCasualRegular";
+	src: url("../assets/font/DomCasualRegular/DomCasualRegular.otf");
+}
+
+@font-face {
+	font-family: "Dom Casual";
+	src: url("../assets/font/DomCasualRegular/DomCasualRegular.otf");
+}
+
+@font-face {
+	font-family: "Expo";
+	src: url("../assets/font/Expo/EXPON.TTF");
+}
+
+@font-face {
+	font-family: "MarkerFelt";
+	src: url("../assets/font/MarkerFelt/Marker Felt.ttf");
+}
+
+@font-face {
+	font-family: "Marker Felt";
+	src: url("../assets/font/MarkerFelt/Marker Felt.ttf");
+}
+
+@font-face {
+	font-family: "Chakra Petch";
+	src: url("../assets/font/ChakraPetch/ChakraPetch-Bold.ttf");
+}
+
+@keyframes pulse-opacity {
+	0% { opacity: 1; }
+	50% { opacity: 0.666; }
+	100% { opacity: 1; }
+}
+
+* {
+	user-select: none;
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	-webkit-user-drag: none;
+	user-drag: none;
+}
+
+/** Necessary to not fuck up the iOS Safari keyboard: */
+input, input:before, input:after {
+	-webkit-touch-callout: initial;
+	-webkit-user-select: initial;
+	-khtml-user-select: initial;
+	-moz-user-select: initial;
+	-ms-user-select: initial;
+	user-select: initial;
+}
+
+.hidden {
+	display: none !important;
+	pointer-events: none !important;
+}
+
+html, body {
+	margin: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	background: black;
+	cursor: url(../assets/ui/common/cur_3darrow.png) 0 0, auto;
+	overscroll-behavior: none;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	touch-action: none; /* THIS THING CRUCIAL */
+}
+
+body {
+	transform-origin: 0 0;
+}
+
+#main-canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#decoy-canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
+#game-ui {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+#menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#mbp-menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#background-image {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
+
+#mbp-background-image {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#loading-message, #switching-message, #loading-detail {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	font-family: MarkerFelt;
+	color: white;
+	font-size: 24px;
+	width: 200px;
+	text-align: center;
+	height: 35px;
+	animation: pulse-opacity 1s infinite forwards;
+}
+
+#loading-detail {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: -80px;
+	left: 0;
+	right: 0;
+	font-family: MarkerFelt;
+	color: #ffffff80;
+	font-size: 12px;
+	width: 200px;
+	text-align: center;
+	height: 35px;
+}
+
+#start-game-dialog {
+	width: 400px;
+	height: 60px;
+	text-align: center;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	font-family: MarkerFelt;
+	color: white;
+}
+
+#version, #mbp-version {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	font-family: Arial;
+	padding: 2px;
+	font-size: 10px;
+}
+
+.modification-switcher {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 40px;
+	height: 40px;
+	padding: 10px;
+	background: #00000031;
+	border-bottom-right-radius: 10px;
+	cursor: pointer;
+	transition: all 0.15s;
+}
+
+.modification-switcher:hover {
+	width: 50px;
+	height: 50px;
+	background: #00000050;
+}
+
+#fullscreen-enforcer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 69420;
+	background: rgba(0,0,0,0.5);
+	backdrop-filter: blur(5px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-family: 'Marker Felt';
+	font-size: 24px;
+	text-align: center;
+	flex-direction: column;
+}
+
+#fullscreen-enforcer img {
+	display: block;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 70px;
+	opacity: 0.75;
+}
+
+#enter-fullscreen {
+	position: absolute;
+	display: block;
+	left: 0px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 5;
+	width: 50px;
+	padding: 5px;
+	background: #00000031;
+	border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+#install-popup img {
+	display: block;
+	margin: auto;
+	width: 26px;
+	background: #0000001f;
+	padding: 5px;
+	border-radius: 5px;
+	margin-top: 3px;
+}
+
+.disabled {
+	opacity: 0.333;
+	pointer-events: none;
+}
