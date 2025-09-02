@@ -1,5 +1,5 @@
 # Marble Blast Powered Up Web
-This project is a clean-room web port of the 3D platformer game Marble Blast Powered Up. The marble physics code was taken from MBWeb along with my own collision detection code, game logic was partially from scratch and taken with permission from [Marble Blast Web Port](https://github.com/Vanilagy/MarbleBlast).
+A Web port of Marble Blast Powered Up. The marble physics code was taken from MBWeb along with my own collision detection code, game logic was partially from scratch and taken with permission from [Marble Blast Web Port](https://github.com/Vanilagy/MarbleBlast).
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L4L71J89I2)
 
