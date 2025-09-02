@@ -4,6 +4,7 @@ A Web port of Marble Blast Powered Up. The marble physics code was taken from MB
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L4L71J89I2)
 
 Play it here: <br>
+Support me on Discord: http://discordapp.com/users/1309941913956122645
 
 ## Features
 This Game is a Mod of the Original Game Marble Blast Gold. It includes almost 4000 community levels, including 150 original MBPU levels (25 Beginner, 30 Intermediate, 70 Advanced and 25 Sandbox ) and more than 3900 community custom levels. It implements all gameplay elements, sounds, music and UI/menu components from Marble Blast Powered Up - additional features include a replay system and online leaderboards. The game can be played using a keyboard, mouse, gamepad or on your mobile device.
