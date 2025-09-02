@@ -20,6 +20,7 @@ This Game is a Mod of the Original Game Marble Blast Gold. It includes almost 40
 <img src="./screenshots/kaiten.png" width="640">
 <img src="./screenshots/simplycomplex.png" width="640">
 <img src="./screenshots/ocean.png" width="640">
+<img src="./screenshots/thunder.png" width="640">
 <img src="./screenshots/audio.png" width="640">
 
 ## Building and developing
