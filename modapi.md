@@ -70,7 +70,7 @@ Hi! This file demonstrates the Custom Properties of Marble Blast Powered Up Webp
 
  **Chasing Tornado's Speed:**
 
- For a level containing a chasing tornado, its approach speed can be easily modified by adding a dynamic field
+ For a level containing a chasing tornado, Change its approaching speed by 
  `chaseSpeed`.
 
  
