@@ -26,7 +26,6 @@ export function addTrick(name: string, score: number) {
 
 	//const pointsAwarded = Math.floor(score * multiplier); // points awarded based upon multiplier and score
 	//state.level.score += pointsAwarded;
-	console.log(`TRICK: ${combo} (${comboScore} x${multiplier.toFixed(1)})`);
 
 	// You can show this visually if needed — like adding HUD or chat line
 	noEndTrick = true;
@@ -38,7 +37,6 @@ export function addTrick(name: string, score: number) {
 
 export function ruinCombo() {
 	if (ruined || !combo) return;
-	console.log(`❌ COMBO RUINED: ${combo} | Total: ${Math.floor(comboScore * multiplier)}`);
 	resetCombo();
 	ruined = true;
 	setTimeout(() => ruined = false, 500);
@@ -47,7 +45,6 @@ export function ruinCombo() {
 export function finishCombo() {
 	if (!combo || ruined || multiplier < 1) return;
 	const total = Math.floor(comboScore * multiplier);
-	console.log(`✅ COMBO FINISHED: ${combo} | Total: ${total}`);
 
 	state.level.score = Math.max(0, state.level.score + total); // Apply score! But Never Negative or below 0
 	resetCombo();
