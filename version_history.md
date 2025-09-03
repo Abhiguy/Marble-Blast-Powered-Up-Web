@@ -25,7 +25,7 @@
 - Added the TTT Pads.
 
 ## 2.2.0
-- Added the Quiet Tornados Feature. No more earrape from Tornados, if a level contains the `quietTornados` Flag. For further info, Checkout [Mod-Api](https://github.com/Abhiguy/Marble-Blast-Powered-Up-Web/blob/master/modapi.md)
+Added the Quiet Tornados Feature. No more earrape from Tornados, if a level contains the `quietTornados` Flag. For further info, Checkout [Mod-Api](https://github.com/Abhiguy/Marble-Blast-Powered-Up-Web/blob/master/modapi.md)
 
 ## 2.1.6
 - Fixed the doubled Shock Absorber's sliding behaviour when hitting plain ground while spinning in the air. No more huge forces when hitting the ground when marble is spinning with doubled shock Absorber.
@@ -56,22 +56,22 @@
 - Fixed the super Jump Particles issue. 
 
 ## 1.9.0
-- Fixed the cracky audio appearing when player is present near many ductFans. Meaning no more headache from the sound of Ductfans.
+Fixed the cracky audio appearing when player is present near many ductFans. Meaning no more headache from the sound of Ductfans.
 
 ## 1.8.0
-- Added new Triggers, including the no-jump trigger.
+Added new Triggers, including the no-jump trigger.
 
 ## 1.7.0
-- Fixed the Kaiten's castle rotating stand's weird rotation.
+Fixed the Kaiten's castle rotating stand's weird rotation.
 
 ## 1.6.0
-- Added 25 new levels in over Beginner, Intermediate and Advanced. Good Luck!
+Added 25 new levels in over Beginner, Intermediate and Advanced. Good Luck!
 
 ## 1.5.0
-- Added the TV! :)
+Added the TV! :)
   
 ## 1.4.0
-- Enhanced the Tornado sound.. Now would sense the danger from farther away!
+Enhanced the Tornado sound.. Now would sense the danger from farther away!
 
 ## 1.3.0
 - Added New Powerups, including the Doubler Item :)
