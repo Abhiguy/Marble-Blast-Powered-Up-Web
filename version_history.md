@@ -25,7 +25,7 @@
 - Added the TTT Pads.
 
 ## 2.2.0
-- Added the Quiet Tornados Feature. No more earrape from Tornados, if a level contains the `quietTornados` Flag. For further info, Checkout MODAPI.
+- Added the Quiet Tornados Feature. No more earrape from Tornados, if a level contains the `quietTornados` Flag. For further info, Checkout [Mod-Api](https://github.com/Abhiguy/Marble-Blast-Powered-Up-Web/blob/master/modapi.md)
 
 ## 2.1.6
 - Fixed the doubled Shock Absorber's sliding behaviour when hitting plain ground while spinning in the air. No more huge forces when hitting the ground when marble is spinning with doubled shock Absorber.
