@@ -73,6 +73,12 @@ Hi! This file demonstrates the Custom Properties of Marble Blast Powered Up Webp
  For a level containing a chasing tornado, Change its approaching speed by 
  `chaseSpeed`.
 
+ # Quieter Tornados #
+
+ **Reduced Tornado Volume:**
+
+ For a level to have quieter Tornados (The ones whose audio won't cause Headaches) the `quietTornados = "yes";` flag could be set in the mis file metadata or in the Mission Element Script Object of the mis file.
+
  
 
  
