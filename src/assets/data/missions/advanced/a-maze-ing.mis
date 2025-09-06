@@ -9,8 +9,6 @@ new SimGroup(MissionGroup) {
          type = "Advanced";
          artist = "Kevin Ryan";
          goldTime = 8000;
-         AlarmStartTime = "20";
-         music = "beach party.ogg";
    };
    new MissionArea(MissionArea) {
       area = "-360 -648 720 1296";
