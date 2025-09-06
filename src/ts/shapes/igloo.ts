@@ -20,6 +20,7 @@ export class IglooItem extends Shape {
 
 	async init(level?: Level, srcElement?: MissionElement) {
 		// No hiccups when loading the level
+		(srcElement as MissionElementStaticShape).rotation = "1 0 0 0";
 		await super.init(level, srcElement);
 
 		this.iglooShape = new Shape("shapes/hazards/igloo.dts");
@@ -66,7 +67,7 @@ export class IglooItem extends Shape {
 			dir.normalize();
 
 			// Compute yaw angle (rotation around Z)
-			let yaw = Math.atan2(dir.y, dir.x) + Math.PI / 2;
+			let yaw = Math.atan2(dir.y, dir.x);
 
 			const rotationQuat = new Quaternion();
 			rotationQuat.setFromAxisAngle(new Vector3(0, 0, 1), yaw);
@@ -92,9 +93,6 @@ export class IglooItem extends Shape {
 				for (let i = 1; i < this.snowballs.length; i++) {
 					if (this.snowballs[i].addedTime < oldest.addedTime) oldest = this.snowballs[i];
 				}
-
-				// Rotate dir by 90 degrees z axis
-				dir = dir.applyAxisAngle(new Vector3(0, 0, 1), Math.PI / 2);
 
 				oldest.addedTime = now;
 				const z = oldest.position.z ?? 0;
