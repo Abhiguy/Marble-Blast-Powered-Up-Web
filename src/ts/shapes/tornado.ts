@@ -9,7 +9,7 @@ export class Tornado extends ForceShape {
 	dtsPath = "shapes/hazards/tornado.dts";
 	collideable = false;
 	sounds = ["tornado.wav"];
-	soundSource: AudioSource | null = null;;
+	soundSource: AudioSource | null = null;
 	chasePlayer = false;
 	chaseSpeed: number; // the speed at which the tornado chases the player, can be changed in the .mis! And is default
 	startPosition: Vector3;
@@ -22,7 +22,7 @@ export class Tornado extends ForceShape {
 		this.addFieldForce(3, new Vector3(0, 0, 150)); // The upwards force is always in the same direction, which is fine considering tornados never appear with modified gravity.
 		this.chasePlayer = el._name === "ChasePlayer";
 		// Parse chaseSpeed from .mis file, default to 2 if not set
-		this.chaseSpeed = MisParser.parseNumber(String(el.chasespeed)) || 2;
+		this.chaseSpeed = el.chasespeed ? MisParser.parseNumber(el.chasespeed) : 2;
 	}
 
 	async onLevelStart() {
@@ -33,9 +33,9 @@ export class Tornado extends ForceShape {
 		}
 		else {
 			this.soundSource.gainFactor = 2; // MBPU have a feature...The tornado's sound is much louder than the original Marble Blast
-		    this.soundSource.maxDistance = 100; // MBPU's Tornado sound is heard from much farther away than the original Marble Blast
+			this.soundSource.maxDistance = 100; // MBPU's Tornado sound is heard from much farther away than the original Marble Blast
 		}
-		
+
 		this.soundSource.setLoop(true);
 		this.soundSource.play();
 		await this.soundSource.promise;
@@ -52,7 +52,7 @@ export class Tornado extends ForceShape {
 		}
 		// Freeze tornado completely if stopwatch is active
 		if (this.level.stopWatchActive) return;
-		
+
 		super.tick(time, onlyVisual);
 
 		if (this.chasePlayer && this.level.marble && this.level.marble.body) {

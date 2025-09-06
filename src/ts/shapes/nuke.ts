@@ -40,7 +40,7 @@ export class Nuke extends Shape {
 
 		let dist = distVec.length();
 		if (dist < range) {
-			let scalar = (1 - dist/range) * power;
+			let scalar = (1 - dist / range) * power;
 			distVec.multiplyScalar(scalar);
 		}
 
@@ -79,7 +79,7 @@ const nukeParticle = {
 		lifetimeVariance: 150,
 		dragCoefficient: 0.8,
 		acceleration: 0,
-		colors: [{r: 0.56, g: 0.36, b: 0.26, a: 1}, {r: 0.56, g: 0.36, b: 0.26, a: 0}],
+		colors: [{ r: 0.56, g: 0.36, b: 0.26, a: 1 }, { r: 0.56, g: 0.36, b: 0.26, a: 0 }],
 		sizes: [0.5, 1],
 		times: [0, 1]
 	}
@@ -102,7 +102,7 @@ export const nukeSmokeParticle = {
 		lifetimeVariance: 300,
 		dragCoefficient: 0.7,
 		acceleration: -8,
-		colors: [{r: 0.56, g: 0.36, b: 0.26, a: 1}, {r: 0.2, g: 0.2, b: 0.2, a: 0.85}, {r: 0, g: 0, b: 0, a: 0}],
+		colors: [{ r: 0.56, g: 0.36, b: 0.26, a: 1 }, { r: 0.2, g: 0.2, b: 0.2, a: 0.85 }, { r: 0, g: 0, b: 0, a: 0 }],
 		sizes: [1, 1.5, 2],
 		times: [0, 0.5, 1]
 	}
@@ -125,7 +125,7 @@ export const nukeSparksParticle = {
 		lifetimeVariance: 2500,
 		dragCoefficient: 0.5,
 		acceleration: 0 ?? -8,
-		colors: [{r: 0.6, g: 0.4, b: 0.3, a: 1}, {r: 0.6, g: 0.4, b: 0.3, a: 1}, {r: 1, g: 0.4, b: 0.3, a: 0}],
+		colors: [{ r: 0.6, g: 0.4, b: 0.3, a: 1 }, { r: 0.6, g: 0.4, b: 0.3, a: 1 }, { r: 1, g: 0.4, b: 0.3, a: 0 }],
 		sizes: [0.5, 0.4, 0.2],
 		times: [0, 0.5, 1]
 	}

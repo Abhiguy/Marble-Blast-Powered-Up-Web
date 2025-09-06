@@ -4,7 +4,7 @@ import { state } from "../state";
 /** Reduces friction temporarily. */
 export class Oil extends PowerUp {
 	dtsPath = "shapes/items/oil.dts";
-	pickUpName = (state.modification === 'gold')? "a Super Oil PowerUp!" : "a Super Oil PowerUp!";
+	pickUpName = (state.modification === 'gold') ? "a Super Oil PowerUp!" : "a Super Oil PowerUp!";
 	sounds = ["pugluevoice.wav", "useglue.wav"];
 
 	pickUp(): boolean {

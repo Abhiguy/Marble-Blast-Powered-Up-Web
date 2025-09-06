@@ -6,7 +6,7 @@ export class NoJumpTrigger extends Trigger {
 	sounds = ['infotutorial.wav'];
 	entered = false;
 	suppressLeaveMessage = false;
-	
+
 	onMarbleEnter() {
 		let marble = this.level.marble;
 		// Disable jumping
@@ -37,7 +37,7 @@ export class NoJumpTrigger extends Trigger {
 		if (this.entered) {
 			this.suppressLeaveMessage = true;
 		}
-		
+
 		this.entered = false;
 	}
 }

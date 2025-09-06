@@ -126,7 +126,7 @@ export class PathedInterior extends Interior {
 		let total = 0;
 
 		// Don't count the last marker
-		for (let i = 0; i < this.markerData.length-1; i++) {
+		for (let i = 0; i < this.markerData.length - 1; i++) {
 			total += this.markerData[i].msToNext;
 		}
 
@@ -143,20 +143,20 @@ export class PathedInterior extends Interior {
 	/** Gets the internal time along the path. Is guaranteed to be in [0, duration]. */
 	getInternalTime(externalTime: number) {
 		if (this.targetTime < 0) {
-			let direction = (this.targetTime === -1)? 1 : (this.targetTime === -2)? -1 : 0;
+			let direction = (this.targetTime === -1) ? 1 : (this.targetTime === -2) ? -1 : 0;
 			return Util.adjustedMod(this.currentTime + (externalTime - this.changeTime) * direction, this.duration);
 		} else {
 			let dur = Math.abs(this.currentTime - this.targetTime);
-			let completion = Util.clamp(dur? (externalTime - this.changeTime) / dur : 1, 0, 1);
+			let completion = Util.clamp(dur ? (externalTime - this.changeTime) / dur : 1, 0, 1);
 			return Util.clamp(Util.lerp(this.currentTime, this.targetTime, completion), 0, this.duration);
 		}
 	}
 
 	tick(time: TimeState) {
-        // Trigger door movement if music code is cracked by the player
-	    if (this.level.mission.title === "Musical Code" && this.level.crackedMusicCode && this.targetTime === 0) {
-		    this.setTargetTime(time, this.duration);
-	    }
+		// Trigger door movement if music code is cracked by the player
+		if (this.level.mission.title === "Musical Code" && this.level.crackedMusicCode && this.targetTime === 0) {
+			this.setTargetTime(time, this.duration);
+		}
 		this.body.position.copy(this.currentPosition); // Reset it back to where it should be (render loop might've moved it)
 
 		let transform = this.getTransformAtTime(m1, this.getInternalTime(time.currentAttemptTime));
@@ -215,7 +215,7 @@ export class PathedInterior extends Interior {
 		let duration = m2Time - m1Time;
 		let position: Vector3;
 
-		let completion = Util.clamp(duration? (time - m1Time) / duration : 1, 0, 1);
+		let completion = Util.clamp(duration ? (time - m1Time) / duration : 1, 0, 1);
 		if (m1.smoothingType === "Accelerate") {
 			// A simple easing function
 			completion = Math.sin(completion * Math.PI - (Math.PI / 2)) * 0.5 + 0.5;

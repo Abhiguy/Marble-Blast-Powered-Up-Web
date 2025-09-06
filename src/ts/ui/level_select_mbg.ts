@@ -126,14 +126,14 @@ export class MbgLevelSelect extends LevelSelect {
 
 		this.levelTitle.textContent = mission.title;
 		this.levelArtist.textContent = 'by ' + mission.artist.trim();
-		this.levelArtist.style.display =  'block'; // show the artist for  not only custom levels but all levels
+		this.levelArtist.style.display = 'block'; // show the artist for  not only custom levels but all levels
 		this.levelDescription.textContent = mission.description;
 		// Hide "Time to Qualify" if backwardClock is set
-        if (mission.backwardClock) {
-            this.levelQualifyTime.textContent = '';
-        } else {
-		let qualifyTime = (mission.qualifyTime !== 0)? mission.qualifyTime : Infinity;
-		this.levelQualifyTime.textContent = isFinite(qualifyTime)? "Time to Qualify: " + Util.secondsToTimeString(qualifyTime / 1000) : '';
+		if (mission.backwardClock) {
+			this.levelQualifyTime.textContent = '';
+		} else {
+			let qualifyTime = (mission.qualifyTime !== 0) ? mission.qualifyTime : Infinity;
+			this.levelQualifyTime.textContent = isFinite(qualifyTime) ? "Time to Qualify: " + Util.secondsToTimeString(qualifyTime / 1000) : '';
 		}
 		this.levelNumberElement.textContent = `${Util.uppercaseFirstLetter(mission.type)} Level ${this.currentMissionIndex + 1}`;
 	}
@@ -175,7 +175,7 @@ export class MbgLevelSelect extends LevelSelect {
 		if (mission) goldTime = mission.goldTime;
 
 		element.children[0].textContent = rank + '. ' + score[0];
-		(element.children[1] as HTMLImageElement).style.opacity = (score[1] <= goldTime)? '' : '0';
+		(element.children[1] as HTMLImageElement).style.opacity = (score[1] <= goldTime) ? '' : '0';
 		element.children[2].textContent = Util.secondsToTimeString(score[1] / 1000);
 	}
 }

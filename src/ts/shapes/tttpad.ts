@@ -12,8 +12,7 @@ import { Util, Scheduler } from "../util";
 export class TTTState {
 	level: Level;
 	pads: TTTPad[] = []; // The pads in the game
-	tttState: TTTState
-	
+	tttState: TTTState;
 
 	constructor(level: Level) {
 		this.level = level;
@@ -71,93 +70,93 @@ export class TTTState {
 	}
 
 	handleTTTWin(winner: number) {
-		
+
 		// Handle draw	
-    if (winner === 1) {
-        state.menu.hud.displayHelp("You Won!");
-		// Trigger beautiful fireworks on all the pad combination at which the marble made to win this puzzle!
-        let time = this.level.timeState;
-		for (const combo of [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]) {
-            const [a, b, c] = combo;
-            if (this.pads[a].state === winner && this.pads[b].state === winner && this.pads[c].state === winner) {
-                this.pads[a].spawnFirework(time);
-                this.pads[b].spawnFirework(time);
-                this.pads[c].spawnFirework(time);
-                break;
-            }
-        }
-        this.level.touchFinish(); // Trigger finish if a player win
-		this.level.audio.play('firewrks.wav'); // Play win sound
-        return;
-    }
-    if (winner === 2) {
-		state.menu.hud.displayHelp("You Lost!");
-		// Trigger game over landmine explosion visual on all the pad combination at which the marble made to lose this puzzle...
-		for (const combo of [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]) {
-			const [a, b, c] = combo;
-			if (this.pads[a].state === winner && this.pads[b].state === winner && this.pads[c].state === winner) {
-				this.pads[a].level.particles.createEmitter(landMineParticle, this.pads[a].worldPosition);
-				this.pads[b].level.particles.createEmitter(landMineSmokeParticle, this.pads[b].worldPosition);
-				this.pads[c].level.particles.createEmitter(landMineSparksParticle, this.pads[c].worldPosition);
-				break;
+		if (winner === 1) {
+			state.menu.hud.displayHelp("You Won!");
+			// Trigger beautiful fireworks on all the pad combination at which the marble made to win this puzzle!
+			let time = this.level.timeState;
+			for (const combo of [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]) {
+				const [a, b, c] = combo;
+				if (this.pads[a].state === winner && this.pads[b].state === winner && this.pads[c].state === winner) {
+					this.pads[a].spawnFirework(time);
+					this.pads[b].spawnFirework(time);
+					this.pads[c].spawnFirework(time);
+					break;
+				}
 			}
+			this.level.touchFinish(); // Trigger finish if a player win
+			this.level.audio.play('firewrks.wav'); // Play win sound
+			return;
 		}
-		this.level.audio.play('explode1.wav'); // Play explosion sound
-		this.level.goOutOfBounds(); // Game over
-		return;
+		if (winner === 2) {
+			state.menu.hud.displayHelp("You Lost!");
+			// Trigger game over landmine explosion visual on all the pad combination at which the marble made to lose this puzzle...
+			for (const combo of [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]) {
+				const [a, b, c] = combo;
+				if (this.pads[a].state === winner && this.pads[b].state === winner && this.pads[c].state === winner) {
+					this.pads[a].level.particles.createEmitter(landMineParticle, this.pads[a].worldPosition);
+					this.pads[b].level.particles.createEmitter(landMineSmokeParticle, this.pads[b].worldPosition);
+					this.pads[c].level.particles.createEmitter(landMineSparksParticle, this.pads[c].worldPosition);
+					break;
+				}
+			}
+			this.level.audio.play('explode1.wav'); // Play explosion sound
+			this.level.goOutOfBounds(); // Game over
+			return;
+		}
 	}
-}
 
 	handleTTTDraw() {
 		state.menu.hud.displayHelp("Tie Game!");
 	}
 
-	
+
 
 	performOpponentTurn() {
-	// Find all available pads
-	let availablePads = this.pads.filter(p => p.state === 0);
-	if (availablePads.length === 0) return;
+		// Find all available pads
+		let availablePads = this.pads.filter(p => p.state === 0);
+		if (availablePads.length === 0) return;
 
-	// --- 1. Try to win immediately ---
-	for (let pad of availablePads) {
-		pad.state = 2; // Pretend AI plays here
-		if (this.checkWinCondition() === 2) {
-			pad.state = 2;
-			pad.mineShape.setOpacity(1);
-			this.handleTTTWin(2);
+		// --- 1. Try to win immediately ---
+		for (let pad of availablePads) {
+			pad.state = 2; // Pretend AI plays here
+			if (this.checkWinCondition() === 2) {
+				pad.state = 2;
+				pad.mineShape.setOpacity(1);
+				this.handleTTTWin(2);
+				return;
+			}
+			pad.state = 0; // Reset
+		}
+
+		// --- 2. Block player's win if possible ---
+		for (let pad of availablePads) {
+			pad.state = 1; // Pretend player plays here
+			if (this.checkWinCondition() === 1) {
+				pad.state = 2;
+				pad.mineShape.setOpacity(1);
+				this.advanceState(true); // Continue game
+				return;
+			}
+			pad.state = 0; // Reset
+		}
+
+		// --- 3. Take center if available ---
+		let centerPad = availablePads.find(p => p.index === 4);
+		if (centerPad) {
+			centerPad.state = 2;
+			centerPad.mineShape.setOpacity(1);
+			this.advanceState(true);
 			return;
 		}
-		pad.state = 0; // Reset
-	}
 
-	// --- 2. Block player's win if possible ---
-	for (let pad of availablePads) {
-		pad.state = 1; // Pretend player plays here
-		if (this.checkWinCondition() === 1) {
-			pad.state = 2;
-			pad.mineShape.setOpacity(1);
-			this.advanceState(true); // Continue game
-			return;
-		}
-		pad.state = 0; // Reset
-	}
-
-	// --- 3. Take center if available ---
-	let centerPad = availablePads.find(p => p.index === 4);
-	if (centerPad) {
-		centerPad.state = 2;
-		centerPad.mineShape.setOpacity(1);
+		// --- 4. Pick a random available pad ---
+		let randomPad = availablePads[Math.floor(Math.random() * availablePads.length)];
+		randomPad.state = 2;
+		randomPad.mineShape.setOpacity(1);
 		this.advanceState(true);
-		return;
 	}
-
-	// --- 4. Pick a random available pad ---
-	let randomPad = availablePads[Math.floor(Math.random() * availablePads.length)];
-	randomPad.state = 2;
-	randomPad.mineShape.setOpacity(1);
-	this.advanceState(true);
-    }
 }
 
 /** The Tic Tac Toe Pad! */
@@ -201,7 +200,7 @@ export class TTTPad extends Shape {
 		this.mineShape.setOpacity(0); // Hide the mine
 	}
 
-	tick( time: TimeState, onlyVisual: boolean) {
+	tick(time: TimeState, onlyVisual: boolean) {
 		if (onlyVisual) return;
 		super.tick(time);
 		// Tick the firework
@@ -233,10 +232,10 @@ export class TTTPad extends Shape {
 	}
 
 	/** Starts the finish celebration firework at a given time. */
-		spawnFirework(time: TimeState) {
-			let firework = new Firework(this.level, this.worldPosition, time.timeSinceLoad);
-			this.fireworks.push(firework);
-		}
+	spawnFirework(time: TimeState) {
+		let firework = new Firework(this.level, this.worldPosition, time.timeSinceLoad);
+		this.fireworks.push(firework);
+	}
 
 	reset(): void {
 		super.reset();
@@ -264,7 +263,7 @@ const landMineParticle = {
 		lifetimeVariance: 150,
 		dragCoefficient: 0.8,
 		acceleration: 0,
-		colors: [{r: 0.56, g: 0.36, b: 0.26, a: 1}, {r: 0.56, g: 0.36, b: 0.26, a: 0}],
+		colors: [{ r: 0.56, g: 0.36, b: 0.26, a: 1 }, { r: 0.56, g: 0.36, b: 0.26, a: 0 }],
 		sizes: [0.5, 1],
 		times: [0, 1]
 	}
@@ -287,7 +286,7 @@ export const landMineSmokeParticle = {
 		lifetimeVariance: 300,
 		dragCoefficient: 0.85,
 		acceleration: -8,
-		colors: [{r: 0.56, g: 0.36, b: 0.26, a: 1}, {r: 0.2, g: 0.2, b: 0.2, a: 1}, {r: 0, g: 0, b: 0, a: 0}],
+		colors: [{ r: 0.56, g: 0.36, b: 0.26, a: 1 }, { r: 0.2, g: 0.2, b: 0.2, a: 1 }, { r: 0, g: 0, b: 0, a: 0 }],
 		sizes: [1, 1.5, 2],
 		times: [0, 0.5, 1]
 	}
@@ -310,7 +309,7 @@ export const landMineSparksParticle = {
 		lifetimeVariance: 350,
 		dragCoefficient: 0.75,
 		acceleration: -8,
-		colors: [{r: 0.6, g: 0.4, b: 0.3, a: 1}, {r: 0.6, g: 0.4, b: 0.3, a: 1}, {r: 1, g: 0.4, b: 0.3, a: 0}],
+		colors: [{ r: 0.6, g: 0.4, b: 0.3, a: 1 }, { r: 0.6, g: 0.4, b: 0.3, a: 1 }, { r: 1, g: 0.4, b: 0.3, a: 0 }],
 		sizes: [0.5, 0.25, 0.25],
 		times: [0, 0.5, 1]
 	}
@@ -346,7 +345,7 @@ export const fireworkSmoke2 = {
 		lifetimeVariance: 200,
 		dragCoefficient: 0.5,
 		acceleration: 0,
-		colors: [{r: 1, g: 1, b: 0, a: 0}, {r: 1, g: 0, b: 0, a: 1}, {r: 1, g: 0, b: 0, a: 0}],
+		colors: [{ r: 1, g: 1, b: 0, a: 0 }, { r: 1, g: 0, b: 0, a: 1 }, { r: 1, g: 0, b: 0, a: 0 }],
 		sizes: [0.1, 0.2, 0.3],
 		times: [0, 0.2, 1]
 	}
@@ -370,7 +369,7 @@ export const redTrail2 = {
 		lifetimeVariance: 100,
 		dragCoefficient: 0,
 		acceleration: 0,
-		colors: [{r: 1, g: 1, b: 0, a: 1}, {r: 1, g: 0, b: 0, a: 1}, {r: 1, g: 0, b: 0, a: 0}],
+		colors: [{ r: 1, g: 1, b: 0, a: 1 }, { r: 1, g: 0, b: 0, a: 1 }, { r: 1, g: 0, b: 0, a: 0 }],
 		sizes: [0.1, 0.05, 0.01],
 		times: [0, 0.5, 1]
 	}
@@ -394,7 +393,7 @@ export const blueTrail2 = {
 		lifetimeVariance: 100,
 		dragCoefficient: 0,
 		acceleration: 0,
-		colors: [{r: 0, g: 0, b: 1, a: 1}, {r: 0.5, g: 0.5, b: 1, a: 1}, {r: 1, g: 1, b: 1, a: 0}],
+		colors: [{ r: 0, g: 0, b: 1, a: 1 }, { r: 0.5, g: 0.5, b: 1, a: 1 }, { r: 1, g: 1, b: 1, a: 0 }],
 		sizes: [0.1, 0.05, 0.01],
 		times: [0, 0.5, 1]
 	}
@@ -418,7 +417,7 @@ export const redSpark2 = {
 		lifetimeVariance: 50,
 		dragCoefficient: 0.5,
 		acceleration: 0,
-		colors: [{r: 1, g: 1, b: 0, a: 1}, {r: 1, g: 1, b: 0, a: 1}, {r: 1, g: 0, b: 0, a: 0}],
+		colors: [{ r: 1, g: 1, b: 0, a: 1 }, { r: 1, g: 1, b: 0, a: 1 }, { r: 1, g: 0, b: 0, a: 0 }],
 		sizes: [0.2, 0.2, 0.2],
 		times: [0, 0.5, 1]
 	}
@@ -442,7 +441,7 @@ export const blueSpark2 = {
 		lifetimeVariance: 200,
 		dragCoefficient: 0,
 		acceleration: 0,
-		colors: [{r: 0, g: 0, b: 1, a: 1}, {r: 0.5, g: 0.5, b: 1, a: 1}, {r: 1, g: 1, b: 1, a: 0}],
+		colors: [{ r: 0, g: 0, b: 1, a: 1 }, { r: 0.5, g: 0.5, b: 1, a: 1 }, { r: 1, g: 1, b: 1, a: 0 }],
 		sizes: [0.2, 0.2, 0.2],
 		times: [0, 0.5, 1]
 	}
@@ -474,11 +473,11 @@ class Firework extends Scheduler {
 		// Update the trails
 		for (let trail of this.trails.slice()) {
 			let completion = Util.clamp((time - trail.spawnTime) / trail.lifetime, 0, 1);
-			completion = 1 - (1 - completion)**2; // ease-out
+			completion = 1 - (1 - completion) ** 2; // ease-out
 
 			// Make the trail travel along an arc (parabola, whatever)
 			let pos = this.pos.clone().multiplyScalar(1 - completion).add(trail.targetPos.clone().multiplyScalar(completion));
-			pos.sub(new Vector3(0, 0, 1).multiplyScalar(completion**2));
+			pos.sub(new Vector3(0, 0, 1).multiplyScalar(completion ** 2));
 			trail.smokeEmitter.setPos(pos, time);
 
 			if (completion === 1) {
@@ -509,11 +508,11 @@ class Firework extends Scheduler {
 
 	/** Spawns a red or blue trail going in a random direction with a random speed. */
 	spawnTrail(time: number) {
-		let type: 'red' | 'blue' = (Math.random() < 0.5)? 'red' : 'blue';
+		let type: 'red' | 'blue' = (Math.random() < 0.5) ? 'red' : 'blue';
 
 		let lifetime = 250 + Math.random() * 2000;
 		let distanceFac = 0.5 + lifetime / 5000; // Make sure the firework doesn't travel a great distance way too quickly
-		let emitter = this.level.particles.createEmitter((type === 'red')? redTrail2 : blueTrail2, this.pos);
+		let emitter = this.level.particles.createEmitter((type === 'red') ? redTrail2 : blueTrail2, this.pos);
 		let randomPointInCircle = Util.randomPointInUnitCircle();
 		let targetPos = new Vector3(randomPointInCircle.x * 3, randomPointInCircle.y * 3, 1 + Math.sqrt(Math.random()) * 3).multiplyScalar(distanceFac).add(this.pos);
 

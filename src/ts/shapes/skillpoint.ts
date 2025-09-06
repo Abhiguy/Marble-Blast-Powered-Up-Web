@@ -18,41 +18,41 @@ export class SkillPointItem extends PowerUp {
 	pickUp(): boolean {
 		this.used = true;
 		let alreadyFound = StorageManager.data.collectedEggs.includes(this.level.mission.path);
-				if (!alreadyFound) {
-					StorageManager.data.collectedEggs.push(this.level.mission.path);
-					StorageManager.store();
-					state.menu.levelSelect.displayMission(); // To refresh the icon
-				}
+		if (!alreadyFound) {
+			StorageManager.data.collectedEggs.push(this.level.mission.path);
+			StorageManager.store();
+			state.menu.levelSelect.displayMission(); // To refresh the icon
+		}
 
-				// Stop the skillpoint emitter once marble has picked it up
-	            if (this.emitter) {
-					this.level.particles.removeEmitter(this.emitter);
-		            this.emitter = null;
-	            }
-		
-				this.level.audio.play(this.sounds[Number(alreadyFound)]); // Holy shit this cast is nasty
-				this.customPickUpAlert = alreadyFound? "You already found this Skill Point." : "You found a Skill Point!";
-		
-				return true;
+		// Stop the skillpoint emitter once marble has picked it up
+		if (this.emitter) {
+			this.level.particles.removeEmitter(this.emitter);
+			this.emitter = null;
+		}
+
+		this.level.audio.play(this.sounds[Number(alreadyFound)]); // Holy shit this cast is nasty
+		this.customPickUpAlert = alreadyFound ? "You already found this Skill Point." : "You found a Skill Point!";
+
+		return true;
 	}
 
-	use() {}
+	use() { }
 
 	reset() {
-	    super.reset();
+		super.reset();
 		this.used = false;
 
-	    // Remove old emitter if it exists..in order to avoid any clinsky side effects or stacking upon..since it's an emitter
-	    if (this.emitter) {
-		    this.level.particles.removeEmitter(this.emitter);
-		    this.emitter = null;
-	    }
+		// Remove old emitter if it exists..in order to avoid any clinsky side effects or stacking upon..since it's an emitter
+		if (this.emitter) {
+			this.level.particles.removeEmitter(this.emitter);
+			this.emitter = null;
+		}
 
-	    // Do not recreate emitter if already collected in this session
-	    if (this.used) return;
+		// Do not recreate emitter if already collected in this session
+		if (this.used) return;
 
-	    // Readd the emitter to the level properly
-	    this.emitter = this.level.particles.createEmitter(skillPointParticle, this.worldPosition);
+		// Readd the emitter to the level properly
+		this.emitter = this.level.particles.createEmitter(skillPointParticle, this.worldPosition);
 	}
 }
 

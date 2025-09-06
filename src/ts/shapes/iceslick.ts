@@ -8,7 +8,7 @@ export class Iceslick extends Shape {
 	friction = specialFrictionFactor['friction_none'];
 
 	onMarbleContact(collision: Collision): void {
-		if(!collision) return;
-        this.level.marble.enableIce(this.level.timeState);
+		if (!collision) return;
+		this.level.marble.enableIce(this.level.timeState);
 	}
 }

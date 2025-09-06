@@ -139,10 +139,10 @@ const createNoiseTileMaterial = async (interior: Interior, baseTexture: string, 
 
 /** A list of custom materials for specific levels. */
 const customMaterialFactories: Record<string, (interior: Interior) => Promise<Material>> = {
-	'edge_white': (interior: Interior) =>  createMBGPhongMaterial(interior, 'sandbox/toroidal/edge_white.jpg', 10, 0.5),
-	'edge_white2': (interior: Interior) =>  createMBGPhongMaterial(interior, 'sandbox/toroidal/edge_white2.jpg', 10, 0.5),
-	'grid_warm1': (interior: Interior) =>  createMBGPhongMaterial(interior, 'sandbox/toroidal/grid_warm1.jpg', 10, 0.5),
-	'wall_warm2': (interior: Interior) =>  createMBGPhongMaterial(interior, 'sandbox/toroidal/wall_warm2.jpg', 10, 0.5),
+	'edge_white': (interior: Interior) => createMBGPhongMaterial(interior, 'sandbox/toroidal/edge_white.jpg', 10, 0.5),
+	'edge_white2': (interior: Interior) => createMBGPhongMaterial(interior, 'sandbox/toroidal/edge_white2.jpg', 10, 0.5),
+	'grid_warm1': (interior: Interior) => createMBGPhongMaterial(interior, 'sandbox/toroidal/grid_warm1.jpg', 10, 0.5),
+	'wall_warm2': (interior: Interior) => createMBGPhongMaterial(interior, 'sandbox/toroidal/wall_warm2.jpg', 10, 0.5),
 
 	'plate_1': (interior: Interior) => createPhongMaterial(interior, 'plate_1.jpg', 'plate_mbu.spec.jpg', 'plate_mbu.normal.png', 30, 0.5),
 	'tile_beginner': (interior: Interior) => createNoiseTileMaterial(interior, 'tile_beginner.png', ''),
@@ -213,10 +213,10 @@ export class Interior {
 
 	/** For dealing with special tornado */
 	originalPosition?: Vector3;
-    originalRotation?: Quaternion;
-    originalScale?: Vector3;
+	originalRotation?: Quaternion;
+	originalScale?: Vector3;
 	material: Material;
-    originalMaterial: Material;
+	originalMaterial: Material;
 
 	/** Avoids recomputation of the same interior. */
 	static initCache = new WeakMap<hxDif.Interior, InitCacheType>();
@@ -226,7 +226,7 @@ export class Interior {
 		this.dif = file;
 		this.difPath = path;
 		this.level = level;
-		this.detailLevel = (subObjectIndex === undefined)? file.interiors[0] : file.subObjects[subObjectIndex];
+		this.detailLevel = (subObjectIndex === undefined) ? file.interiors[0] : file.subObjects[subObjectIndex];
 		this.materialNames = this.detailLevel.materialList.map(x => x.split('/').pop().toLowerCase());
 
 		this.body = new RigidBody();
@@ -280,7 +280,7 @@ export class Interior {
 					continue;
 				}
 
-				let fullPath = this.difPath.includes('data/')?
+				let fullPath = this.difPath.includes('data/') ?
 					this.difPath.slice(this.difPath.indexOf('data/') + 'data/'.length)
 					: this.difPath.slice(this.difPath.indexOf('data_mbp/') + 'data_mbp/'.length);
 
@@ -374,8 +374,8 @@ export class Interior {
 		let k = 0; // Keep track of the face's index for corrent vertex winding order.
 		for (let i = surface.windingStart; i < surface.windingStart + surface.windingCount - 2; i++) {
 			let i1 = this.detailLevel.windings[i];
-			let i2 = this.detailLevel.windings[i+1];
-			let i3 = this.detailLevel.windings[i+2];
+			let i2 = this.detailLevel.windings[i + 1];
+			let i3 = this.detailLevel.windings[i + 2];
 
 			if (k % 2 === 0) {
 				// Swap the first and last index to maintain correct winding order
@@ -393,7 +393,7 @@ export class Interior {
 				// Figure out UV coordinates by getting the distances of the corresponding vertices to the plane.
 				let u = texPlaneX.distanceToPoint(new Vector3(position.x, position.y, position.z));
 				let v = texPlaneY.distanceToPoint(new Vector3(position.x, position.y, position.z));
-				if (this.level.mission.modification === 'ultra' && material === 'plate_1') u /= 2, v/= 2; // This one texture gets scaled up by 2x probably in the shader, but to avoid writing a separate shader we do it here.
+				if (this.level.mission.modification === 'ultra' && material === 'plate_1') u /= 2, v /= 2; // This one texture gets scaled up by 2x probably in the shader, but to avoid writing a separate shader we do it here.
 
 				geometry.positions.push(position.x, position.y, position.z);
 				geometry.normals.push(0, 0, 0); // Push a placeholder, we'll compute a proper normal later
@@ -522,7 +522,7 @@ export class Interior {
 		this.scale = scale;
 		this.mesh.transform.copy(this.worldMatrix);
 		// move visual mesh of the interiors when dead
-		this.mesh.changedTransform(); 
+		this.mesh.changedTransform();
 
 		this.body.position.copy(position);
 		this.body.orientation.copy(orientation);
@@ -552,65 +552,65 @@ export class Interior {
 		}
 	}
 
-    /** Returns the world position of the mesh, which is the translation part of the 4x4 matrix. */
+	/** Returns the world position of the mesh, which is the translation part of the 4x4 matrix. */
 	getWorldPosition(mesh: Mesh): Vector3 {
-	   const position = new Vector3();
-	   mesh.worldTransform.getTranslation(position); // This sets `position` to the translation part of the 4x4 matrix
-	   return position;
-    }
+		const position = new Vector3();
+		mesh.worldTransform.getTranslation(position); // This sets `position` to the translation part of the 4x4 matrix
+		return position;
+	}
 
-   /** This Function updates the visibility and emission of light of the interior based on the player's position... Specifically used for sandbox's flashlight levels */
-    updateVisibility(playerPosition: Vector3) {
-	// This variable is used to update the visibility of the interior based on the distance from the player in the level world position.
-	const meshPosition = this.getWorldPosition(this.mesh);
-	// The Central part of this function.. This is to update the visibility of the interior based on the distance from the player.
-	const distance = playerPosition.distanceTo(meshPosition);
+	/** This Function updates the visibility and emission of light of the interior based on the player's position... Specifically used for sandbox's flashlight levels */
+	updateVisibility(playerPosition: Vector3) {
+		// This variable is used to update the visibility of the interior based on the distance from the player in the level world position.
+		const meshPosition = this.getWorldPosition(this.mesh);
+		// The Central part of this function.. This is to update the visibility of the interior based on the distance from the player.
+		const distance = playerPosition.distanceTo(meshPosition);
 
-	const difPathNormalized = this.difPath?.toLowerCase().replace(/\\/g, '/');
-	if (!difPathNormalized) return;
+		const difPathNormalized = this.difPath?.toLowerCase().replace(/\\/g, '/');
+		if (!difPathNormalized) return;
 
-	// Extract specific files...from the directory path..to help modify those specific interiors behaviour.
-	const fileName = difPathNormalized.split('/').pop();
-	if (!fileName) return;
+		// Extract specific files...from the directory path..to help modify those specific interiors behaviour.
+		const fileName = difPathNormalized.split('/').pop();
+		if (!fileName) return;
 
-	// We take a diversion..a folder with all the black textured interiors will help us drive home our effect.
-	const isDarkVersion = difPathNormalized.includes('/slendy1/');
+		// We take a diversion..a folder with all the black textured interiors will help us drive home our effect.
+		const isDarkVersion = difPathNormalized.includes('/slendy1/');
 
-	// Shared visibility thresholds (These will be updated based upon the marble's proximity to the interior..)
-	// This is done in order to make the Flash light effect of Marble Blast Powered Up on interiors more realistic.
-	// The values are based on the distance at which the interior should be visible.
-	// Thus only these interiors show up only when the marble is at a certain distance.
-	const visibilityMap: { [key: string]: number } = {
-		'slendy_house1.dif': 21,
-		'slendy_house2.dif': 21,
-		'slendy_house3.dif': 28,
-		'slendy_tree.dif': 20,
-		'slendy_stump1.dif': 20,
-		'rock.dif': 10,
-		'slendy_stump.dif': 8, // The smallest interior of all, so it has the lowest threshold.
-		'slendy_castle.dif': 77, // Slendy castle is a big interior...so it has a higher threshold.
-		'slendy_maze.dif': 40,
-		'slendy_lake.dif': 40,
-		'slendy_whirlimobile.dif': 20,
-		'slendy_fence.dif': 24
-	};
+		// Shared visibility thresholds (These will be updated based upon the marble's proximity to the interior..)
+		// This is done in order to make the Flash light effect of Marble Blast Powered Up on interiors more realistic.
+		// The values are based on the distance at which the interior should be visible.
+		// Thus only these interiors show up only when the marble is at a certain distance.
+		const visibilityMap: { [key: string]: number } = {
+			'slendy_house1.dif': 21,
+			'slendy_house2.dif': 21,
+			'slendy_house3.dif': 28,
+			'slendy_tree.dif': 20,
+			'slendy_stump1.dif': 20,
+			'rock.dif': 10,
+			'slendy_stump.dif': 8, // The smallest interior of all, so it has the lowest threshold.
+			'slendy_castle.dif': 77, // Slendy castle is a big interior...so it has a higher threshold.
+			'slendy_maze.dif': 40,
+			'slendy_lake.dif': 40,
+			'slendy_whirlimobile.dif': 20,
+			'slendy_fence.dif': 24
+		};
 
-	    const threshold = visibilityMap[fileName];
-	    if (threshold === undefined) return;
+		const threshold = visibilityMap[fileName];
+		if (threshold === undefined) return;
 
-	    // Logic: if dark version, show it when far; hide when close and lit version, show it when close; hide when far
-	    if (isDarkVersion) {
-		   this.mesh.opacity = distance > threshold ? 1 : 0;
-	    } 
+		// Logic: if dark version, show it when far; hide when close and lit version, show it when close; hide when far
+		if (isDarkVersion) {
+			this.mesh.opacity = distance > threshold ? 1 : 0;
+		}
 		else {
-		   this.mesh.opacity = distance < threshold ? 1 : 0;
-	    }
-    }
+			this.mesh.opacity = distance < threshold ? 1 : 0;
+		}
+	}
 
 
 	/* eslint-disable @typescript-eslint/no-unused-vars */
-	tick(time: TimeState) {}
-	render(time: TimeState) {}
-	reset() {}
-	async onLevelStart() {}
+	tick(time: TimeState) { }
+	render(time: TimeState) { }
+	reset() { }
+	async onLevelStart() { }
 }

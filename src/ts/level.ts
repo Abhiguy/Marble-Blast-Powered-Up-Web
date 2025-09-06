@@ -7,13 +7,11 @@ import { SignFinish } from "./shapes/sign_finish";
 import { DummySignFinish } from "./shapes/sign_finish_dummy";
 import { SignPlain } from "./shapes/sign_plain";
 import { EndPad, fireworkSmoke, redSpark, redTrail, blueSpark, blueTrail } from "./shapes/end_pad";
-import { SpecialStartPad } from "./shapes/special_start_pad";
-import { SpecialEndPad, fireworkSmoke1, redSpark1, redTrail1, blueSpark1, blueTrail1} from "./shapes/special_end_pad";
 import { MusicPad } from "./shapes/music_pad";
 import { Gem } from "./shapes/gem";
 import { DummyGem } from "./shapes/gem_dummy";
 import { SuperJump, superJumpParticleOptions } from "./shapes/super_jump";
-import { Doubler} from "./shapes/doubler";
+import { Doubler } from "./shapes/doubler";
 import { SignCaution } from "./shapes/sign_caution";
 import { SuperBounce } from "./shapes/super_bounce";
 import { RoundBumper } from "./shapes/round_bumper";
@@ -27,7 +25,6 @@ import { AntiGravity } from "./shapes/anti_gravity";
 import { LandMine, landMineSmokeParticle, landMineSparksParticle } from "./shapes/land_mine";
 import { SkyMine, skyMineSmokeParticle, skyMineSparksParticle } from "./shapes/sky_mine";
 import { FishMine, FishMineSmokeParticle, FishMineSparksParticle } from "./shapes/fish_mine";
-import { LandMineSpecial} from "./shapes/land_mine_special";
 import { ShockAbsorber } from "./shapes/shock_absorber";
 import { SuperSpeed, superSpeedParticleOptions } from "./shapes/super_speed";
 import { TimeTravel } from "./shapes/time_travel";
@@ -109,8 +106,8 @@ import { TTTPad, TTTState, fireworkSmoke2, redSpark2, redTrail2, blueSpark2, blu
 import { SpringBoard } from "./shapes/springboard";
 import { Grass } from "./shapes/grass";
 import { Monsoon } from "./shapes/monsoon";
-import { Firework,Trail } from "./shapes/end_pad";
-import { TrickTrigger } from "./triggers/trick_trigger";
+import { Firework, Trail } from "./shapes/end_pad";
+import { Tricks, TrickTrigger } from "./triggers/trick_trigger";
 import { TrololoTrigger } from "./triggers/trolololo_trigger";
 import { CornerTrigger } from "./triggers/corner_trigger";
 import { Iceslick } from "./shapes/iceslick";
@@ -165,7 +162,7 @@ const particleEmitterMap: Record<string, ParticleEmitterOptions> = {
 	MarbleSuperSpeedEmitter: Object.assign(ParticleEmitter.cloneOptions(superSpeedParticleOptions), {
 		emitterLifetime: 5000,
 		ambientVelocity: new Vector3(-0.5, 0, -0.5)
-	}),	
+	}),
 	LandMineEmitter: particleNodeEmittersEmitterOptions.LandMineEmitter,
 	LandMineSmokeEmitter: landMineSmokeParticle,
 	LandMineSparkEmitter: landMineSparksParticle,
@@ -179,7 +176,6 @@ const particleEmitterMap: Record<string, ParticleEmitterOptions> = {
 	NukeSmokeEmitter: nukeSmokeParticle,
 	NukeSparkEmitter: nukeSparksParticle,
 	FireWorkSmokeEmitter: fireworkSmoke,
-	FireWorkSmokeEmitter1: fireworkSmoke1,
 	fireworkSmokeEmitter2: fireworkSmoke2,
 	RainLocalEmitter: RainLocal,
 	BubbleLocalEmitter: BubbleLocal,
@@ -189,10 +185,6 @@ const particleEmitterMap: Record<string, ParticleEmitterOptions> = {
 	BlueFireWorkSparkEmitter: blueSpark,
 	BlueFireWorkTrailEmitter: blueTrail,
 
-	RedFireWorkSparkEmitter1: redSpark1,
-	RedFireWorkTrailEmitter1: redTrail1,
-	BlueFireWorkSparkEmitter1: blueSpark1,
-	BlueFireWorkTrailEmitter1: blueTrail1,
 	RedFireWorkSparkEmitter2: redSpark2,
 	RedFireWorkTrailEmitter2: redTrail2,
 	BlueFireWorkSparkEmitter2: blueSpark2,
@@ -296,7 +288,7 @@ export class Level extends Scheduler {
 	enableCustomJumpAndDash = false;
 
 	/** For Handling The Music Pads Musical Code Sequence */
-    musicCodeSequence: number[] = [];
+	musicCodeSequence: number[] = [];
 	correctMusicCode: number[] = [4, 5, 3, 1, 2];
 	/** Only if the Player cracked the special Musical Code. */
 	crackedMusicCode = false;
@@ -341,25 +333,6 @@ export class Level extends Scheduler {
 	checkpointUp: Vector3 = null;
 	checkpointBlast: number = null;
 
-	/** For Handling How long Gyrocopter lasts-- Default (5000ms) */
-	GyrocopterTime: number = 5000;
-	/** Gyrocopter's Air acceleration -- Default (5) */
-	AirAcceleration: number = 5;
-	/** For handling Gyrocopter's Gravity Intensity Multiplier -- Default (1/4th of default gravity (20)) or 0.25 times the level's gravity */
-	GyrocopterGravityMultiplier: number = 0.25
-	/** For Handling how long Super Bounce lasts-- Default (5000ms) */
-	SuperBounceTime: number = 5000;
-	/** For Handling Super Bounce's  Bounce Restitution -- Default (0.9) */
-	BounceRestitution: number = 0.9;
-	/** For Handling how long Shock Absorber lasts-- Default (5000ms) */
-	ShockAbsorberTime: number = 5000;
-	/** For Handling how long glue is active-- Default (5000ms) */
-	GlueTime: number = 5000;
-	/** For Handling how long metal is active-- Default (5000ms) */
-	MetalTime: number = 5000;
-	/** For Handling how long paper is active-- Default (5000ms) */
-	PaperTime: number = 5000;
-
 	audio: AudioManager;
 	timeTravelSound: AudioSource;
 	/** The alarm that plays in MBP when the player is about to pass the "par time". */
@@ -371,6 +344,9 @@ export class Level extends Scheduler {
 
 	/**TTT*/
 	tttState: TTTState = null;
+
+	// Tricks
+	trickState: Tricks = null;
 
 	// for handling tricks
 	floorZ = 0;
@@ -441,8 +417,8 @@ export class Level extends Scheduler {
 			this.audio = new AudioManager();
 			this.audio.init({ duration: this.offlineSettings.duration });
 			this.audio.setAssetPath(mainAudioManager.assetPath);
-			this.audio.soundGain.gain.value = this.offlineSettings.soundVolume**2;
-			this.audio.musicGain.gain.value = this.offlineSettings.musicVolume**2;
+			this.audio.soundGain.gain.value = this.offlineSettings.soundVolume ** 2;
+			this.audio.musicGain.gain.value = this.offlineSettings.musicVolume ** 2;
 			this.audio.currentTimeOverride = 0;
 		}
 
@@ -463,8 +439,9 @@ export class Level extends Scheduler {
 		if (this.mission.title === "Tic-Tac-Toe")
 			this.tttState = new TTTState(this);
 
+		this.trickState = new Tricks();
 	}
-	
+
 
 	async start() {
 		if (this.stopped) return;
@@ -476,7 +453,7 @@ export class Level extends Scheduler {
 		for (let shape of this.shapes) await shape.onLevelStart();
 		this.audio.normalizePositionalAudioVolume();
 		this.music.play();
-		
+
 
 		resize(false); // To update renderer
 		this.updateCamera(this.timeState); // Ensure that the camera is positioned correctly before the first tick for correct positional audio playback
@@ -657,10 +634,10 @@ export class Level extends Scheduler {
 		this.overlayScene.addAmbientLight(overlayLight);
 
 		this.overlayCamera = new OrthographicCamera(
-			-window.innerWidth/2,
-			window.innerWidth/2,
-			-window.innerHeight/2,
-			window.innerHeight/2,
+			-window.innerWidth / 2,
+			window.innerWidth / 2,
+			-window.innerHeight / 2,
+			window.innerHeight / 2,
 			1,
 			1000
 		);
@@ -714,31 +691,31 @@ export class Level extends Scheduler {
 				let missionArray = MissionLibrary.allCategories.find(x => x.includes(this.mission));
 				let levelIndex = missionArray.indexOf(this.mission);
 				switch ((levelIndex % 6) + 1) {
-	                case 1:
-		                musicFileName = 'low key.ogg';
-		                this.originalMusicName = 'low key.ogg';
-		                break;
-	                case 2:
-		                musicFileName = 'groove police.ogg';
-		                this.originalMusicName = 'groove police.ogg';
-		                break;
-	                case 3:
-		                musicFileName = 'cookout.ogg';
-		                this.originalMusicName = 'cookout.ogg';
-		                break;
-	                case 4:
-		                musicFileName = 'classic vibe.ogg';
-		                this.originalMusicName = 'classic vibe.ogg';
-		                break;
-	                case 5:
-		                musicFileName = 'beach party.ogg';
-		                this.originalMusicName = 'beach party.ogg';
-		                break;
-	                case 6:
-		                musicFileName = 'summer gathering.ogg';
-		                this.originalMusicName = 'summer gathering.ogg';
-		                break;
-                }
+					case 1:
+						musicFileName = 'low key.ogg';
+						this.originalMusicName = 'low key.ogg';
+						break;
+					case 2:
+						musicFileName = 'groove police.ogg';
+						this.originalMusicName = 'groove police.ogg';
+						break;
+					case 3:
+						musicFileName = 'cookout.ogg';
+						this.originalMusicName = 'cookout.ogg';
+						break;
+					case 4:
+						musicFileName = 'classic vibe.ogg';
+						this.originalMusicName = 'classic vibe.ogg';
+						break;
+					case 5:
+						musicFileName = 'beach party.ogg';
+						this.originalMusicName = 'beach party.ogg';
+						break;
+					case 6:
+						musicFileName = 'summer gathering.ogg';
+						this.originalMusicName = 'summer gathering.ogg';
+						break;
+				}
 			} else {
 				// Play a random *MBP* song
 				musicFileName = Util.randomFromArray(MBP_SONGS);
@@ -838,8 +815,8 @@ export class Level extends Scheduler {
 
 		// Set the position, rotation and scale of the interior
 		interior.originalPosition = interiorPosition.clone();
-        interior.originalRotation = interiorRotation.clone();
-        interior.originalScale = interiorScale.clone();
+		interior.originalRotation = interiorRotation.clone();
+		interior.originalScale = interiorScale.clone();
 
 		interior.setTransform(interiorPosition, interiorRotation, interiorScale);
 
@@ -852,11 +829,11 @@ export class Level extends Scheduler {
 		// Add the correct shape based on type
 		let dataBlockLowerCase = element.datablock?.toLowerCase();
 		if (!dataBlockLowerCase) { /* Make sure we don't do anything if there's no data block */ }
-		else if (["startpad", "startpad_mbg", "startpad_mbp"].includes(dataBlockLowerCase)) shape = new StartPad(element as MissionElementStaticShape);
-		else if (["endpad", "endpad_mbg", "endpad_mbp"].includes(dataBlockLowerCase)) shape = new EndPad(element === this.endPadElement);
+		else if (["startpad", "startpad_mbg", "startpad_mbp"].includes(dataBlockLowerCase)) shape = new StartPad(element as MissionElementStaticShape, false);
+		else if (["endpad", "endpad_mbg", "endpad_mbp"].includes(dataBlockLowerCase)) shape = new EndPad(element === this.endPadElement, false);
 		else if (dataBlockLowerCase === "musicpad") shape = new MusicPad(element as MissionElementStaticShape);
-		else if (["specialstartpad"].includes(dataBlockLowerCase)) shape = new SpecialStartPad();
-		else if (["specialendpad"].includes(dataBlockLowerCase)) shape = new SpecialEndPad(element === this.endPadElement);
+		else if (["specialstartpad"].includes(dataBlockLowerCase)) shape = new StartPad(element as MissionElementStaticShape, true);
+		else if (["specialendpad"].includes(dataBlockLowerCase)) shape = new EndPad(element === this.endPadElement, true);
 		else if (dataBlockLowerCase === "signfinish") shape = new SignFinish();
 		else if (dataBlockLowerCase === "dummysignfinish") shape = new DummySignFinish();
 		else if (dataBlockLowerCase.startsWith("signplain")) shape = new SignPlain(element as MissionElementStaticShape);
@@ -880,13 +857,13 @@ export class Level extends Scheduler {
 		else if (dataBlockLowerCase === "smallductfan") shape = new SmallDuctFan();
 		else if (dataBlockLowerCase === "antigravityitem") shape = new AntiGravity(element as MissionElementItem);
 		else if (dataBlockLowerCase === "norespawnantigravityitem") shape = new AntiGravity(element as MissionElementItem, true);
-		else if (dataBlockLowerCase === "landmine") shape = new LandMine();
+		else if (dataBlockLowerCase === "landmine") shape = new LandMine(false);
 		else if (dataBlockLowerCase === "skymine") shape = new SkyMine(element as MissionElementStaticShape);
 		else if (dataBlockLowerCase === "fishmine") shape = new FishMine(element as MissionElementStaticShape);
 		else if (dataBlockLowerCase === "stopwatchitem") shape = new StopWatch(element as MissionElementItem);
 		else if (dataBlockLowerCase === "metalitem") shape = new Metal(element as MissionElementItem);
 		else if (dataBlockLowerCase === "paperitem") shape = new Paper(element as MissionElementItem);
-		else if (dataBlockLowerCase === "landminespecial") shape = new LandMineSpecial();
+		else if (dataBlockLowerCase === "landminespecial") shape = new LandMine(true);
 		else if (dataBlockLowerCase === "shockabsorberitem") shape = new ShockAbsorber(element as MissionElementItem);
 		else if (dataBlockLowerCase === "superspeeditem") shape = new SuperSpeed(element as MissionElementItem);
 		else if (["timetravelitem", "timepenaltyitem"].includes(dataBlockLowerCase)) shape = new TimeTravel(element as MissionElementItem);
@@ -960,7 +937,7 @@ export class Level extends Scheduler {
 		} else if (dataBlockLowerCase === "helptrigger") {
 			trigger = new HelpTrigger(element, this);
 		} else if (dataBlockLowerCase === "nojumptrigger") {
-			trigger = new NoJumpTrigger(element, this);	
+			trigger = new NoJumpTrigger(element, this);
 		} else if (dataBlockLowerCase === "teleporttrigger") {
 			trigger = new TeleportTrigger(element, this);
 		} else if (dataBlockLowerCase === "destinationtrigger") {
@@ -970,13 +947,13 @@ export class Level extends Scheduler {
 		} else if (dataBlockLowerCase === "checkpointtrigger") {
 			trigger = new CheckpointTrigger(element, this);
 		} else if (dataBlockLowerCase === "tricktrigger") {
-			trigger = new TrickTrigger(element, this);	
+			trigger = new TrickTrigger(element, this);
 		} else if (dataBlockLowerCase === "trololotrigger") {
-			trigger = new TrololoTrigger(element, this);	
+			trigger = new TrololoTrigger(element, this);
 		} else if (dataBlockLowerCase === "cornertrigger") {
-			trigger = new CornerTrigger(element, this);	
+			trigger = new CornerTrigger(element, this);
 		} else if (dataBlockLowerCase === "whirlitrigger") {
-			trigger = new WhirliTrigger(element, this);	
+			trigger = new WhirliTrigger(element, this);
 		}
 
 		if (!trigger) return;
@@ -1079,6 +1056,7 @@ export class Level extends Scheduler {
 		}
 
 		this.tttState?.reset();
+		this.trickState.resetCombo();
 
 		this.music.setPlaybackRate(1);
 
@@ -1118,7 +1096,7 @@ export class Level extends Scheduler {
 		this.marble.calculatePredictiveTransforms();
 
 		// Determine starting camera orientation based on the start pad
-		this.yaw = euler.z + Math.PI/2;
+		this.yaw = euler.z + Math.PI / 2;
 		this.pitch = DEFAULT_PITCH;
 
 		let missionInfo = this.mission.missionInfo;
@@ -1138,7 +1116,7 @@ export class Level extends Scheduler {
 		this.deselectPowerUp();
 		hud.setCenterText('none');
 		maybeShowTouchControls();
-		setTouchControlMode((this.replay.mode === 'playback')? 'replay' : 'normal');
+		setTouchControlMode((this.replay.mode === 'playback') ? 'replay' : 'normal');
 
 		this.timeTravelSound?.stop();
 		this.timeTravelSound = null;
@@ -1172,26 +1150,26 @@ export class Level extends Scheduler {
 	}
 
 	/** Instantly respawns the marble when went OOB...but not erasing the stats */
-    fastRespawnPlayer() {
-	    // Cancel any OOB schedules or pending state resets
-	    this.clearScheduleId('oobRestart');
+	fastRespawnPlayer() {
+		// Cancel any OOB schedules or pending state resets
+		this.clearScheduleId('oobRestart');
 
-	    // Reset OOB state
-	    this.outOfBounds = false;
-	    this.dead = false;
+		// Reset OOB state
+		this.outOfBounds = false;
+		this.dead = false;
 		this.audio.play('spawn.wav');
 		let startPosition: Vector3;
-        let euler: Euler;
+		let euler: Euler;
 
-        if (this.mission.Competency && this.currentCheckpoint) {
-            // Competency: use the checkpoint set by pickUpGem()
-            startPosition = this.currentCheckpoint.group.position.clone(); // There could be multiple startPads..spawning on all of them
-            euler = new Euler();
-        } else {
+		if (this.mission.competency && this.currentCheckpoint) {
+			// Competency: use the checkpoint set by pickUpGem()
+			startPosition = this.currentCheckpoint.group.position.clone(); // There could be multiple startPads..spawning on all of them
+			euler = new Euler();
+		} else {
 			// In non competency levels...spawning on a single startPad
-            ({ position: startPosition, euler } = this.getStartPositionAndOrientation());
-        }
-        
+			({ position: startPosition, euler } = this.getStartPositionAndOrientation());
+		}
+
 		// Respawn immediately
 		({ position: startPosition, euler } = this.getStartPositionAndOrientation());
 		// Position the marble
@@ -1207,16 +1185,16 @@ export class Level extends Scheduler {
 		this.yaw = euler.z + Math.PI / 2;
 		this.pitch = DEFAULT_PITCH;
 
-	    // Reset camera text
-	    state.menu.hud.setCenterText('none');
-		
-	    // Re-enable powerup UI....a sweet spot
-	    state.menu.hud.setPowerupButtonState(true);
+		// Reset camera text
+		state.menu.hud.setCenterText('none');
 
-	    // Record respawn in replay
-	    this.replay.recordCheckpointRespawn();
+		// Re-enable powerup UI....a sweet spot
+		state.menu.hud.setPowerupButtonState(true);
 
-        // Reset the physics
+		// Record respawn in replay
+		this.replay.recordCheckpointRespawn();
+
+		// Reset the physics
 		this.currentUp.set(0, 0, 1);
 		this.orientationChangeTime = -Infinity;
 		this.oldOrientationQuat = new Quaternion();
@@ -1224,12 +1202,12 @@ export class Level extends Scheduler {
 		this.setGravityIntensity(this.defaultGravity);
 
 		// No air tricks popping on respawn...but can do them again....
-        this.bigAirDone = false;
-        this.hugeAirDone = false;
-        this.maxHeight = 0;
+		this.bigAirDone = false;
+		this.hugeAirDone = false;
+		this.maxHeight = 0;
 		this.canDoAirTrick = false;
-        this.floorZ = this.marble.body.position.z; // VERY IMPORTANT
-    }
+		this.floorZ = this.marble.body.position.z; // VERY IMPORTANT
+	}
 
 	tryRender() {
 		if (this.stopped) return;
@@ -1269,7 +1247,7 @@ export class Level extends Scheduler {
 		let tempTimeState: TimeState = {
 			timeSinceLoad: this.timeState.timeSinceLoad + completion * physicsTickLength,
 			currentAttemptTime: this.timeState.currentAttemptTime + completion * physicsTickLength,
-			gameplayClock: (this.currentTimeTravelBonus || this.timeState.currentAttemptTime < GO_TIME)? this.timeState.gameplayClock : this.timeState.gameplayClock + completion * physicsTickLength,
+			gameplayClock: (this.currentTimeTravelBonus || this.timeState.currentAttemptTime < GO_TIME) ? this.timeState.gameplayClock : this.timeState.gameplayClock + completion * physicsTickLength,
 			physicsTickCompletion: completion,
 			tickIndex: this.timeState.tickIndex + completion
 		};
@@ -1333,7 +1311,7 @@ export class Level extends Scheduler {
 
 			// Smoothly interpolate pitch and yaw between the last two keyframes
 			this.pitch = Util.lerp(this.replay.cameraOrientations[indexLow].pitch, this.replay.cameraOrientations[indexHigh].pitch, timeState.physicsTickCompletion);
-			this.pitch = Math.max(-Math.PI/2 + Math.PI/4, Math.min(Math.PI/2 - 0.0001, this.pitch)); // This bounds thing might have gotten inaccurate in the conversion from float64 to float32, so do it here again
+			this.pitch = Math.max(-Math.PI / 2 + Math.PI / 4, Math.min(Math.PI / 2 - 0.0001, this.pitch)); // This bounds thing might have gotten inaccurate in the conversion from float64 to float32, so do it here again
 			this.yaw = Util.lerp(this.replay.cameraOrientations[indexLow].yaw, this.replay.cameraOrientations[indexHigh].yaw, timeState.physicsTickCompletion);
 		}
 
@@ -1488,9 +1466,9 @@ export class Level extends Scheduler {
 					this.currentTimeTravelBonus = 0;
 					// Take heed though....the Time Travels shouldnt be affected since we are doing the stopwatch....
 					// Release the objects after the watch effect is over
-					if(this.stopWatchActive) {
-					   this.music.setPlaybackRate(1); // Play back the music...
-		               this.stopWatchActive = false;
+					if (this.stopWatchActive) {
+						this.music.setPlaybackRate(1); // Play back the music...
+						this.stopWatchActive = false;
 					}
 				}
 			}
@@ -1504,7 +1482,7 @@ export class Level extends Scheduler {
 
 			this.tickSchedule(this.timeState.currentAttemptTime);
 
-			if (this.offline) this.audio.currentTimeOverride = this.timeState.currentAttemptTime/1000;
+			if (this.offline) this.audio.currentTimeOverride = this.timeState.currentAttemptTime / 1000;
 
 			if (this.mission.hasBlast && this.blastAmount < 1) this.blastAmount = Util.clamp(this.blastAmount + 1000 / BLAST_CHARGE_TIME / PHYSICS_TICK_RATE, 0, 1);
 
@@ -1575,21 +1553,21 @@ export class Level extends Scheduler {
 		}
 
 		this.audio.updatePositionalAudio(this.timeState, this.camera.position, this.yaw);
-		this.pitch = Math.max(-Math.PI/2 + Math.PI/4, Math.min(Math.PI/2 - 0.0001, this.pitch)); // The player can't look straight up
+		this.pitch = Math.max(-Math.PI / 2 + Math.PI / 4, Math.min(Math.PI / 2 - 0.0001, this.pitch)); // The player can't look straight up
 		if (tickDone) this.marble.calculatePredictiveTransforms();
 
 		// Handle pressing of the restart button
 		if (!this.finishTime && isPressed('restart') && !this.pressingRestart) {
-			if (this.mission.backwardClock || this.mission.Competency) {
-		      // For backwardClock or Competency levels, R should fully restart (hard respawn)
-		        this.restart(true);
-	        } else {
-		        this.restart(false);
-	        }
+			if (this.mission.backwardClock || this.mission.competency) {
+				// For backwardClock or Competency levels, R should fully restart (hard respawn)
+				this.restart(true);
+			} else {
+				this.restart(false);
+			}
 			if (this.currentCheckpoint) this.restartPressTime = performance.now();
-			    this.pressingRestart = true;
-		    } else if (!isPressed('restart')) {
-			    this.pressingRestart = false;
+			this.pressingRestart = true;
+		} else if (!isPressed('restart')) {
+			this.pressingRestart = false;
 		}
 
 		// Holding down the restart button for 1 second will force a hard restart
@@ -1598,111 +1576,111 @@ export class Level extends Scheduler {
 				this.restart(true);
 		}
 
-        // The FlashLight Effect for interiors in slendernado level...
+		// The FlashLight Effect for interiors in slendernado level...
 		// Visibility of the interiors will change with respect to marble's proximity to them.
 		if (this.mission.title === "Slendernado") {
 			for (const interior of this.interiors) {
-                interior.updateVisibility(this.marble.body.position);
-            }
+				interior.updateVisibility(this.marble.body.position);
+			}
 		}
 
 		// for handling finish fireworks at random marble position in backwardClock levels per frame
 		for (let firework of this.finishFireworks.slice()) {
-	        firework.tick(this.timeState.timeSinceLoad);
-	        if (this.timeState.timeSinceLoad - firework.spawnTime >= 10000)
-		        Util.removeFromArray(this.finishFireworks, firework);
-        }
+			firework.tick(this.timeState.timeSinceLoad);
+			if (this.timeState.timeSinceLoad - firework.spawnTime >= 10000)
+				Util.removeFromArray(this.finishFireworks, firework);
+		}
 
 		// for handling the air tricks
 		if (this.mission.backwardClock) {
-	        const pos = this.marble.body.position;
-	        const vel = this.marble.body.linearVelocity;
-            const airborne = pos.z > this.floorZ + 0.5;
+			const pos = this.marble.body.position;
+			const vel = this.marble.body.linearVelocity;
+			const airborne = pos.z > this.floorZ + 0.5;
 
-	        if (!airborne) {
-		    // Update floorZ when grounded (reset point for next airtime)
-		        this.floorZ = pos.z;
-		        this.canDoAirTrick = true; // Allow air tricks again now that grounded
-		        this.maxHeight = 0;
-	        } 
-            if (!this.canDoAirTrick) return; // Prevent trick activation in first few frames after spawn/restart
-		    // Airborne: trigger tricks only if Z is high above last known floor
-		    const height = pos.z - this.floorZ;
+			if (!airborne) {
+				// Update floorZ when grounded (reset point for next airtime)
+				this.floorZ = pos.z;
+				this.canDoAirTrick = true; // Allow air tricks again now that grounded
+				this.maxHeight = 0;
+			}
+			if (!this.canDoAirTrick) return; // Prevent trick activation in first few frames after spawn/restart
+			// Airborne: trigger tricks only if Z is high above last known floor
+			const height = pos.z - this.floorZ;
 			// The max height determines what trick will be evaluated and based upon the trick the score will increase.
-		    this.maxHeight = Math.max(this.maxHeight, height);
+			this.maxHeight = Math.max(this.maxHeight, height);
 
 			// Free Fall state....gone too high in air and falling back..
-		    if (this.maxHeight > 75) {
-			    this.score += 5000;
-			    state.menu.hud.displayAlert("Free Falling\n5000", "#ffff00");
-			    this.floorZ = pos.z + 50;
-			    return;
-		    }
+			if (this.maxHeight > 75) {
+				this.score += 5000;
+				state.menu.hud.displayAlert("Free Falling\n5000", "#ffff00");
+				this.floorZ = pos.z + 50;
+				return;
+			}
 
 			// Went high above but not too high....
-		    if (vel.z < -0.5  &&this.maxHeight > 13 && this.hugeAirDone) {
-			    this.score += 5000;
-			    state.menu.hud.displayAlert("Mega Air\n5000", "#00ff2fff");
-			    this.floorZ = pos.z + 50;
-			    this.hugeAirDone = false;
-			    return;
-		    }
+			if (vel.z < -0.5 && this.maxHeight > 13 && this.hugeAirDone) {
+				this.score += 5000;
+				state.menu.hud.displayAlert("Mega Air\n5000", "#00ff2fff");
+				this.floorZ = pos.z + 50;
+				this.hugeAirDone = false;
+				return;
+			}
 
 			// Huge air evaluates if both the downward velocity and height are at the required level...
 			// Fall from huge above to Huge Air.....
-		    if (vel.z < -0.1 && !this.hugeAirDone && this.maxHeight > 11 && this.bigAirDone) {
-			    this.score += 2000;
-			    state.menu.hud.displayAlert("Huge Air\n2000", "#001effff");
-			    this.floorZ = pos.z + 50;
-			    this.bigAirDone = false;
-			    this.hugeAirDone = true;
-			    return;
-		    }
+			if (vel.z < -0.1 && !this.hugeAirDone && this.maxHeight > 11 && this.bigAirDone) {
+				this.score += 2000;
+				state.menu.hud.displayAlert("Huge Air\n2000", "#001effff");
+				this.floorZ = pos.z + 50;
+				this.bigAirDone = false;
+				this.hugeAirDone = true;
+				return;
+			}
 
-		    // Big Air evaluates if smaller downward velocity and not too high...
+			// Big Air evaluates if smaller downward velocity and not too high...
 			// probably the lowest region of air tricks atmosphere
-		    // Only allow Big Air if it hasn't already been done this jump
-		    if (vel.z < 0.5 && !this.bigAirDone && this.maxHeight > 6) {
-			    this.score += 1000;
-			    state.menu.hud.displayAlert("Big Air\n1000", "#ffff00");
-			    this.floorZ = pos.z + 50;
-			    this.bigAirDone = true;
-			    return;
-		    }	
+			// Only allow Big Air if it hasn't already been done this jump
+			if (vel.z < 0.5 && !this.bigAirDone && this.maxHeight > 6) {
+				this.score += 1000;
+				state.menu.hud.displayAlert("Big Air\n1000", "#ffff00");
+				this.floorZ = pos.z + 50;
+				this.bigAirDone = true;
+				return;
+			}
 		}
-        
+
 		// For handling the automatic respawn to array of startpads in Competency levels
-		if (this.mission.Competency) {
-            const COMPETENCY_LIMIT = 30000; // 30 seconds window for each attempt. Do your best to get up there!
+		if (this.mission.competency) {
+			const COMPETENCY_LIMIT = 30000; // 30 seconds window for each attempt. Do your best to get up there!
 
 			// If leftPad was triggered, skip the wait and teleport instantly....from starting pad to first index pad
-            if (this.leftPad) {
-                this.timeState.gameplayClock = COMPETENCY_LIMIT; // force instant trigger to first pad of the array of startpads
-            }
+			if (this.leftPad) {
+				this.timeState.gameplayClock = COMPETENCY_LIMIT; // force instant trigger to first pad of the array of startpads
+			}
 
-            // Gee...time's up!..Move on to next stage!
-            if (this.timeState.gameplayClock >= COMPETENCY_LIMIT) {
-                this.timeState.gameplayClock = 0;
+			// Gee...time's up!..Move on to next stage!
+			if (this.timeState.gameplayClock >= COMPETENCY_LIMIT) {
+				this.timeState.gameplayClock = 0;
 
-                this.padIndex++;
+				this.padIndex++;
 
-                // Get all StartPads sorted by padIndex
-                const startPads = this.shapes.filter(s => s instanceof StartPad)
-                .sort((a, b) => (a as StartPad).padIndex - (b as StartPad).padIndex) as StartPad[];
+				// Get all StartPads sorted by padIndex
+				const startPads = this.shapes.filter(s => s instanceof StartPad)
+					.sort((a, b) => (a as StartPad).padIndex - (b as StartPad).padIndex) as StartPad[];
 
-                // Wrap around if padIndex exceeds total pads
-                if (this.padIndex > startPads.length) this.padIndex = 1;
+				// Wrap around if padIndex exceeds total pads
+				if (this.padIndex > startPads.length) this.padIndex = 1;
 
-                // Set the next checkpoint
-                const nextPad = startPads.find(p => p.padIndex === this.padIndex);
-                if (nextPad) this.currentCheckpoint = nextPad;
+				// Set the next checkpoint
+				const nextPad = startPads.find(p => p.padIndex === this.padIndex);
+				if (nextPad) this.currentCheckpoint = nextPad;
 
-                // Fast respawning the player to next successive checkpoints.
-		        // This call is happened once per the cycle.
-                this.fastRespawnPlayer();
+				// Fast respawning the player to next successive checkpoints.
+				// This call is happened once per the cycle.
+				this.fastRespawnPlayer();
 				this.leftPad = false; // Reset Left Pad state..
-            }
-        }
+			}
+		}
 	}
 
 	/** Get the current interpolated orientation quaternion. */
@@ -1740,15 +1718,15 @@ export class Level extends Scheduler {
 
 		this.newOrientationQuat = quatChange.multiply(currentQuat).normalize();
 		this.oldOrientationQuat = currentQuat;
-		this.orientationChangeTime = instant? -Infinity : time.currentAttemptTime;
+		this.orientationChangeTime = instant ? -Infinity : time.currentAttemptTime;
 	}
 
 	/** Spawns Fireworks at marble's position wherever finished..probably for BackwardClock levels */
 	spawnFinishFireworksAtMarble(time: TimeState, pos: Vector3) {
 		const upDir = new Vector3(0, 0, 1).applyQuaternion(this.oldOrientationQuat).normalize();
-	    let firework = new Firework(this, pos.clone(), time.timeSinceLoad, upDir);
-	    this.finishFireworks.push(firework);
-    }
+		let firework = new Firework(this, pos.clone(), time.timeSinceLoad, upDir);
+		this.finishFireworks.push(firework);
+	}
 
 	/** Gets the position and orientation of the player spawn point. */
 	getStartPositionAndOrientation() {
@@ -1758,13 +1736,13 @@ export class Level extends Scheduler {
 		let euler = new Euler();
 
 		// On Competency level, if first spawn (no checkpoint yet), pick the unindexed StartPoint
-        if (this.mission.Competency && !this.currentCheckpoint) {
-            startPad = this.shapes.find(s => s instanceof StartPad && isNaN((s as StartPad).padIndex)) as StartPad;
-        }
+		if (this.mission.competency && !this.currentCheckpoint) {
+			startPad = this.shapes.find(s => s instanceof StartPad && s.padIndex === -1) as StartPad;
+		}
 
 		// In Competency levels which consists of multiple checkpoints...every startpad is treated as main pad till the duration window completes.
 		// This means the player is spawned at array of startpads in mis file followed by the indexes cascadingly.
-		if (this.mission.Competency && this.currentCheckpoint instanceof StartPad) {
+		if (this.mission.competency && this.currentCheckpoint instanceof StartPad) {
 			startPad = this.currentCheckpoint;
 		}
 
@@ -1794,8 +1772,8 @@ export class Level extends Scheduler {
 	}
 
 	getCurrentTime() {
-	    return this.timeState.currentAttemptTime;
-    }
+		return this.timeState.currentAttemptTime;
+	}
 
 	onResize(width: number, height: number, hudPixelRatio: number) {
 		if (!this.camera || !this.overlayCamera) return;
@@ -1825,8 +1803,8 @@ export class Level extends Scheduler {
 		this.previousMouseMovementDistance = totalDistance;
 
 		let factor = Util.lerp(1 / 2500, 1 / 100, StorageManager.data.settings.mouseSensitivity);
-		let xFactor = (StorageManager.data.settings.invertMouse & 0b01)? -1 : 1;
-		let yFactor = (StorageManager.data.settings.invertMouse & 0b10)? -1 : 1;
+		let xFactor = (StorageManager.data.settings.invertMouse & 0b01) ? -1 : 1;
+		let yFactor = (StorageManager.data.settings.invertMouse & 0b10) ? -1 : 1;
 		let freeLook = StorageManager.data.settings.alwaysFreeLook || isPressed('freeLook');
 
 		if (freeLook) this.pitch += e.movementY * factor * yFactor;
@@ -1870,14 +1848,14 @@ export class Level extends Scheduler {
 		}
 	}
 
-	pickUpGem(gem: Gem,t: number) {
+	pickUpGem(gem: Gem, t: number) {
 		this.gemCount++;
 		// Award score based on gem color
 		if (gem.gemColor === 'red') this.score += 10000;
 		else if (gem.gemColor === 'yellow') this.score += 20000;
 		else if (gem.gemColor === 'blue') this.score += 50000;
 		let string: string;
-		let gemWord = (state.modification === 'gold')? 'gem' : 'diamond';
+		let gemWord = (state.modification === 'gold') ? 'gem' : 'diamond';
 
 		// Show a notification (and play a sound) based on the gems remaining
 		if (this.gemCount === this.totalGems) {
@@ -1890,59 +1868,59 @@ export class Level extends Scheduler {
 			}
 		} else {
 			let showRemaining = true;
-		// Custom alert for backwardClock levels and colored gems
-		if (this.mission.backwardClock) {
-			if (gem.gemColor === 'red') {
-				string = "Red Gem\n10,000";
-				showRemaining = false;
-			} else if (gem.gemColor === 'yellow') {
-				string = "Yellow Gem\n20,000";
-				showRemaining = false;
-			} else if (gem.gemColor === 'blue') {
-				string = "Blue Gem\n50,000";
-				showRemaining = false;
+			// Custom alert for backwardClock levels and colored gems
+			if (this.mission.backwardClock) {
+				if (gem.gemColor === 'red') {
+					string = "Red Gem\n10,000";
+					showRemaining = false;
+				} else if (gem.gemColor === 'yellow') {
+					string = "Yellow Gem\n20,000";
+					showRemaining = false;
+				} else if (gem.gemColor === 'blue') {
+					string = "Blue Gem\n50,000";
+					showRemaining = false;
+				} else {
+					string = `You picked up a ${gemWord}${state.modification === 'gold' ? '.' : '!'}`;
+				}
+			} else if (this.mission.competency) {
+				// Increment pad index BEFORE respawning
+				this.timeState.gameplayClock = 0;
+				this.padIndex++;
+				this.score += this.timeState.currentAttemptTime / 1000;
+				this.score += 20;
+				// Find all StartPads and sort by padIndex
+				const startPads = this.shapes.filter(s => s instanceof StartPad)
+					.sort((a, b) => (a as StartPad).padIndex - (b as StartPad).padIndex) as StartPad[];
+
+				// Wrap around if padIndex exceeds the number of pads
+				if (this.padIndex > startPads.length) this.padIndex = 1;
+
+				// Find the next pad by padIndex
+				const nextPad = startPads.find(p => p.padIndex === this.padIndex);
+
+				if (nextPad) {
+					// respawn player at next successive start pads
+					this.currentCheckpoint = nextPad;
+				}
+
+				// Calling the fast respawn
+				this.fastRespawnPlayer();
+				string = `You picked up a ${gemWord}${state.modification === 'gold' ? '.' : '!'}`;
 			} else {
 				string = `You picked up a ${gemWord}${state.modification === 'gold' ? '.' : '!'}`;
 			}
-		} else if (this.mission.Competency) {
-			// Increment pad index BEFORE respawning
-			this.timeState.gameplayClock = 0;
-            this.padIndex++;
-			this.score += this.timeState.currentAttemptTime / 1000;
-			this.score += 20;
-			// Find all StartPads and sort by padIndex
-            const startPads = this.shapes.filter(s => s instanceof StartPad)
-            .sort((a, b) => (a as StartPad).padIndex - (b as StartPad).padIndex) as StartPad[];
 
-            // Wrap around if padIndex exceeds the number of pads
-            if (this.padIndex > startPads.length) this.padIndex = 1;
-
-            // Find the next pad by padIndex
-            const nextPad = startPads.find(p => p.padIndex === this.padIndex);
-
-            if (nextPad) {
-			    // respawn player at next successive start pads
-			    this.currentCheckpoint = nextPad;
-		    }
-			
-			// Calling the fast respawn
-		    this.fastRespawnPlayer();	
-			string = `You picked up a ${gemWord}${state.modification === 'gold' ? '.' : '!'}`;
-		} else {
-			string = `You picked up a ${gemWord}${state.modification === 'gold' ? '.' : '!'}`;
-		}
-
-		if (showRemaining) {
-			let remaining = this.totalGems - this.gemCount;
-			if (remaining === 1) {
-				string += ` Only one ${gemWord} to go!`;
-			} else if (remaining > 1) {
-				string += ` ${remaining} ${gemWord}s to go!`;
+			if (showRemaining) {
+				let remaining = this.totalGems - this.gemCount;
+				if (remaining === 1) {
+					string += ` Only one ${gemWord} to go!`;
+				} else if (remaining > 1) {
+					string += ` ${remaining} ${gemWord}s to go!`;
+				}
 			}
+			this.audio.play('gotgem.wav');
 		}
-		    this.audio.play('gotgem.wav');
-	}
-	    state.menu.hud.displayAlert(string, '#ffff00');
+		state.menu.hud.displayAlert(string, '#ffff00');
 	}
 
 	addTimeTravelBonus(bonus: number, timeToRevert: number) {
@@ -1955,23 +1933,23 @@ export class Level extends Scheduler {
 		this.currentTimeTravelBonus += bonus;
 
 		// Take heed though....the Time Travels shouldnt be affected since we are doing the stopwatch....
-		if(this.stopWatchActive){
-		   this.stopWatchActive = true;
-		   this.music.setPlaybackRate(0);
+		if (this.stopWatchActive) {
+			this.stopWatchActive = true;
+			this.music.setPlaybackRate(0);
 		}
 
 		// Reschedule freeze end exactly at the total paused time..In order to avoid any shabbys...
-	    if (this.schedule) {
-		    let freezeEndTime = this.timeState.currentAttemptTime + this.currentTimeTravelBonus;
+		if (this.schedule) {
+			let freezeEndTime = this.timeState.currentAttemptTime + this.currentTimeTravelBonus;
 
-		    this.schedule(freezeEndTime, () => {
-			// Only execute unfreeze logic if watch's effect time has fully expired
-			if (this.currentTimeTravelBonus <= 0) {
-			    this.music.setPlaybackRate(1);
-			    this.stopWatchActive = false;
-			}
-		    });
-	    }
+			this.schedule(freezeEndTime, () => {
+				// Only execute unfreeze logic if watch's effect time has fully expired
+				if (this.currentTimeTravelBonus <= 0) {
+					this.music.setPlaybackRate(1);
+					this.stopWatchActive = false;
+				}
+			});
+		}
 	}
 
 	touchSkyMine() {
@@ -1997,14 +1975,14 @@ export class Level extends Scheduler {
 		this.analytics.outOfBoundsCount++;
 
 		// If Player Goes OOB in BackwardClock levels...they will be respawned with all saved stats (gems score,timestate,etc) but the score will be reducted
-		if(this.mission.backwardClock) {
+		if (this.mission.backwardClock) {
 			state.menu.hud.displayAlert("OUT OF BOUNDS\n50000", "#ff2222");
 			this.score = Math.max(0, this.score - 50000); // Prevent negative score
 		}
 
 		if (this.replay.mode !== 'playback') this.schedule(this.timeState.currentAttemptTime + 2000, () => this.restart(false), 'oobRestart');
 		if (this.mission.backwardClock) this.schedule(this.timeState.currentAttemptTime + 2, () => this.restart(false), 'oobRestart'); // respawn marble immediately in backwardClock levels!
-		if (this.mission.Competency) this.schedule(this.timeState.currentAttemptTime + 2, () => this.fastRespawnPlayer(), 'oobRestart'); // respawn marble immediately in competency levels!
+		if (this.mission.competency) this.schedule(this.timeState.currentAttemptTime + 2, () => this.fastRespawnPlayer(), 'oobRestart'); // respawn marble immediately in competency levels!
 	}
 
 	/** Sets a new active checkpoint. */
@@ -2029,9 +2007,9 @@ export class Level extends Scheduler {
 
 		this.checkpointHeldPowerUp = this.heldPowerUp;
 
-		if(!this.mission.backwardClock) {
-		state.menu.hud.displayAlert("Checkpoint reached!", '#ffff00');
-		this.audio.play('checkpoint.wav');
+		if (!this.mission.backwardClock) {
+			state.menu.hud.displayAlert("Checkpoint reached!", '#ffff00');
+			this.audio.play('checkpoint.wav');
 		}
 	}
 
@@ -2076,7 +2054,7 @@ export class Level extends Scheduler {
 		// Set camera orienation
 		let euler = new Euler();
 		euler.setFromQuaternion(this.currentCheckpoint.worldOrientation, "ZXY");
-		this.yaw = euler.z + Math.PI/2;
+		this.yaw = euler.z + Math.PI / 2;
 		this.pitch = DEFAULT_PITCH;
 
 		// Restore gem states
@@ -2101,11 +2079,11 @@ export class Level extends Scheduler {
 		this.blastAmount = this.checkpointBlast;
 		this.finishTime = null; // For those very, very rare cases where the player touched the finish while OOB, but not fast enough, so they get respawned at the checkpoint and we need to remove the "finish lock".
 		// No air tricks popping on respawn...but can do them again....
-        this.bigAirDone = false;
-        this.hugeAirDone = false;
-        this.maxHeight = 0;
+		this.bigAirDone = false;
+		this.hugeAirDone = false;
+		this.maxHeight = 0;
 		this.canDoAirTrick = false;
-        this.floorZ = this.marble.body.position.z; // VERY IMPORTANT
+		this.floorZ = this.marble.body.position.z; // VERY IMPORTANT
 
 		this.deselectPowerUp(); // Always deselect first
 		// Wait a bit to select the powerup to prevent immediately using it incase the user skipped the OOB screen by clicking
@@ -2119,18 +2097,18 @@ export class Level extends Scheduler {
 		if (this.finishTime !== null) return;
 
 		// Big Check for those who want to cheat in requireGravity levels....hehehe.....
-        if (this.mission.requireGravity) {
-            let gravityDown = this.world.gravity.clone().normalize();
-            let finishUp = new Vector3(0, 0, 1); // adjust if needed
-            let angleDeg = gravityDown.angleTo(finishUp) * (180 / Math.PI);
-            if (angleDeg > 60) return;  // Get your best to unlock the finish..
-        }
+		if (this.mission.requireGravity) {
+			let gravityDown = this.world.gravity.clone().normalize();
+			let finishUp = new Vector3(0, 0, 1); // adjust if needed
+			let angleDeg = gravityDown.angleTo(finishUp) * (180 / Math.PI);
+			if (angleDeg > 60) return;  // Get your best to unlock the finish..
+		}
 
 		this.replay.recordTouchFinish();
-        // In Backward Clock or Competency levels a player can always finish.
-		if (!this.mission.backwardClock && !this.mission.Competency && this.gemCount < this.totalGems) {
+		// In Backward Clock or Competency levels a player can always finish.
+		if (!this.mission.backwardClock && !this.mission.competency && this.gemCount < this.totalGems) {
 			this.audio.play('missinggems.wav');
-			state.menu.hud.displayAlert((state.modification === 'gold')? "You can't finish without all the gems!!" : "You may not finish without all the diamonds!!", '#ffff00');
+			state.menu.hud.displayAlert((state.modification === 'gold') ? "You can't finish without all the gems!!" : "You may not finish without all the diamonds!!", '#ffff00');
 		} else {
 			if (completionOfImpact === undefined) completionOfImpact = 1;
 
@@ -2153,8 +2131,6 @@ export class Level extends Scheduler {
 
 			let endPad = Util.findLast(this.shapes, (shape) => shape instanceof EndPad) as EndPad;
 			endPad?.spawnFirework(this.timeState); // EndPad *might* not exist, in that case no fireworks lol
-			let specialendPad = Util.findLast(this.shapes, (shape) => shape instanceof SpecialEndPad) as SpecialEndPad;
-			specialendPad?.spawnFirework(this.timeState); // EndPad *might* not exist, in that case no fireworks lol
 			let tttPad = Util.findLast(this.shapes, (shape) => shape instanceof TTTPad) as TTTPad;
 			tttPad?.spawnFirework(this.timeState); // EndPad *might* not exist, in that case no fireworks lol
 
@@ -2177,7 +2153,7 @@ export class Level extends Scheduler {
 				resetPressedFlag('jump');
 				resetPressedFlag('restart');
 			});
-			
+
 			this.analytics.finishes++;
 			this.levelFinished = true;
 		}
@@ -2264,7 +2240,7 @@ export class Level extends Scheduler {
 
 	/** Returns how much percent the level has finished loading. */
 	getLoadingCompletion() {
-		return this.loadingState.total? this.loadingState.loaded / this.loadingState.total : 0;
+		return this.loadingState.total ? this.loadingState.loaded / this.loadingState.total : 0;
 	}
 
 	/** Disposes the GPU assets used by the level. */

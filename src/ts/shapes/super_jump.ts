@@ -7,14 +7,14 @@ import { MisParser, MissionElementItem } from "../parsing/mis_parser";
 /** Gives the marble an upwards boost. */
 export class SuperJump extends PowerUp {
 	dtsPath = "shapes/items/superjump.dts";
-	pickUpName = (state.modification === 'gold')? "Super Jump PowerUp" : "Jump Boost PowerUp";
+	pickUpName = (state.modification === 'gold') ? "Super Jump PowerUp" : "Jump Boost PowerUp";
 	sounds = ["pusuperjumpvoice.wav", "dosuperjump.wav", "usex2.wav"];
 	superJumpHeight: number | undefined;
 
 	constructor(element: MissionElementItem) {
-			super(element);
-	
-			this.superJumpHeight = MisParser.parseNumber(String(element.superjumpheight)) || 20; // Default to 20 if not set
+		super(element);
+
+		this.superJumpHeight = element.superjumpheight ? MisParser.parseNumber(element.superjumpheight) : 20; // Default to 20 if not set
 	}
 
 	pickUp(): boolean {
@@ -55,7 +55,7 @@ export const superJumpParticleOptions = {
 		lifetimeVariance: 150,
 		dragCoefficient: 0.25,
 		acceleration: 0,
-		colors: [{r: 0, g: 0.5, b: 1, a: 0}, {r: 0, g: 0.6, b: 1, a: 1}, {r: 0, g: 0.6, b: 1, a: 0}],
+		colors: [{ r: 0, g: 0.5, b: 1, a: 0 }, { r: 0, g: 0.6, b: 1, a: 1 }, { r: 0, g: 0.6, b: 1, a: 0 }],
 		sizes: [0.25, 0.25, 0.5],
 		times: [0, 0.75, 1]
 	}

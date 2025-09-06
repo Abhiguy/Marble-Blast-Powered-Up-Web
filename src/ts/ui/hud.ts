@@ -44,7 +44,7 @@ export abstract class Hud {
 
 	centerText: 'none' | 'ready' | 'set' | 'go' | 'outofbounds' = 'none';
 	scaryface: boolean;
-	scaryFaceTimer: number = 0;
+	scaryFaceTimer = 0;
 	helpText = '';
 	/** The time state at the last point the help text was updated. */
 	helpTextTimeState: TimeState = null;
@@ -105,15 +105,15 @@ export abstract class Hud {
 
 	setupTouchControls() {
 		// Change the offset based on whether or not there's a gem counter
-		pauseButton.style.top = state.level.totalGems? '60px' : '';
-		restartButton.style.top = state.level.totalGems? '60px' : '';
-		freeLookButton.style.top = state.level.totalGems? '60px' : '';
+		pauseButton.style.top = state.level.totalGems ? '60px' : '';
+		restartButton.style.top = state.level.totalGems ? '60px' : '';
+		freeLookButton.style.top = state.level.totalGems ? '60px' : '';
 
 		// Kinda hacky here, don't wanna clean up: (Yes there's a good reason we don't set display)
-		blastButton.style.visibility = state.level.mission.hasBlast? '' : 'hidden';
-		blastButton.style.pointerEvents = state.level.mission.hasBlast? '' : 'none';
-		freeLookButton.style.visibility = StorageManager.data.settings.alwaysFreeLook? 'hidden' : '';
-		freeLookButton.style.pointerEvents = StorageManager.data.settings.alwaysFreeLook? 'none' : '';
+		blastButton.style.visibility = state.level.mission.hasBlast ? '' : 'hidden';
+		blastButton.style.pointerEvents = state.level.mission.hasBlast ? '' : 'none';
+		freeLookButton.style.visibility = StorageManager.data.settings.alwaysFreeLook ? 'hidden' : '';
+		freeLookButton.style.pointerEvents = StorageManager.data.settings.alwaysFreeLook ? 'none' : '';
 
 		this.fpsMeter.style.transform = 'scale(0.5)';
 		this.fpsMeter.querySelector('img').style.borderRight = '50px solid #ffffff4d'; // To make it visible with rounded corners
@@ -131,8 +131,8 @@ export abstract class Hud {
 		movementJoystickHandle.style.height = joystickHandleSize + 'px';
 
 		let scale = StorageManager.data.settings.actionButtonSize / 120;
-		actionButtonContainer.style.right = StorageManager.data.settings.actionButtonRightOffset/scale + 'px';
-		actionButtonContainer.style.bottom = StorageManager.data.settings.actionButtonBottomOffset/scale + 'px';
+		actionButtonContainer.style.right = StorageManager.data.settings.actionButtonRightOffset / scale + 'px';
+		actionButtonContainer.style.bottom = StorageManager.data.settings.actionButtonBottomOffset / scale + 'px';
 		actionButtonContainer.style.transform = `scale(${scale})`;
 
 		// Reorder the action buttons as needed
@@ -173,7 +173,7 @@ export abstract class Hud {
 		// Draw the clock background
 		if (this.showClockBackground) {
 			let clockBackground = ResourceManager.getImageFromCache('./assets/ui_mbp/game/transparency.png');
-			ctx.drawImage(clockBackground, Math.floor(width/2 - 220/2 + 3), -10, 220, 79);
+			ctx.drawImage(clockBackground, Math.floor(width / 2 - 220 / 2 + 3), -10, 220, 79);
 		}
 
 		// This might seem a bit strange, but the time we display is actually a few milliseconds in the PAST (unless the user is currently in TT or has finished), for the reason that time was able to go backwards upon finishing or collecting TTs due to CCD time correction. That felt wrong, so we accept this inaccuracy in displaying time for now.
@@ -185,35 +185,35 @@ export abstract class Hud {
 
 		timeToDisplay = Math.min(timeToDisplay, MAX_TIME);
 
-        // If the level has a backward clock, we display the time until the qualify time is reached.
+		// If the level has a backward clock, we display the time until the qualify time is reached.
 		if (level.mission.backwardClock) {
-         timeToDisplay = Math.max(level.mission.qualifyTime - timeState.gameplayClock, 0);
-          if (level.finishTime)
-            timeToDisplay = Math.max(level.mission.qualifyTime - level.finishTime.gameplayClock, 0);
-            // Do NOT use maxDisplayedTime for backward timer!
-            timeToDisplay = Math.min(timeToDisplay, MAX_TIME);
-		    // --- Auto-finish when timer hits zero ---
-            if (timeToDisplay === 0 && !level.finishTime) {
-                level.touchFinish();
-			    level.spawnFinishFireworksAtMarble(time,level.marble.body.position);
-			    level.audio.play('firewrks.wav');
-            }
-        }   
-		
-		// If the level is a competency level, we always use 30 seconds backward timer
-        else if (level.mission.Competency) {
-           const COMPETENCY_LIMIT = 30000; // 30 seconds in ms
-           // Visual clock always resets to 30s after each interval
-           timeToDisplay = COMPETENCY_LIMIT - (level.timeState.gameplayClock % COMPETENCY_LIMIT);
-           timeToDisplay = Math.min(timeToDisplay, MAX_TIME);
+			timeToDisplay = Math.max(level.mission.qualifyTime - timeState.gameplayClock, 0);
+			if (level.finishTime)
+				timeToDisplay = Math.max(level.mission.qualifyTime - level.finishTime.gameplayClock, 0);
+			// Do NOT use maxDisplayedTime for backward timer!
+			timeToDisplay = Math.min(timeToDisplay, MAX_TIME);
+			// --- Auto-finish when timer hits zero ---
+			if (timeToDisplay === 0 && !level.finishTime) {
+				level.touchFinish();
+				level.spawnFinishFireworksAtMarble(time, level.marble.body.position);
+				level.audio.play('firewrks.wav');
+			}
+		}
 
-            if (level.finishTime) {
-                timeToDisplay = COMPETENCY_LIMIT - (level.finishTime.gameplayClock % COMPETENCY_LIMIT);
-                timeToDisplay = Math.min(timeToDisplay, MAX_TIME);
-            }
-	    }
+		// If the level is a competency level, we always use 30 seconds backward timer
+		else if (level.mission.competency) {
+			const COMPETENCY_LIMIT = 30000; // 30 seconds in ms
+			// Visual clock always resets to 30s after each interval
+			timeToDisplay = COMPETENCY_LIMIT - (level.timeState.gameplayClock % COMPETENCY_LIMIT);
+			timeToDisplay = Math.min(timeToDisplay, MAX_TIME);
+
+			if (level.finishTime) {
+				timeToDisplay = COMPETENCY_LIMIT - (level.finishTime.gameplayClock % COMPETENCY_LIMIT);
+				timeToDisplay = Math.min(timeToDisplay, MAX_TIME);
+			}
+		}
 		// Draw the clock
-		this.drawNumbers(Util.secondsToTimeString(timeToDisplay / 1000), width/2, 0, true, this.determineClockColor(timeToDisplay));
+		this.drawNumbers(Util.secondsToTimeString(timeToDisplay / 1000), width / 2, 0, true, this.determineClockColor(timeToDisplay));
 
 		const mainClockY = 0;
 		const digitHeight = 43; // Height of your number images
@@ -227,11 +227,11 @@ export abstract class Hud {
 
 			// Draw the TT icon to the left of the timer string
 			let ttImage = ResourceManager.getImageFromCache(this.menu.uiAssetPath + "game/timetravel.png");
-			let ttIconX = width/2 - (ttString.length * 22) / 2 - ttImage.width - 10; // 22 is approx. digit width, adjust as needed
+			let ttIconX = width / 2 - (ttString.length * 22) / 2 - ttImage.width - 10; // 22 is approx. digit width, adjust as needed
 			ctx.drawImage(ttImage, ttIconX, yOffset);
 
 			// Draw the timer string, left-aligned next to the image, so the whole unit is centered
-			this.drawNumbers(ttString, width/2, yOffset, true, 'green');
+			this.drawNumbers(ttString, width / 2, yOffset, true, 'green');
 		}
 
 		// Draw the power-up border (always there)
@@ -243,28 +243,28 @@ export abstract class Hud {
 		// Draw the gem count or score
 		if (level.totalGems > 0) {
 			if (level.mission.backwardClock) {
-            // Show "Score:" label with normal text, and the number with drawNumbers
-            let score = level.score; // 10 points per gem
-            ctx.font = '24px DomCasualRegular';
-            ctx.fillStyle = '#fff';
-            ctx.textAlign = 'left';
-            ctx.textBaseline = 'top';
-            ctx.fillText("", 30, 0);
-            this.drawNumbers(score.toString().padStart(7, '0'), 40, 0, false); // Adjust X as needed for spacing
-            } else if (level.mission.Competency) {
-                let score = Math.floor(level.score); // score increments by 20 per gem pickup
-                // Extracting digits inline and drawing the gem score counter
-                let thousands = Math.floor(score / 1000) % 10;
-                let hundreds = Math.floor(score / 100) % 10;
-                let tens = Math.floor(score / 10) % 10;
-                let ones = score % 10; // Gee....
-                this.drawNumbers(thousands.toString() + hundreds.toString(), 30, 0, false);
-                this.drawNumbers(tens.toString() + ones.toString(), 90, 0, false);
-            } else {
-			  let string = Util.leftPadZeroes(level.gemCount.toString(), this.gemCountMinDigits) + '/' + Util.leftPadZeroes(level.totalGems.toString(), this.gemCountMinDigits);
-			  this.drawNumbers(string, 30, 0, false);
-		    }
-	    }
+				// Show "Score:" label with normal text, and the number with drawNumbers
+				let score = level.score; // 10 points per gem
+				ctx.font = '24px DomCasualRegular';
+				ctx.fillStyle = '#fff';
+				ctx.textAlign = 'left';
+				ctx.textBaseline = 'top';
+				ctx.fillText("", 30, 0);
+				this.drawNumbers(score.toString().padStart(7, '0'), 40, 0, false); // Adjust X as needed for spacing
+			} else if (level.mission.competency) {
+				let score = Math.floor(level.score); // score increments by 20 per gem pickup
+				// Extracting digits inline and drawing the gem score counter
+				let thousands = Math.floor(score / 1000) % 10;
+				let hundreds = Math.floor(score / 100) % 10;
+				let tens = Math.floor(score / 10) % 10;
+				let ones = score % 10; // Gee....
+				this.drawNumbers(thousands.toString() + hundreds.toString(), 30, 0, false);
+				this.drawNumbers(tens.toString() + ones.toString(), 90, 0, false);
+			} else {
+				let string = Util.leftPadZeroes(level.gemCount.toString(), this.gemCountMinDigits) + '/' + Util.leftPadZeroes(level.totalGems.toString(), this.gemCountMinDigits);
+				this.drawNumbers(string, 30, 0, false);
+			}
+		}
 
 		let x2Image = ResourceManager.getImageFromCache(this.menu.uiAssetPath + "game/x2.png");
 		if (level.marble.doubler)
@@ -279,12 +279,12 @@ export abstract class Hud {
 		// Pop the image
 		if (this.scaryface) {
 			if (this.scaryFaceTimer > 0) {
-		     this.scaryFaceTimer--; // Decrease timer each frame
-		     let scaryface = ResourceManager.getImageFromCache(this.menu.uiAssetPath + "game/face.png");
-		     ctx.drawImage(scaryface, Math.floor((width - scaryface.width) / 2), Math.floor(height * 0.0005));
-	        } else {
-		     this.scaryface = false; // Hide after timer ends
-	        }
+				this.scaryFaceTimer--; // Decrease timer each frame
+				let scaryface = ResourceManager.getImageFromCache(this.menu.uiAssetPath + "game/face.png");
+				ctx.drawImage(scaryface, Math.floor((width - scaryface.width) / 2), Math.floor(height * 0.0005));
+			} else {
+				this.scaryface = false; // Hide after timer ends
+			}
 		}
 
 		let helpTextTime = this.helpTextTimeState?.timeSinceLoad ?? -Infinity;
@@ -309,7 +309,7 @@ export abstract class Hud {
 
 			let lines = this.breakTextIntoLines(this.helpText, width);
 			for (let i = 0; i < lines.length; i++) {
-				ctx.fillText(lines[i], Math.floor(width / 2), Math.floor(height * 0.45) + 24*1.2*i);
+				ctx.fillText(lines[i], Math.floor(width / 2), Math.floor(height * 0.45) + 24 * 1.2 * i);
 			}
 
 			ctx.shadowColor = 'transparent';
@@ -325,7 +325,7 @@ export abstract class Hud {
 			let color = Util.lerpColors(yellow, black, Util.lerp(0, 0.5, alertTextCompletion));
 
 			ctx.font = '24px DomCasualRegular';
-			ctx.fillStyle = this.alertColor ||`rgb(${color.r}, ${color.g}, ${color.b})`;
+			ctx.fillStyle = this.alertColor || `rgb(${color.r}, ${color.g}, ${color.b})`;
 			ctx.textAlign = 'center';
 			ctx.textBaseline = 'bottom';
 			ctx.shadowColor = state.modification === 'gold' ? 'black' : 'rgb(119, 102, 34)';
@@ -335,7 +335,7 @@ export abstract class Hud {
 
 			let lines = this.breakTextIntoLines(this.alertText, width);
 			for (let i = 0; i < lines.length; i++) {
-				ctx.fillText(lines[i], Math.floor(width / 2), height - 30 - 24*1.2*(lines.length - i - 1));
+				ctx.fillText(lines[i], Math.floor(width / 2), height - 30 - 24 * 1.2 * (lines.length - i - 1));
 			}
 
 			ctx.shadowColor = 'transparent';
@@ -386,11 +386,11 @@ export abstract class Hud {
 			let offset = new Vector2(7, 34);
 			if (Util.isTouchDevice) offset.set(20, 47); // To make it visible with rounded corners
 
-			let blastMeterFillSrc = `./assets/ui_mbp/game/blastbar_bar${(amount >= 0.2)? 'green' : 'gray'}.png`;
+			let blastMeterFillSrc = `./assets/ui_mbp/game/blastbar_bar${(amount >= 0.2) ? 'green' : 'gray'}.png`;
 			let fillImage = ResourceManager.getImageFromCache(blastMeterFillSrc);
 			ctx.drawImage(fillImage, offset.x + 5, height - offset.y + 5, Util.clamp(amount, 0, 1) * 109, 17);
 
-			let bodyImage = ResourceManager.getImageFromCache((amount > 1)? './assets/ui_mbp/game/blastbar_charged.png' : './assets/ui_mbp/game/blastbar.png');
+			let bodyImage = ResourceManager.getImageFromCache((amount > 1) ? './assets/ui_mbp/game/blastbar_charged.png' : './assets/ui_mbp/game/blastbar.png');
 			ctx.drawImage(bodyImage, offset.x, height - offset.y);
 		}
 	}
@@ -421,7 +421,7 @@ export abstract class Hud {
 
 		if (isClock) {
 			let totalWidth = (string.length - 1) * (defaultWidth + defaultMarginRight) - (2 * (defaultWidth + defaultMarginRight - 10)) + defaultWidth;
-			x = Math.floor(x - totalWidth/2);
+			x = Math.floor(x - totalWidth / 2);
 		}
 
 		// Draw every symbol
@@ -450,7 +450,7 @@ export abstract class Hud {
 			if (metrics.width > maxWidth) {
 				let words = line.split(' ');
 				let low = 0;
-				let high = words.length-1;
+				let high = words.length - 1;
 				let ans = 0;
 
 				// Do a binary search on how many words we can include in the line before it becomes too wide
@@ -472,7 +472,7 @@ export abstract class Hud {
 				let nextLine = words.slice(ans + 1).join(' ');
 
 				lines[i] = updatedLine;
-				lines.splice(i+1, 0, nextLine);
+				lines.splice(i + 1, 0, nextLine);
 			}
 		}
 
@@ -556,8 +556,8 @@ export abstract class Hud {
 		value /= Math.min(1, state.level.timeState.timeSinceLoad / 1000 ?? 1); // Hack to make it reach the final frame rate faster
 		value = Math.floor(value);
 		let settingsTarget = FRAME_RATE_OPTIONS[StorageManager.data.settings.frameRateCap];
-		if (value === 59 || value === 119 || value === 143 || value === 239 || value === settingsTarget-1) value++; // Snap to the most common frame rates
-		if (value === 61 || value === 121 || value === 145 || value === 241 || value === settingsTarget+1) value--;
+		if (value === 59 || value === 119 || value === 143 || value === 239 || value === settingsTarget - 1) value++; // Snap to the most common frame rates
+		if (value === 61 || value === 121 || value === 145 || value === 241 || value === settingsTarget + 1) value--;
 
 		this.fpsMeterValue.textContent = 'FPS: ' + value;
 	}

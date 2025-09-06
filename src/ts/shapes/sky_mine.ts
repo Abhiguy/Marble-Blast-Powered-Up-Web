@@ -15,39 +15,42 @@ export class SkyMine extends Shape {
 	startPosition: Vector3;
 	endPosition: Vector3;
 	customOffset: Vector3;
-	moveT: number = 0; // 0=start, 1=end
-    moveSpeed: number; // units per second
-    moveDirection: number = 1; // 1=forward, -1=backward
+	moveT = 0; // 0=start, 1=end
+	moveSpeed: number; // units per second
+	moveDirection = 1; // 1=forward, -1=backward
 
 	constructor(element: MissionElementStaticShape) {
 		super();
 		this.mover = element._name === "Mover";
-	
+
 		// Parse custom offsets from the .mis file, default to 0 if not set
-		this.customOffset = new Vector3(
-			MisParser.parseNumber(String(element.my_x)),
-			MisParser.parseNumber(String(element.my_y)),
-			MisParser.parseNumber(String(element.my_z))
-		);
-	
+		if (element.my_x)
+			this.customOffset = new Vector3(
+				MisParser.parseNumber(element.my_x),
+				MisParser.parseNumber(element.my_y),
+				MisParser.parseNumber(element.my_z)
+			);
+		else
+			this.customOffset = new Vector3(0, 0, 0);
+
 		// Parse moveSpeed from .mis file, default to 2 if not set
-		this.moveSpeed = MisParser.parseNumber(String(element.myspeed)) || 2;
+		this.moveSpeed = element.myspeed ? MisParser.parseNumber(element.myspeed) : 2;
 	}
 
 	async onLevelStart() {
-	    this.startPosition = this.worldPosition.clone();
-        if (this.mover) {
-            this.endPosition = this.startPosition.clone().add(this.customOffset);
-        } else {
-            this.endPosition = this.startPosition.clone();
-        }
-        this.moveT = 0;
-        this.moveDirection = 1;
-    }
+		this.startPosition = this.worldPosition.clone();
+		if (this.mover) {
+			this.endPosition = this.startPosition.clone().add(this.customOffset);
+		} else {
+			this.endPosition = this.startPosition.clone();
+		}
+		this.moveT = 0;
+		this.moveDirection = 1;
+	}
 
 	onMarbleContact() {
 		let time = this.level.timeState;
-		
+
 		if (this.level.stopWatchActive) return; // Don't explode if the stop watch is active
 
 		let marble = this.level.marble;
@@ -63,7 +66,7 @@ export class SkyMine extends Shape {
 
 		// Take heed though.....Sky Mines are score penalties in score based levels....
 		if (this.level.mission.backwardClock) {
-		    this.level.touchSkyMine();
+			this.level.touchSkyMine();
 		}
 
 		this.level.audio.play(this.sounds[0]);
@@ -100,12 +103,12 @@ export class SkyMine extends Shape {
 		let distance = this.startPosition.distanceTo(this.endPosition);
 		if (distance > 0) {
 			this.moveT += (moveSpeed / distance) * this.moveDirection / PHYSICS_TICK_RATE;
-		
+
 			// Ping-pong motion: reverse at ends
 			if (this.moveT > 1) {
 				this.moveT = 1;
 				this.moveDirection = -1;
-			} else if (this.moveT< 0) {
+			} else if (this.moveT < 0) {
 				this.moveT = 0;
 				this.moveDirection = 1;
 			}
@@ -134,9 +137,9 @@ export class SkyMine extends Shape {
 			this.group.recomputeTransform();
 		}
 		if (this.mover) {
-            this.moveT = 0;
-            this.moveDirection = 1;
-        }
+			this.moveT = 0;
+			this.moveDirection = 1;
+		}
 	}
 }
 
@@ -158,7 +161,7 @@ const skyMineParticle = {
 		lifetimeVariance: 150,
 		dragCoefficient: 0.8,
 		acceleration: 0,
-		colors: [{r: 0.56, g: 0.36, b: 0.26, a: 1}, {r: 0.56, g: 0.36, b: 0.26, a: 0}],
+		colors: [{ r: 0.56, g: 0.36, b: 0.26, a: 1 }, { r: 0.56, g: 0.36, b: 0.26, a: 0 }],
 		sizes: [0.5, 1],
 		times: [0, 1]
 	}
@@ -181,7 +184,7 @@ export const skyMineSmokeParticle = {
 		lifetimeVariance: 300,
 		dragCoefficient: 0.85,
 		acceleration: -8,
-		colors: [{r: 0.56, g: 0.36, b: 0.26, a: 1}, {r: 0.2, g: 0.2, b: 0.2, a: 1}, {r: 0, g: 0, b: 0, a: 0}],
+		colors: [{ r: 0.56, g: 0.36, b: 0.26, a: 1 }, { r: 0.2, g: 0.2, b: 0.2, a: 1 }, { r: 0, g: 0, b: 0, a: 0 }],
 		sizes: [1, 1.5, 2],
 		times: [0, 0.5, 1]
 	}
@@ -204,7 +207,7 @@ export const skyMineSparksParticle = {
 		lifetimeVariance: 350,
 		dragCoefficient: 0.75,
 		acceleration: -8,
-		colors: [{r: 0.6, g: 0.4, b: 0.3, a: 1}, {r: 0.6, g: 0.4, b: 0.3, a: 1}, {r: 1, g: 0.4, b: 0.3, a: 0}],
+		colors: [{ r: 0.6, g: 0.4, b: 0.3, a: 1 }, { r: 0.6, g: 0.4, b: 0.3, a: 1 }, { r: 1, g: 0.4, b: 0.3, a: 0 }],
 		sizes: [0.5, 0.25, 0.25],
 		times: [0, 0.5, 1]
 	}
