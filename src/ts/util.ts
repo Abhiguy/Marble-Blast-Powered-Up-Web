@@ -20,7 +20,7 @@ export abstract class Util {
 		try {
 			// Fetch the keyboard map for instant access later
 			this.keyboardMap = await (navigator as any).keyboard?.getLayoutMap();
-		} catch (e) {}
+		} catch (e) { }
 	}
 
 	static degToRad(deg: number) {
@@ -97,7 +97,7 @@ export abstract class Util {
 		return (a + b) / 2;
 	}
 
-	static isSameVector(v1: {x: number, y: number, z: number}, v2: {x: number, y: number, z: number}) {
+	static isSameVector(v1: { x: number, y: number, z: number }, v2: { x: number, y: number, z: number }) {
 		return v1.x === v2.x && v1.y === v2.y && v1.z === v2.z;
 	}
 
@@ -131,7 +131,7 @@ export abstract class Util {
 			if (!value) break outer;
 
 			// Use the value from the keyboard map. This maps things like KeyZ to Y for German keyboards, for example.
-			return (value.toUpperCase().length > 1)? value : value.toUpperCase(); // This special handling here is for characters that turn into more than one letter when capitalized (like ß).
+			return (value.toUpperCase().length > 1) ? value : value.toUpperCase(); // This special handling here is for characters that turn into more than one letter when capitalized (like ß).
 		}
 
 		if (code.startsWith("Key")) return code.slice(3);
@@ -153,9 +153,9 @@ export abstract class Util {
 
 	/** Compute the value of a 1D Catmull-Rom spline. */
 	static catmullRom(t: number, p0: number, p1: number, p2: number, p3: number) {
-		let point = t*t*t*((-1) * p0 + 3 * p1 - 3 * p2 + p3) / 2;
-		point += t*t*(2*p0 - 5 * p1+ 4 * p2 - p3) / 2;
-		point += t*((-1) * p0 + p2) / 2;
+		let point = t * t * t * ((-1) * p0 + 3 * p1 - 3 * p2 + p3) / 2;
+		point += t * t * (2 * p0 - 5 * p1 + 4 * p2 - p3) / 2;
+		point += t * ((-1) * p0 + p2) / 2;
 		point += p1;
 
 		return point;
@@ -200,9 +200,9 @@ export abstract class Util {
 
 		matrix.transpose();
 
-		let vresult_0 = m0*v0 + m1*v1 + m2*v2;
-		let vresult_1 = m4*v0 + m5*v1 + m6*v2;
-		let vresult_2 = m8*v0 + m9*v1 + m10*v2;
+		let vresult_0 = m0 * v0 + m1 * v1 + m2 * v2;
+		let vresult_1 = m4 * v0 + m5 * v1 + m6 * v2;
+		let vresult_2 = m8 * v0 + m9 * v1 + m10 * v2;
 
 		v.set(vresult_0, vresult_1, vresult_2);
 	}
@@ -213,11 +213,11 @@ export abstract class Util {
 
 		for (let i = 0; i < 2; i++) {
 			for (let j = 0; j < radialSegments; j++) {
-				let angle = j/radialSegments * Math.PI * 2;
+				let angle = j / radialSegments * Math.PI * 2;
 				let x = Math.cos(angle);
 				let z = Math.sin(angle);
 
-				vertices.push(new Vector3(x * radius * scale.x, (i? halfHeight : -halfHeight) * scale.y, z * radius * scale.z));
+				vertices.push(new Vector3(x * radius * scale.x, (i ? halfHeight : -halfHeight) * scale.y, z * radius * scale.z));
 			}
 		}
 
@@ -338,7 +338,7 @@ export abstract class Util {
 			let c = str[i];
 
 			if (inString) {
-				if (c === strLiteralToken && str[i-1] !== '\\') inString = false;
+				if (c === strLiteralToken && str[i - 1] !== '\\') inString = false;
 				continue;
 			}
 
@@ -367,7 +367,7 @@ export abstract class Util {
 			let c = str[i];
 
 			if (inString) {
-				if (c === strLiteralToken && str[i-1] !== '\\') inString = false;
+				if (c === strLiteralToken && str[i - 1] !== '\\') inString = false;
 				continue;
 			}
 
@@ -386,7 +386,7 @@ export abstract class Util {
 
 			if (inString) {
 				if (i === index) return true;
-				if (c === strLiteralToken && str[i-1] !== '\\') inString = false;
+				if (c === strLiteralToken && str[i - 1] !== '\\') inString = false;
 				continue;
 			}
 
@@ -499,8 +499,8 @@ export abstract class Util {
 			'iPhone',
 			'iPod'
 		].includes(navigator.platform)
-		// iPad on iOS 13 detection
-		|| (navigator.userAgent.includes("Mac") && "ontouchend" in document);
+			// iPad on iOS 13 detection
+			|| (navigator.userAgent.includes("Mac") && "ontouchend" in document);
 	}
 
 	/** Override dis if you want. */
@@ -509,7 +509,7 @@ export abstract class Util {
 	static secondsToTimeString(seconds: number, decimalDigits = this.getDefaultSecondsToTimeStringDecimalDigits()) {
 		let abs = Math.abs(seconds);
 		let minutes = Math.floor(abs / 60);
-		let string = Util.leftPadZeroes(minutes.toString(), 2) + ':' + Util.leftPadZeroes(Math.floor(abs % 60).toString(), 2) + '.' + Util.leftPadZeroes(Math.floor(abs * 10**decimalDigits % 10**decimalDigits).toString(), decimalDigits);
+		let string = Util.leftPadZeroes(minutes.toString(), 2) + ':' + Util.leftPadZeroes(Math.floor(abs % 60).toString(), 2) + '.' + Util.leftPadZeroes(Math.floor(abs * 10 ** decimalDigits % 10 ** decimalDigits).toString(), decimalDigits);
 		if (seconds < 0) string = '-' + string;
 
 		return string;
@@ -564,7 +564,7 @@ export abstract class Util {
 		return 'ontouchstart' in window; // Let's see if this suffices for now actually (this doesn't match my touchscreen laptop)
 
 		let check = false;
-		(function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||(window as any).opera);
+		(function (a) { if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true; })(navigator.userAgent || navigator.vendor || (window as any).opera);
 		return check;
 	}
 
@@ -617,7 +617,7 @@ export abstract class Util {
 		tmax = Math.min(tmax, Math.max(tz1, tz2));
 
 		if (intersectionPoint && tmax >= tmin)
-			intersectionPoint.copy(rayOrigin).addScaledVector(rayDirection, (tmin >= 0)? tmin : tmax); // use tmax if the ray starts inside the box
+			intersectionPoint.copy(rayOrigin).addScaledVector(rayDirection, (tmin >= 0) ? tmin : tmax); // use tmax if the ray starts inside the box
 
 		return tmax >= tmin;
 	}
@@ -631,7 +631,7 @@ export abstract class Util {
 
 	/** Manually ensures all numbers in the element's text have the same width so they align nicely. */
 	static monospaceNumbers(element: Element, ems = 0.5) {
-		element.innerHTML = element.textContent.split('').map(x => (x >= '0' && x <= '9')? `<span style="width: ${ems}em; display: inline-block; text-align: center;">${x}</span>` : x).join('');
+		element.innerHTML = element.textContent.split('').map(x => (x >= '0' && x <= '9') ? `<span style="width: ${ems}em; display: inline-block; text-align: center;">${x}</span>` : x).join('');
 	}
 
 	/** Fires a callback when the user has held down a given element for a longer amount of time. Allows "right clicking" on touch devices. */
@@ -691,7 +691,7 @@ export abstract class Util {
 
 	static requestPointerLock() {
 		let ret = document.documentElement.requestPointerLock?.() as any as Promise<void>;
-		if (ret && ret instanceof Promise) ret.catch(() => {});
+		if (ret && ret instanceof Promise) ret.catch(() => { });
 	}
 
 	/** Returns true iff `b` is a subsequence of `a`. */
@@ -750,29 +750,29 @@ export abstract class Util {
 			let existed = true;
 			const req: IDBOpenDBRequest = indexedDB.open(dbName);
 
-			req.onsuccess = function() {
+			req.onsuccess = function () {
 				req.result.close();
 				if (!existed)
 					indexedDB.deleteDatabase(dbName);
 				resolve(existed);
 			};
 
-			req.onerror = function() {
+			req.onerror = function () {
 				reject(new Error('Error opening database'));
 			};
 
-			req.onupgradeneeded = function() {
+			req.onupgradeneeded = function () {
 				existed = false;
 			};
 		});
 	}
 
 	static angleDiff(a: number, b: number): number {
-	       let diff = a - b;
-	       while (diff < -Math.PI) diff += 2 * Math.PI;
-	       while (diff > Math.PI) diff -= 2 * Math.PI;
-	       return diff;
-    }
+		let diff = a - b;
+		while (diff < -Math.PI) diff += 2 * Math.PI;
+		while (diff > Math.PI) diff -= 2 * Math.PI;
+		return diff;
+	}
 }
 Util.isTouchDevice = Util.checkIsTouchDevice(); // Precompute the thing
 

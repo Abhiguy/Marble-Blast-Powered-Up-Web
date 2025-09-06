@@ -23,7 +23,7 @@ export abstract class MissionLibrary {
 	static ultraIntermediate: Mission[] = [];
 	static ultraAdvanced: Mission[] = [];
 	static ultraCustom: Mission[] = [];
-	
+
 
 	/** Loads all missions. */
 	static async init() {

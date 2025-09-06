@@ -20,11 +20,11 @@ export class SignCaution extends Shape {
 	}
 
 	tick(time: TimeState, onlyVisual: boolean) {
-	    if (onlyVisual) return;
+		if (onlyVisual) return;
 		super.tick(time);
-	
+
 		let dist = this.level.marble.body.position.distanceTo(this.worldPosition);
-		if(this.level.mission.title === "Slendernado") { // Modifying the sign for Slendernado
+		if (this.level.mission.title === "Slendernado") { // Modifying the sign for Slendernado
 			if (dist < 10.0) {
 				this.setOpacity(1);
 			}

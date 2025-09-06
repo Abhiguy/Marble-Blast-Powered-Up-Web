@@ -8,13 +8,13 @@ import { MissionElementItem, MisParser } from "../parsing/mis_parser";
 /** Accelerates the marble. */
 export class SuperSpeed extends PowerUp {
 	dtsPath = "shapes/items/superspeed.dts";
-	pickUpName = (state.modification === 'gold')? "Super Speed PowerUp" : "Speed Booster PowerUp";
+	pickUpName = (state.modification === 'gold') ? "Super Speed PowerUp" : "Speed Booster PowerUp";
 	sounds = ["pusuperspeedvoice.wav", "dosuperspeed.wav", "usex2.wav"];
-	superSpeedStrenght: number | undefined;
+	superSpeedStrength: number | undefined;
 
 	constructor(element: MissionElementItem) {
 		super(element);
-		this.superSpeedStrenght = MisParser.parseNumber(String(element.superspeedstrength)) || 25; // Default to 25 if not set
+		this.superSpeedStrength = element.superspeedstrength ? MisParser.parseNumber(element.superspeedstrength) : 25; // Default to 25 if not set
 	}
 
 	pickUp(): boolean {
@@ -38,11 +38,11 @@ export class SuperSpeed extends PowerUp {
 
 		if (this.level.marble.doubler) {
 			// Doubled strenght of superSpeed for picking doubler
-			marble.body.linearVelocity.addScaledVector(movementVector, this.superSpeedStrenght * 2);
+			marble.body.linearVelocity.addScaledVector(movementVector, this.superSpeedStrength * 2);
 			this.level.audio.play(this.sounds[2]);
 			this.level.marble.doubler = false; // Reset doubler
 		} else {
-			marble.body.linearVelocity.addScaledVector(movementVector, this.superSpeedStrenght); // Simply add to velocity of marble of normal superSpeed
+			marble.body.linearVelocity.addScaledVector(movementVector, this.superSpeedStrength); // Simply add to velocity of marble of normal superSpeed
 		}
 		this.level.audio.play(this.sounds[1]);
 		this.level.particles.createEmitter(superSpeedParticleOptions, null, () => marble.body.position.clone());
@@ -68,7 +68,7 @@ export const superSpeedParticleOptions = {
 		lifetimeVariance: 150,
 		dragCoefficient: 0.25,
 		acceleration: 0,
-		colors: [{r: 0.8, g: 0.8, b: 0, a: 0}, {r: 0.8, g: 0.8, b: 0, a: 1}, {r: 0.8, g: 0.8, b: 0, a: 0}],
+		colors: [{ r: 0.8, g: 0.8, b: 0, a: 0 }, { r: 0.8, g: 0.8, b: 0, a: 1 }, { r: 0.8, g: 0.8, b: 0, a: 0 }],
 		sizes: [0.25, 0.25, 1],
 		times: [0, 0.25, 1]
 	}

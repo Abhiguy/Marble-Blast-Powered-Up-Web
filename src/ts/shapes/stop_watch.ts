@@ -7,21 +7,21 @@ import { MissionElementItem, MisParser } from "../parsing/mis_parser";
 /** The Stop Watch! */
 export class StopWatch extends PowerUp {
 	dtsPath = "shapes/items/stopwatch.dts";
-	pickUpName = (state.modification === 'gold')? "Stopped Time PowerUp!" : "Stopped Time PowerUp!";
+	pickUpName = (state.modification === 'gold') ? "Stopped Time PowerUp!" : "Stopped Time PowerUp!";
 	sounds = ["puwatchvoice.wav", "usewatch.wav"];
 	watchSound: AudioSource;
 	timeBonus: number;
 	audio: any;
 	cooldownDuration = 4000; // Override the default cooldown duration for the Stop Watch;
 	stopWatchTime: number | undefined;
-	
-	
-		constructor(element: MissionElementItem) {
-				super(element);
 
-				this.stopWatchTime = MisParser.parseNumber(String(element.stopwatchtime)) || 5000; // Default to 5000 if not set
-				this.timeBonus = this.stopWatchTime;
-		}
+
+	constructor(element: MissionElementItem) {
+		super(element);
+
+		this.stopWatchTime = element.stopwatchtime ? MisParser.parseNumber(element.stopwatchtime) : 5000; // Default to 5000 if not set
+		this.timeBonus = this.stopWatchTime;
+	}
 
 	pickUp(): boolean {
 		return this.level.pickUpPowerUp(this);
@@ -32,8 +32,6 @@ export class StopWatch extends PowerUp {
 		// This is done to modify the shapes and force shapes behaviour in level...which will ultimately freeze
 		// as long as the watch is active
 		this.level.stopWatchActive = true;
-
-		if (!this.level.schedule) return;
 
 		// Stop any previous watchSound if activated already...avoiding sound glitches
 		if (this.level.timeTravelSound) {

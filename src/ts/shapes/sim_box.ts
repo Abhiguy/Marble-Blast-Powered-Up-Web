@@ -25,7 +25,7 @@ export class SimBox extends Shape {
 		this.initialPosition = this.worldPosition.clone();
 		this.initialOrientation = this.worldOrientation.clone();
 		this.rigidBody.position = this.initialPosition.clone(); // Boxes Will move from their initial transform...
-        this.rigidBody.orientation = this.initialOrientation.clone();
+		this.rigidBody.orientation = this.initialOrientation.clone();
 		this.size = new Vector3(1, 1, 1);
 		this.rigidBody.linearVelocity = new Vector3(0, 0, 0);
 	}

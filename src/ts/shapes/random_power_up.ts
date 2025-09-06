@@ -8,7 +8,7 @@ import { TimeTravel } from "./time_travel";
 
 // https://stackoverflow.com/questions/39392853/is-there-a-type-for-class-in-typescript-and-does-any-include-it
 interface Type<T> extends Function {
-    new (...args: any[]): T;
+	new(...args: any[]): T;
 }
 
 export const POSSIBLE_POWERUPS: Type<PowerUp>[] = [SuperJump, SuperSpeed, Helicopter, SuperBounce, ShockAbsorber, TimeTravel];

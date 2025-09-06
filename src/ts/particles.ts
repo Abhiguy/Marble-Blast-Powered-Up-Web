@@ -8,7 +8,7 @@ import { Vector3 } from "./math/vector3";
 import { Matrix4 } from "./math/matrix4";
 
 const PATHS = ['particles/bubble.png', 'particles/saturn.png', 'particles/smoke.png', 'particles/spark.png', 'particles/star.png', 'particles/twirl.png', 'particles/rain.png', 'particles/snow.png'];
-const MAX_PARTICLES_PER_GROUP = 2**14;
+const MAX_PARTICLES_PER_GROUP = 2 ** 14;
 
 /** The options for a single particle. */
 interface ParticleOptions {
@@ -79,7 +79,7 @@ const uvs = new Float32Array(Array(MAX_PARTICLES_PER_GROUP).fill([
 
 const indices: number[] = [];
 for (let i = 0; i < MAX_PARTICLES_PER_GROUP; i++) indices.push(
-	4*i + 0, 4*i + 1, 4*i + 2, 4*i + 0, 4*i + 2, 4*i + 3
+	4 * i + 0, 4 * i + 1, 4 * i + 2, 4 * i + 0, 4 * i + 2, 4 * i + 3
 );
 
 /** Manages emitters and particles. */
@@ -393,7 +393,7 @@ export const particleNodeEmittersEmitterOptions = {
 			lifetimeVariance: 10,
 			dragCoefficient: 0,
 			acceleration: 0,
-			colors: [{r: 1, g: 1, b: 0, a: 0}, {r: 1, g: 1, b: 0, a: 1}, {r: 1, g: 1, b: 1, a: 0}],
+			colors: [{ r: 1, g: 1, b: 0, a: 0 }, { r: 1, g: 1, b: 0, a: 1 }, { r: 1, g: 1, b: 1, a: 0 }],
 			sizes: [0.4, 0.4, 0.4],
 			times: [0, 0.15, 1]
 		}
@@ -415,7 +415,7 @@ export const particleNodeEmittersEmitterOptions = {
 			lifetimeVariance: 150,
 			dragCoefficient: 0.8,
 			acceleration: 0,
-			colors: [{r: 0.56, g: 0.36, b: 0.26, a: 1}, {r: 0.56, g: 0.36, b: 0.26, a: 0}],
+			colors: [{ r: 0.56, g: 0.36, b: 0.26, a: 1 }, { r: 0.56, g: 0.36, b: 0.26, a: 0 }],
 			sizes: [0.5, 1],
 			times: [0, 1]
 		}
@@ -437,7 +437,7 @@ export const particleNodeEmittersEmitterOptions = {
 			lifetimeVariance: 150,
 			dragCoefficient: 0.8,
 			acceleration: 0,
-			colors: [{r: 0.56, g: 0.36, b: 0.26, a: 1}, {r: 0.56, g: 0.36, b: 0.26, a: 0}],
+			colors: [{ r: 0.56, g: 0.36, b: 0.26, a: 1 }, { r: 0.56, g: 0.36, b: 0.26, a: 0 }],
 			sizes: [0.5, 1],
 			times: [0, 1]
 		}
@@ -459,90 +459,90 @@ export const particleNodeEmittersEmitterOptions = {
 			lifetimeVariance: 150,
 			dragCoefficient: 0.8,
 			acceleration: 0,
-			colors: [{r: 0.56, g: 0.36, b: 0.26, a: 1}, {r: 0.56, g: 0.36, b: 0.26, a: 0}],
+			colors: [{ r: 0.56, g: 0.36, b: 0.26, a: 1 }, { r: 0.56, g: 0.36, b: 0.26, a: 0 }],
 			sizes: [0.5, 1],
 			times: [0, 1]
 		}
 	}
-}
+};
 
 export const RainLocal = {
-        ejectionPeriod: 0.7,
-        ambientVelocity: new Vector3(0, 0, -127),
-        ejectionVelocity: 0,
-        velocityVariance: 0,
-        emitterLifetime: Infinity,
-        spawnOffset() {
-            let randomPointInCircle = Util.randomPointInUnitCircle();
-            return new Vector3(randomPointInCircle.x * 37, randomPointInCircle.y * 37, Math.random() * 0.4 - 0.5);
-        },
-        inheritedVelFactor: 0,
-        particleOptions: {
-            texture: 'particles/rain.png',
-            blending: BlendingType.Normal,
-            spinSpeed: 0,
-            spinRandomMin: 0,
-            spinRandomMax: 0,
-            lifetime: 10000,
-            lifetimeVariance: 200,
-            dragCoefficient: 0,
-            acceleration: 0,
-            colors: [{r: 0.4, g: 0.4, b: 0.8, a: 1}, {r: 0.4, g: 0.4, b: 0.8, a: 1}, {r: 0.4, g: 0.4, b: 0.8, a: 1}],
-            sizes: [3, 4.5, 6],
-            times: [0, 0.2, 1]
-        }
-}
+	ejectionPeriod: 0.7,
+	ambientVelocity: new Vector3(0, 0, -127),
+	ejectionVelocity: 0,
+	velocityVariance: 0,
+	emitterLifetime: Infinity,
+	spawnOffset() {
+		let randomPointInCircle = Util.randomPointInUnitCircle();
+		return new Vector3(randomPointInCircle.x * 37, randomPointInCircle.y * 37, Math.random() * 0.4 - 0.5);
+	},
+	inheritedVelFactor: 0,
+	particleOptions: {
+		texture: 'particles/rain.png',
+		blending: BlendingType.Normal,
+		spinSpeed: 0,
+		spinRandomMin: 0,
+		spinRandomMax: 0,
+		lifetime: 10000,
+		lifetimeVariance: 200,
+		dragCoefficient: 0,
+		acceleration: 0,
+		colors: [{ r: 0.4, g: 0.4, b: 0.8, a: 1 }, { r: 0.4, g: 0.4, b: 0.8, a: 1 }, { r: 0.4, g: 0.4, b: 0.8, a: 1 }],
+		sizes: [3, 4.5, 6],
+		times: [0, 0.2, 1]
+	}
+};
 
 export const BubbleLocal = {
-        ejectionPeriod: 0.62,//0.65
-        ambientVelocity: new Vector3(0, 0, 82),
-        ejectionVelocity: 0,
-        velocityVariance: 0,
-        emitterLifetime: Infinity,
-        spawnOffset() {
-            let randomPointInCircle = Util.randomPointInUnitCircle();
-            return new Vector3(randomPointInCircle.x * 60, randomPointInCircle.y * 60, Math.random() * 0.4 - 0.5);
-        },
-        inheritedVelFactor: 0,
-        particleOptions: {
-            texture: 'particles/bubble.png',
-            blending: BlendingType.Normal,
-            spinSpeed: 0,
-            spinRandomMin: 0,
-            spinRandomMax: 0,
-            lifetime: 10000,
-            lifetimeVariance: 200,
-            dragCoefficient: 0,
-            acceleration: 0,
-            colors: [{r: 0.4, g: 0.4, b: 0.8, a: 1}, {r: 0.4, g: 0.4, b: 0.8, a: 1}, {r: 0.4, g: 0.4, b: 0.8, a: 1}],
-            sizes: [0.4, 1.25, 0.5],
-            times: [0, 0.2, 1]
-        }
-}
+	ejectionPeriod: 0.62,//0.65
+	ambientVelocity: new Vector3(0, 0, 82),
+	ejectionVelocity: 0,
+	velocityVariance: 0,
+	emitterLifetime: Infinity,
+	spawnOffset() {
+		let randomPointInCircle = Util.randomPointInUnitCircle();
+		return new Vector3(randomPointInCircle.x * 60, randomPointInCircle.y * 60, Math.random() * 0.4 - 0.5);
+	},
+	inheritedVelFactor: 0,
+	particleOptions: {
+		texture: 'particles/bubble.png',
+		blending: BlendingType.Normal,
+		spinSpeed: 0,
+		spinRandomMin: 0,
+		spinRandomMax: 0,
+		lifetime: 10000,
+		lifetimeVariance: 200,
+		dragCoefficient: 0,
+		acceleration: 0,
+		colors: [{ r: 0.4, g: 0.4, b: 0.8, a: 1 }, { r: 0.4, g: 0.4, b: 0.8, a: 1 }, { r: 0.4, g: 0.4, b: 0.8, a: 1 }],
+		sizes: [0.4, 1.25, 0.5],
+		times: [0, 0.2, 1]
+	}
+};
 
 export const SnowLocal = {
-        ejectionPeriod: 0.7,
-        ambientVelocity: new Vector3(0, 0, -56),
-        ejectionVelocity: 0,
-        velocityVariance: 0,
-        emitterLifetime: Infinity,
-        spawnOffset() {
-            let randomPointInCircle = Util.randomPointInUnitCircle();
-            return new Vector3(randomPointInCircle.x * 70, randomPointInCircle.y * 70, Math.random() * 0.4 - 0.5);
-        },
-        inheritedVelFactor: 0,
-        particleOptions: {
-            texture: 'particles/snow.png',
-            blending: BlendingType.Normal,
-            spinSpeed: 0,
-            spinRandomMin: 0,
-            spinRandomMax: 0,
-            lifetime: 10000,
-            lifetimeVariance: 200,
-            dragCoefficient: 0,
-            acceleration: 0,
-            colors: [{r: 0.8, g: 0.8, b: 0.8, a: 1}, {r: 0.8, g: 0.8, b: 0.8, a: 1}, {r: 0.8, g: 0.8, b: 0.8, a: 1}],
-            sizes: [0.25, 0.5, 0.25],
-            times: [0, 0.2, 1]
-        }
-}
+	ejectionPeriod: 0.7,
+	ambientVelocity: new Vector3(0, 0, -56),
+	ejectionVelocity: 0,
+	velocityVariance: 0,
+	emitterLifetime: Infinity,
+	spawnOffset() {
+		let randomPointInCircle = Util.randomPointInUnitCircle();
+		return new Vector3(randomPointInCircle.x * 70, randomPointInCircle.y * 70, Math.random() * 0.4 - 0.5);
+	},
+	inheritedVelFactor: 0,
+	particleOptions: {
+		texture: 'particles/snow.png',
+		blending: BlendingType.Normal,
+		spinSpeed: 0,
+		spinRandomMin: 0,
+		spinRandomMax: 0,
+		lifetime: 10000,
+		lifetimeVariance: 200,
+		dragCoefficient: 0,
+		acceleration: 0,
+		colors: [{ r: 0.8, g: 0.8, b: 0.8, a: 1 }, { r: 0.8, g: 0.8, b: 0.8, a: 1 }, { r: 0.8, g: 0.8, b: 0.8, a: 1 }],
+		sizes: [0.25, 0.5, 0.25],
+		times: [0, 0.2, 1]
+	}
+};

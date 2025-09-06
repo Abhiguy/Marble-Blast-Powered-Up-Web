@@ -1,82 +1,75 @@
 import { Trigger } from "./trigger";
 import { state } from "../state";
-import { MissionElementTrigger } from "../parsing/mis_parser";
+import { MisParser, MissionElementTrigger } from "../parsing/mis_parser";
 import { Level } from "../level";
 
-interface WhirliTriggerElement extends MissionElementTrigger {
-  order?: string;
-  prev?: string;
-  lap?: string;
-}
-
-interface MarbleWithLapProps {
-  lastWT?: number;
-  lapTime?: number;
-  lapped?: boolean;
-}
-
 export class WhirliTrigger extends Trigger {
-  element: WhirliTriggerElement;
+	element: MissionElementTrigger;
 
-  order: number;
-  prev: number;
-  lap: boolean;
-  level: Level;
+	order: number;
+	prev: number;
+	lap: boolean;
+	level: Level;
 
-  // Global lap stats tracking (static vars like prefs)
-  static prefGFLapTime = 0;
-  static prefGFLaps = 0;
+	// Global lap stats tracking (static vars like prefs)
+	static totalLapTime = 0;
+	static lapsCompleted = 0;
 
-  constructor(element: WhirliTriggerElement, level: Level) {
-    super(element, level);
-    this.element = element;
-    this.level = level;
+	// Laps state
+	static lastWT = 0;
+	static lapTime = 0;
+	static lapped = false;
 
-    this.order = Number(element.order) || 0;
-    this.prev = Number(element.prev) || 0;
-    this.lap = element.lap === "1" || element.lap === "true";
-  }
+	constructor(element: MissionElementTrigger, level: Level) {
+		super(element, level);
+		this.element = element;
+		this.level = level;
 
-  onMarbleEnter() {
-    const marble = this.level.marble as MarbleWithLapProps;
+		this.order = element.order ? MisParser.parseNumber(element.order) : 0;
+		this.prev = element.prev ? MisParser.parseNumber(element.prev) : 0;
+		this.lap = MisParser.parseBoolean(element.lap);
+	}
 
-    // Marble lap properties....already present in marble class
-    if (marble.lastWT === undefined) marble.lastWT = 0;
-    if (marble.lapTime === undefined) marble.lapTime = 0;
-    if (marble.lapped === undefined) marble.lapped = false;
+	reset(): void {
+		WhirliTrigger.lastWT = 0;
+		WhirliTrigger.lapTime = 0;
+		WhirliTrigger.lapped = false;
+	}
 
-    if (marble.lastWT === this.prev) {
-      marble.lastWT = this.order;
+	onMarbleEnter() {
+		// Marble lap properties....already present in marble class
+		if (WhirliTrigger.lastWT === this.prev) {
+			WhirliTrigger.lastWT = this.order;
 
-      if (this.lap) {
-        const elapsedTime = this.level.getCurrentTime();
-        const lap = elapsedTime - marble.lapTime;
-        marble.lapTime = elapsedTime;
+			if (this.lap) {
+				const elapsedTime = this.level.getCurrentTime();
+				const lap = elapsedTime - WhirliTrigger.lapTime;
+				WhirliTrigger.lapTime = elapsedTime;
 
-        WhirliTrigger.prefGFLapTime += lap;
-        WhirliTrigger.prefGFLaps++;
+				WhirliTrigger.totalLapTime += lap;
+				WhirliTrigger.lapsCompleted++;
 
-        if (marble.lapped) {
-          if (WhirliTrigger.prefGFLaps % 10 === 0) {
-            const avg = WhirliTrigger.prefGFLapTime / WhirliTrigger.prefGFLaps;
-            state.menu.hud.displayHelp(
-              `Average Lap Time: ${formatTime(avg)}\n` +
-              `Total Laps: ${WhirliTrigger.prefGFLaps}, Total Time Wasted: ${formatTime(WhirliTrigger.prefGFLapTime)}\n` +
-              `Get a life!`,
-              true
-            );
-          }
-        } else {
-          marble.lapped = true;
-        }
-      }
-    }
-  }
+				if (WhirliTrigger.lapped) {
+					if (WhirliTrigger.lapsCompleted % 10 === 0) {
+						const avg = WhirliTrigger.totalLapTime / WhirliTrigger.lapsCompleted;
+						state.menu.hud.displayHelp(
+							`Average Lap Time: ${formatTime(avg)}\n` +
+							`Total Laps: ${WhirliTrigger.lapsCompleted}, Total Time Wasted: ${formatTime(WhirliTrigger.totalLapTime)}\n` +
+							`Get a life!`,
+							true
+						);
+					}
+				} else {
+					WhirliTrigger.lapped = true;
+				}
+			}
+		}
+	}
 }
 
 // Helper function to format time (minutes:seconds.milliseconds)
 function formatTime(seconds: number): string {
-  const mins = Math.floor(seconds / 60);
-  const secs = (seconds % 60).toFixed(2);
-  return `${mins}:${secs.padStart(5, "0")}`;
+	const mins = Math.floor(seconds / 60);
+	const secs = (seconds % 60).toFixed(2);
+	return `${mins}:${secs.padStart(5, "0")}`;
 }

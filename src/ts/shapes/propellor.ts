@@ -13,24 +13,24 @@ export class Propellor extends Shape {
 		this.level.replay.recordMarbleContact(this);
 	}
 
-	tick(time: TimeState, onlyVisual = false) {	
+	tick(time: TimeState, onlyVisual = false) {
 		super.tick(time, onlyVisual);
 
-		if (!onlyVisual&& this.level.marble && this.level.marble.body) {
-		// Follow the marble
-		let dir = this.level.marble.body.position.clone().sub(this.worldPosition).normalize();
-        dir.z = 0;
-        dir.normalize();
+		if (!onlyVisual && this.level.marble && this.level.marble.body) {
+			// Follow the marble
+			let dir = this.level.marble.body.position.clone().sub(this.worldPosition).normalize();
+			dir.z = 0;
+			dir.normalize();
 
-        // Compute yaw angle (rotation around Z)
-        let yaw = Math.atan2(dir.y, dir.x);
+			// Compute yaw angle (rotation around Z)
+			let yaw = Math.atan2(dir.y, dir.x);
 
-        const rotationQuat = new Quaternion();
-        rotationQuat.setFromAxisAngle(new Vector3(0, 0, 1), yaw);
+			const rotationQuat = new Quaternion();
+			rotationQuat.setFromAxisAngle(new Vector3(0, 0, 1), yaw);
 
-        this.group.orientation.copy(rotationQuat);
-		this.group.recomputeTransform();
+			this.group.orientation.copy(rotationQuat);
+			this.group.recomputeTransform();
 		}
-	}					
-					
+	}
+
 }

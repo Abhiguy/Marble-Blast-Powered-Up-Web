@@ -14,23 +14,26 @@ export class EndPad extends Shape {
 	fireworks: Firework[] = [];
 	sounds = ['firewrks.wav'];
 	inArea = 0; // Used to only trigger the event once
+	proximity: boolean;
 
 	/** @param isMain Whether or not this pad is the main pad, meaning it has to be touched for the level to end. All other pads are purely cosmetic. */
-	constructor(isMain: boolean) {
+	constructor(isMain: boolean, useProximity: boolean) {
 		super();
 
 		if (!isMain) return;
+
+		this.proximity = useProximity;
 
 		// Create the finish area collision geometry
 		let height = 4.8;
 		let radius = 1.7;
 		let transform = new Matrix4();
-		transform.compose(new Vector3(0, 0, height/2 + 0.2), new Quaternion().setFromEuler(new Euler(-Math.PI/2, 0, 0)), new Vector3(1, 1, 1));
+		transform.compose(new Vector3(0, 0, height / 2 + 0.2), new Quaternion().setFromEuler(new Euler(-Math.PI / 2, 0, 0)), new Vector3(1, 1, 1));
 
 		this.addCollider((scale: Vector3) => {
 			// Create the finish area collision geometry
 			// Scaling note: The actual height of the cylinder (here: the y scaling) doesn't change, it's always the same.
-			let finishArea = Util.createCylinderConvexHull(radius, height/2, 64, new Vector3(scale.x, 1, scale.y));
+			let finishArea = Util.createCylinderConvexHull(radius, height / 2, 64, new Vector3(scale.x, 1, scale.y));
 			finishArea.margin = 0.005; // OIMO had a margin of 0.005 on every shape. We somewhat try to correct for that by adding it back here.
 
 			return finishArea;
@@ -78,7 +81,7 @@ export class EndPad extends Shape {
 		// Unfreeze after the watch effect is over....
 		if (!this.level.stopWatchActive && this.isTSStatic) {
 			this.isTSStatic = false;
-			this.hasBeenRendered = false; 
+			this.hasBeenRendered = false;
 			this.group.recomputeTransform?.();
 		}
 
@@ -89,6 +92,16 @@ export class EndPad extends Shape {
 
 		// Skip rendering if static and already rendered
 		if (this.isTSStatic && this.hasBeenRendered) return;
+
+		if (this.proximity) {
+			let dist = this.level.marble.body.position.distanceTo(this.worldPosition);
+			if (dist < 10.0) {
+				this.setOpacity(1);
+			}
+			else {
+				this.setOpacity(0);
+			}
+		}
 
 		// Continue with visual tick
 		this.tick(time, true);
@@ -118,7 +131,7 @@ export const fireworkSmoke = {
 		lifetimeVariance: 200,
 		dragCoefficient: 0.5,
 		acceleration: 0,
-		colors: [{r: 1, g: 1, b: 0, a: 0}, {r: 1, g: 0, b: 0, a: 1}, {r: 1, g: 0, b: 0, a: 0}],
+		colors: [{ r: 1, g: 1, b: 0, a: 0 }, { r: 1, g: 0, b: 0, a: 1 }, { r: 1, g: 0, b: 0, a: 0 }],
 		sizes: [0.1, 0.2, 0.3],
 		times: [0, 0.2, 1]
 	}
@@ -142,7 +155,7 @@ export const redTrail = {
 		lifetimeVariance: 100,
 		dragCoefficient: 0,
 		acceleration: 0,
-		colors: [{r: 1, g: 1, b: 0, a: 1}, {r: 1, g: 0, b: 0, a: 1}, {r: 1, g: 0, b: 0, a: 0}],
+		colors: [{ r: 1, g: 1, b: 0, a: 1 }, { r: 1, g: 0, b: 0, a: 1 }, { r: 1, g: 0, b: 0, a: 0 }],
 		sizes: [0.1, 0.05, 0.01],
 		times: [0, 0.5, 1]
 	}
@@ -166,7 +179,7 @@ export const blueTrail = {
 		lifetimeVariance: 100,
 		dragCoefficient: 0,
 		acceleration: 0,
-		colors: [{r: 0, g: 0, b: 1, a: 1}, {r: 0.5, g: 0.5, b: 1, a: 1}, {r: 1, g: 1, b: 1, a: 0}],
+		colors: [{ r: 0, g: 0, b: 1, a: 1 }, { r: 0.5, g: 0.5, b: 1, a: 1 }, { r: 1, g: 1, b: 1, a: 0 }],
 		sizes: [0.1, 0.05, 0.01],
 		times: [0, 0.5, 1]
 	}
@@ -190,7 +203,7 @@ export const redSpark = {
 		lifetimeVariance: 50,
 		dragCoefficient: 0.5,
 		acceleration: 0,
-		colors: [{r: 1, g: 1, b: 0, a: 1}, {r: 1, g: 1, b: 0, a: 1}, {r: 1, g: 0, b: 0, a: 0}],
+		colors: [{ r: 1, g: 1, b: 0, a: 1 }, { r: 1, g: 1, b: 0, a: 1 }, { r: 1, g: 0, b: 0, a: 0 }],
 		sizes: [0.2, 0.2, 0.2],
 		times: [0, 0.5, 1]
 	}
@@ -214,7 +227,7 @@ export const blueSpark = {
 		lifetimeVariance: 200,
 		dragCoefficient: 0,
 		acceleration: 0,
-		colors: [{r: 0, g: 0, b: 1, a: 1}, {r: 0.5, g: 0.5, b: 1, a: 1}, {r: 1, g: 1, b: 1, a: 0}],
+		colors: [{ r: 0, g: 0, b: 1, a: 1 }, { r: 0.5, g: 0.5, b: 1, a: 1 }, { r: 1, g: 1, b: 1, a: 0 }],
 		sizes: [0.2, 0.2, 0.2],
 		times: [0, 0.5, 1]
 	}
@@ -256,11 +269,11 @@ export class Firework extends Scheduler {
 		// Update the trails
 		for (let trail of this.trails.slice()) {
 			let completion = Util.clamp((time - trail.spawnTime) / trail.lifetime, 0, 1);
-			completion = 1 - (1 - completion)**2; // ease-out
+			completion = 1 - (1 - completion) ** 2; // ease-out
 
 			// Make the trail travel along an arc (parabola, whatever)
 			let pos = this.pos.clone().multiplyScalar(1 - completion).add(trail.targetPos.clone().multiplyScalar(completion));
-			pos.sub(this.upDir.clone().multiplyScalar(completion**2)); // move slightly down along upDir parabola
+			pos.sub(this.upDir.clone().multiplyScalar(completion ** 2)); // move slightly down along upDir parabola
 			trail.smokeEmitter.setPos(pos, time);
 
 			if (completion === 1) {
@@ -291,11 +304,11 @@ export class Firework extends Scheduler {
 
 	/** Spawns a red or blue trail going in a random direction with a random speed. */
 	spawnTrail(time: number) {
-		let type: 'red' | 'blue' = (Math.random() < 0.5)? 'red' : 'blue';
+		let type: 'red' | 'blue' = (Math.random() < 0.5) ? 'red' : 'blue';
 
 		let lifetime = 250 + Math.random() * 2000;
 		let distanceFac = 0.5 + lifetime / 5000; // Make sure the firework doesn't travel a great distance way too quickly
-		let emitter = this.level.particles.createEmitter((type === 'red')? redTrail : blueTrail, this.pos);
+		let emitter = this.level.particles.createEmitter((type === 'red') ? redTrail : blueTrail, this.pos);
 
 		// Generate random 2D direction in a circle as before
 		let randomPointInCircle = Util.randomPointInUnitCircle();

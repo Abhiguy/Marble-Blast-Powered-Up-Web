@@ -9,26 +9,26 @@ export abstract class AbstractLavaFloor extends Shape {
 	emitters: ParticleEmitter[] = []; // Array of emitters spawned along with the floor
 
 	async onLevelStart() {
-        super.onLevelStart();
-        this.emitters = [];
+		super.onLevelStart();
+		this.emitters = [];
 
-        // Number of lava emitters across the floor
-        const numEmitters = 19; // many emitters spawned along with the floor at random offsets
-        const floorHalfWidth = 15; // half of the width of the surface to make sure nothing goes out of span
-        const floorHalfDepth = 15;   // half-depth of the lava floor
-        const maxHeight = 1.46; // spawning them just a lil above the floor. Heh..should have been doing this
+		// Number of lava emitters across the floor
+		const numEmitters = 19; // many emitters spawned along with the floor at random offsets
+		const floorHalfWidth = 15; // half of the width of the surface to make sure nothing goes out of span
+		const floorHalfDepth = 15;   // half-depth of the lava floor
+		const maxHeight = 1.46; // spawning them just a lil above the floor. Heh..should have been doing this
 
-        for (let i = 0; i < numEmitters; i++) {
-            // Strictly inside the floor bounds...
-            const offsetX = (Math.random() - 0.5) * 1.5 * floorHalfWidth;
-            const offsetY = (Math.random() - 0.5) * 1.5 * floorHalfDepth;
-            const offsetZ = Math.random() * maxHeight;
-            const pos = this.worldPosition.clone().add(new Vector3(offsetX, offsetY, offsetZ));
+		for (let i = 0; i < numEmitters; i++) {
+			// Strictly inside the floor bounds...
+			const offsetX = (Math.random() - 0.5) * 1.5 * floorHalfWidth;
+			const offsetY = (Math.random() - 0.5) * 1.5 * floorHalfDepth;
+			const offsetZ = Math.random() * maxHeight;
+			const pos = this.worldPosition.clone().add(new Vector3(offsetX, offsetY, offsetZ));
 
-            const emitter = this.level.particles.createEmitter(lavaemitter, pos);
-            this.emitters.push(emitter);
-        }
-    }
+			const emitter = this.level.particles.createEmitter(lavaemitter, pos);
+			this.emitters.push(emitter);
+		}
+	}
 	onMarbleContact(collision: Collision) {
 		this.level.audio.play(this.sounds[0]);
 

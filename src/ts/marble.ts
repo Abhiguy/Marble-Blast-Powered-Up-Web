@@ -48,7 +48,7 @@ export const bounceParticleOptions: ParticleEmitterOptions = {
 		lifetimeVariance: 100,
 		dragCoefficient: 0.5,
 		acceleration: -2,
-		colors: [{r: 0.9, g: 0, b: 0, a: 1}, {r: 0.9, g: 0.9, b: 0, a: 1}, {r: 0.9, g: 0.9, b: 0, a: 0}],
+		colors: [{ r: 0.9, g: 0, b: 0, a: 1 }, { r: 0.9, g: 0.9, b: 0, a: 1 }, { r: 0.9, g: 0.9, b: 0, a: 0 }],
 		sizes: [0.25, 0.25, 0.25],
 		times: [0, 0.75, 1]
 	}
@@ -71,7 +71,7 @@ const blastParticleOptions: ParticleEmitterOptions = {
 		lifetimeVariance: 250,
 		dragCoefficient: 0.2,
 		acceleration: -0.1,
-		colors: [{r: 25/255, g: 244/255, b: 255/255, a: 0.2}, {r: 25/255, g: 244/255, b: 255/255, a: 1}, {r: 25/255, g: 244/255, b: 255/255, a: 1}, {r: 25/255, g: 244/255, b: 255/255, a: 0}],
+		colors: [{ r: 25 / 255, g: 244 / 255, b: 255 / 255, a: 0.2 }, { r: 25 / 255, g: 244 / 255, b: 255 / 255, a: 1 }, { r: 25 / 255, g: 244 / 255, b: 255 / 255, a: 1 }, { r: 25 / 255, g: 244 / 255, b: 255 / 255, a: 0 }],
 		sizes: [0.1, 0.1, 0.1],
 		times: [0, 0.2, 0.75, 1]
 	}
@@ -94,7 +94,7 @@ const landMineParticle = {
 		lifetimeVariance: 150,
 		dragCoefficient: 0.8,
 		acceleration: 0,
-		colors: [{r: 0.56, g: 0.36, b: 0.26, a: 1}, {r: 0.56, g: 0.36, b: 0.26, a: 0}],
+		colors: [{ r: 0.56, g: 0.36, b: 0.26, a: 1 }, { r: 0.56, g: 0.36, b: 0.26, a: 0 }],
 		sizes: [0.5, 1],
 		times: [0, 1]
 	}
@@ -117,7 +117,7 @@ export const landMineSmokeParticle = {
 		lifetimeVariance: 300,
 		dragCoefficient: 0.85,
 		acceleration: -8,
-		colors: [{r: 0.56, g: 0.36, b: 0.26, a: 1}, {r: 0.2, g: 0.2, b: 0.2, a: 1}, {r: 0, g: 0, b: 0, a: 0}],
+		colors: [{ r: 0.56, g: 0.36, b: 0.26, a: 1 }, { r: 0.2, g: 0.2, b: 0.2, a: 1 }, { r: 0, g: 0, b: 0, a: 0 }],
 		sizes: [1, 1.5, 2],
 		times: [0, 0.5, 1]
 	}
@@ -140,7 +140,7 @@ export const landMineSparksParticle = {
 		lifetimeVariance: 350,
 		dragCoefficient: 0.75,
 		acceleration: -8,
-		colors: [{r: 0.6, g: 0.4, b: 0.3, a: 1}, {r: 0.6, g: 0.4, b: 0.3, a: 1}, {r: 1, g: 0.4, b: 0.3, a: 0}],
+		colors: [{ r: 0.6, g: 0.4, b: 0.3, a: 1 }, { r: 0.6, g: 0.4, b: 0.3, a: 1 }, { r: 1, g: 0.4, b: 0.3, a: 0 }],
 		sizes: [0.5, 0.25, 0.25],
 		times: [0, 0.5, 1]
 	}
@@ -163,7 +163,7 @@ const airujumpParticleOptions: ParticleEmitterOptions = {
 		lifetimeVariance: 250,
 		dragCoefficient: 0.5,
 		acceleration: -0.1,
-		colors: [{r: 255/255, g: 244/255, b: 25/255, a: 0.2}, {r: 255/255, g: 244/255, b: 25/255, a: 1}, {r: 255/255, g: 244/255, b: 25/255, a: 1}, {r: 255/255, g: 244/255, b: 25/255, a: 0}],
+		colors: [{ r: 255 / 255, g: 244 / 255, b: 25 / 255, a: 0.2 }, { r: 255 / 255, g: 244 / 255, b: 25 / 255, a: 1 }, { r: 255 / 255, g: 244 / 255, b: 25 / 255, a: 1 }, { r: 255 / 255, g: 244 / 255, b: 25 / 255, a: 0 }],
 		sizes: [0.1, 0.1, 0.1],
 		times: [0, 0.2, 0.75, 1]
 	}
@@ -186,7 +186,7 @@ const dashParticleOptions = {
 		lifetimeVariance: 150,
 		dragCoefficient: 0.25,
 		acceleration: 0,
-		colors: [{r: 0.5, g: 0.5, b: 0.9, a: 0}, {r: 0.5, g: 0.5, b: 0.9, a: 0.5}, {r: 0.5, g: 0.5, b: 0.9, a: 0}],
+		colors: [{ r: 0.5, g: 0.5, b: 0.9, a: 0 }, { r: 0.5, g: 0.5, b: 0.9, a: 0.5 }, { r: 0.5, g: 0.5, b: 0.9, a: 0 }],
 		sizes: [0.25, 0.25, 1],
 		times: [0, 0.25, 1]
 	}
@@ -195,7 +195,7 @@ const blastMaxParticleOptions = ParticleEmitter.cloneOptions(blastParticleOption
 blastMaxParticleOptions.ejectionVelocity = 4;
 blastMaxParticleOptions.ejectionPeriod = 0.7;
 blastMaxParticleOptions.particleOptions.dragCoefficient = 0.3;
-blastMaxParticleOptions.particleOptions.colors = blastMaxParticleOptions.particleOptions.colors.map(x => { x.r = 255/255; x.g = 159/255; x.b = 25/255; return x; });
+blastMaxParticleOptions.particleOptions.colors = blastMaxParticleOptions.particleOptions.colors.map(x => { x.r = 255 / 255; x.g = 159 / 255; x.b = 25 / 255; return x; });
 
 /** Controls marble behavior and responds to player input. */
 export class Marble {
@@ -275,6 +275,25 @@ export class Marble {
 	paper = false;
 	revealer = false;
 
+	/** For Handling How long Gyrocopter lasts-- Default (5000ms) */
+	gyrocopterTime = 5000;
+	/** Gyrocopter's Air acceleration -- Default (5) */
+	airAcceleration = 5;
+	/** For handling Gyrocopter's Gravity Intensity Multiplier -- Default (1/4th of default gravity (20)) or 0.25 times the level's gravity */
+	gyrocopterGravityMultiplier = 0.25;
+	/** For Handling how long Super Bounce lasts-- Default (5000ms) */
+	superBounceTime = 5000;
+	/** For Handling Super Bounce's  Bounce Restitution -- Default (0.9) */
+	superBounceBounceRestitution = 0.9;
+	/** For Handling how long Shock Absorber lasts-- Default (5000ms) */
+	shockAbsorberTime = 5000;
+	/** For Handling how long glue is active-- Default (5000ms) */
+	glueTime = 5000;
+	/** For Handling how long metal is active-- Default (5000ms) */
+	metalTime = 5000;
+	/** For Handling how long paper is active-- Default (5000ms) */
+	paperTime = 5000;
+
 	lastMovementVec = new Vector3();
 	beforeVel = new Vector3();
 	beforeAngVel = new Vector3();
@@ -306,8 +325,8 @@ export class Marble {
 	wallTouchTimer = 0;
 	lastGlueTouchTime = 0;
 
-	currentTexturePath: string = "shapes/balls/base.marble.png";
-	
+	currentTexturePath = "shapes/balls/base.marble.png";
+
 	constructor(level: Level) {
 		this.level = level;
 	}
@@ -335,7 +354,7 @@ export class Marble {
 			} catch (e) {
 				console.error("Failed to load custom marble texture:", e);
 			}
-		} 
+		}
 		else {
 			marbleTexture = await ResourceManager.getTexture("shapes/balls/base.marble.png");
 			this.currentTexturePath = "shapes/balls/base.marble.png";
@@ -423,7 +442,7 @@ export class Marble {
 		this.body.onAfterCollisionResponse = this.onAfterCollisionResponse.bind(this);
 
 		// Set the marble's default orientation to be close to actual MBP
-		this.body.orientation.setFromEuler(new Euler(Math.PI/2, Math.PI * 7/6, 0));
+		this.body.orientation.setFromEuler(new Euler(Math.PI / 2, Math.PI * 7 / 6, 0));
 
 		this.forcefield = new Shape();
 		this.forcefield.dtsPath = "shapes/images/glow_bounce.dts";
@@ -453,7 +472,7 @@ export class Marble {
 
 		this.helicopter = new Shape();
 		// Easter egg: Due to an iconic bug where the helicopter would instead look like a glow bounce, this can now happen 0.1% of the time.
-		this.helicopter.dtsPath = (Math.random() < 1 / 1000)? "shapes/images/glow_bounce.dts" : "shapes/images/helicopter.dts";
+		this.helicopter.dtsPath = (Math.random() < 1 / 1000) ? "shapes/images/glow_bounce.dts" : "shapes/images/helicopter.dts";
 		this.helicopter.castShadows = true;
 		await this.helicopter.init(this.level);
 		this.helicopter.setOpacity(0);
@@ -461,7 +480,7 @@ export class Marble {
 
 		this.airplaneimage = new Shape();
 		// Easter egg: Due to an iconic bug where the airplane would instead look like a glow bounce, this can now happen 0.1% of the time.
-		this.airplaneimage.dtsPath = (Math.random() < 1 / 1000)? "shapes/images/glow_bounce.dts" : "shapes/images/airplane.dts";
+		this.airplaneimage.dtsPath = (Math.random() < 1 / 1000) ? "shapes/images/glow_bounce.dts" : "shapes/images/airplane.dts";
 		this.airplaneimage.castShadows = true;
 		await this.airplaneimage.init(this.level);
 		this.airplaneimage.setOpacity(0);
@@ -559,9 +578,9 @@ export class Marble {
 	}
 
 	isOnGround() {
-	    // Only check collisions that are defined and have a normal
-	    return this.body.collisions.some(c => c && c.normal && Math.abs(c.normal.dot(this.level.currentUp)) > 0.8);
-    }
+		// Only check collisions that are defined and have a normal
+		return this.body.collisions.some(c => c && c.normal && Math.abs(c.normal.dot(this.level.currentUp)) > 0.8);
+	}
 
 	onBeforeIntegrate(dt: number) {
 		let allowUserInput = !state.menu.finishScreen.showing;
@@ -600,8 +619,7 @@ export class Marble {
 
 		this.lastMovementVec.copy(movementVec);
 
-		if (this.isFlyingPlane)
-		{
+		if (this.isFlyingPlane) {
 			let cameraOrient = this.level.camera.orientation;
 			let cameraForward = new Vector3(0, 0, -1);
 			cameraForward.applyQuaternion(cameraOrient);
@@ -618,45 +636,45 @@ export class Marble {
 
 		// Wall Bounce Handling Block for allowing a special jump if the player jumps on the ground after bounced back the wall when hitting it in the forgiveness window.
 		if (this.wallBounceTimer > 0) {
-		   this.wallBounceTimer -= dt * 1000;
+			this.wallBounceTimer -= dt * 1000;
 
-		   if (this.wallBounceTimer <= 0) {
-			   this.recentWallBounce = false;
-			   this.wallBounceTimer = 0;
+			if (this.wallBounceTimer <= 0) {
+				this.recentWallBounce = false;
+				this.wallBounceTimer = 0;
 			}
 		}
 
 		// Wall Touch Timer Handling Block for allowing a wall jump if the player jumps on touching a wall during this window then he feels a ejective force off the wall...
 		if (this.wallTouchTimer > 0) {
-		   this.wallTouchTimer -= dt * 1000;
+			this.wallTouchTimer -= dt * 1000;
 
-		   if (this.wallTouchTimer <= 0) {
-			   this.recentWallBounce = false;
-			   this.wallTouchTimer = 0;
+			if (this.wallTouchTimer <= 0) {
+				this.recentWallBounce = false;
+				this.wallTouchTimer = 0;
 			}
 		}
 
 		// "late jump" detection
 		if (!this.isOnGround() && isPressed('jump')) {
-		   // Cast the marble's shape slightly downward to check for ground proximity
-		   const down = this.level.currentUp.clone().multiplyScalar(-1);
-		   const movement = down.clone().multiplyScalar(this.radius + 0.35); // 0.35 is the "forgiveness" window
-		   const hits = this.level.world.castShape(this.shape, movement, 1);
+			// Cast the marble's shape slightly downward to check for ground proximity
+			const down = this.level.currentUp.clone().multiplyScalar(-1);
+			const movement = down.clone().multiplyScalar(this.radius + 0.35); // 0.35 is the "forgiveness" window
+			const hits = this.level.world.castShape(this.shape, movement, 1);
 
-		   // If we hit something (ground is close), allow a pending special jump
-		   if (hits.length > 0) {
-			  this.pendingSpecialJump = true;
+			// If we hit something (ground is close), allow a pending special jump
+			if (hits.length > 0) {
+				this.pendingSpecialJump = true;
 			}
 		}
 
 		// Detect if we're touching a wall to allow wall jump
 		if (!this.isOnGround()) {
 			const directions = [
-			new Vector3(1, 0, 0),
-			new Vector3(-1, 0, 0),
-			new Vector3(0, 1, 0),
-			new Vector3(0, -1, 0)
-		];
+				new Vector3(1, 0, 0),
+				new Vector3(-1, 0, 0),
+				new Vector3(0, 1, 0),
+				new Vector3(0, -1, 0)
+			];
 
 			for (const dir of directions) {
 				const movement = dir.clone().multiplyScalar(this.radius + 0.15);
@@ -668,7 +686,7 @@ export class Marble {
 				}
 			}
 		}
-		
+
 
 		// The axis of rotation (for angular velocity) is the cross product of the current up vector and the movement vector, since the axis of rotation is perpendicular to both.
 		let movementRotationAxis = this.level.currentUp.clone().cross(movementVec);
@@ -708,23 +726,23 @@ export class Marble {
 
 			if (angVel.length() > 300 * this.speedFac) angVel.multiplyScalar(300 * this.speedFac / angVel.length()); // Absolute max angular speed
 
-			if (dot2 + movementRotationAxis.length() > 12 * Math.PI*2 * inputStrength / contactNormalUpDot * this.speedFac) {
+			if (dot2 + movementRotationAxis.length() > 12 * Math.PI * 2 * inputStrength / contactNormalUpDot * this.speedFac) {
 				// Cap the rolling velocity
-				let newLength = Math.max(0, 12 * Math.PI*2 * inputStrength / contactNormalUpDot * this.speedFac - dot2);
+				let newLength = Math.max(0, 12 * Math.PI * 2 * inputStrength / contactNormalUpDot * this.speedFac - dot2);
 				movementRotationAxis.normalize().multiplyScalar(newLength);
 			}
 		} else {
 			// Handle airborne movement
 			// Angular acceleration isn't quite as speedy
-			movementRotationAxis.multiplyScalar(1/2);
+			movementRotationAxis.multiplyScalar(1 / 2);
 
 			let time = this.level.timeState;
 
 			let airMovementVector = movementVec.clone();
-			let airVelocity =  3.2; // Change air velocity for the helicopter
+			let airVelocity = 3.2; // Change air velocity for the helicopter
 
-			if (time.currentAttemptTime - this.helicopterEnableTime < this.level.GyrocopterTime) airVelocity = this.level.AirAcceleration; // Original gyrocopter air velocity (5)
-			if (time.currentAttemptTime - this.helicopterEnableTimex2 < this.level.GyrocopterTime * 2) airVelocity = this.level.AirAcceleration * 3; // Doubled gyrocopter air velocity (15)
+			if (time.currentAttemptTime - this.helicopterEnableTime < this.gyrocopterTime) airVelocity = this.airAcceleration; // Original gyrocopter air velocity (5)
+			if (time.currentAttemptTime - this.helicopterEnableTimex2 < this.gyrocopterTime * 2) airVelocity = this.airAcceleration * 3; // Doubled gyrocopter air velocity (15)
 			if (this.level.mission.title === "Simulacrum") airVelocity = 16; // Vaccum in Simulacrum level...increased air acceleration
 
 			if (this.level.finishTime) airVelocity = 0;
@@ -780,8 +798,8 @@ export class Marble {
 		}
 
 		if (this.justLanded && (isPressed('jump') || this.level.jumpQueued)) {
-		 this.level.jumpQueued = true; // Queue a jump if space is held on landing
-		 this.justLanded = false;
+			this.level.jumpQueued = true; // Queue a jump if space is held on landing
+			this.justLanded = false;
 		}
 
 		this.slidingTimeout--;
@@ -798,7 +816,7 @@ export class Marble {
 				this.airjumpsLeft--;
 			}
 		}
-   }
+	}
 
 	onAfterIntegrate() {
 		// We'll need these for collision response lata
@@ -825,7 +843,7 @@ export class Marble {
 				position.y = startPosition.y;
 				vel.x = vel.y = 0;
 			}
-			
+
 			let angVel = this.body.angularVelocity;
 			// Cap the angular velocity so it doesn't go haywire
 			if (angVel.length() > 60) angVel.normalize().multiplyScalar(60);
@@ -835,7 +853,7 @@ export class Marble {
 			this.shape.friction = 0.05;
 		} else if (time.currentAttemptTime - this.iceEnableTime < 5000) {
 			this.shape.friction = 0.05;
-		} 
+		}
 		else {
 			this.shape.friction = 1;
 		}
@@ -854,11 +872,11 @@ export class Marble {
 		this.lastContactNormal.copy(contactNormal);
 
 		// Improve glue responsiveness at non contact with anything or if in mid air
-		if (this.level.timeState.currentAttemptTime - this.glueEnableTime < this.level.GlueTime) {
-			this.level.setUp(this.lastContactNormal.clone().normalize()); 
+		if (this.level.timeState.currentAttemptTime - this.glueEnableTime < this.glueTime) {
+			this.level.setUp(this.lastContactNormal.clone().normalize());
 			this.lastGlueTouchTime = this.level.timeState.currentAttemptTime;
 		}
-		
+
 		let lastSurfaceRelativeVelocity = this.beforeVel.clone().sub(contactShape.body.linearVelocity);
 		let surfaceRelativeVelocity = this.body.linearVelocity.clone().sub(contactShape.body.linearVelocity);
 		let maxDotSlide = 0.5; // 30°
@@ -890,15 +908,15 @@ export class Marble {
 		// If using a doubled shock absorber...give the marble a yeet on steep slopes if having angular velocity...
 		// Doubled Shock Absorber helps marble climb steep slopes very easily..
 		if (this.shockAbsorberEnableTimex2 > 0 && collision.restitution < 0.5) {
-		let dot = -this.beforeVel.dot(contactNormal);
+			let dot = -this.beforeVel.dot(contactNormal);
 			if (dot >= 0.01 && contactNormal.z < 0.86) { // Slopes only... Limit to slopes steeper than ~30°
 				let gravityDir = contactNormal.clone(); // Acts as slope normal
-				let tangent = new Vector3(0, 0, -1).projectOnPlane(gravityDir).normalize().negate(); 
+				let tangent = new Vector3(0, 0, -1).projectOnPlane(gravityDir).normalize().negate();
 				let frictionBoost = tangent.multiplyScalar(dot * 1.2); // strong anti-gravity friction necessary for climbing
 				this.body.linearVelocity.add(frictionBoost);
 			}
 		}
-		
+
 		// Create a certain velocity boost on collisions with walls based on angular velocity. This assists in making wall-hits feel more natural.
 		let angularBoost = this.body.angularVelocity.clone().cross(contactNormal).multiplyScalar((1 - Math.abs(contactNormalUpDot)) * contactNormal.dot(this.body.linearVelocity) / (Math.PI * 2) / 15);
 		if (angularBoost.length() >= 0.01) {
@@ -914,76 +932,76 @@ export class Marble {
 
 		// Handle jumping
 		if (contactNormalUpDot > 1e-6 && !state.menu.finishScreen.showing && (isPressed('jump') || this.level.jumpQueued)) {
-		   let jumpStrength = this.jumpImpulse;
+			let jumpStrength = this.jumpImpulse;
 
-		// Only allow special jump if custom jump/dash is enabled
-		if (this.level.enableCustomJumpAndDash && this.wallBounceHappened) {
-		   jumpStrength = this.specialJumpImpulse;
-		}
-
-		this.setLinearVelocityInDirection( contactNormal,
-		jumpStrength + contactShape.body.linearVelocity.dot(contactNormal),
-		true,
-		() => {
-			this.playJumpSound();
-			if (jumpStrength === this.specialJumpImpulse) {
-				// The Wall Jump...is done when continuously hugging the wall for 1.5 secs and jumping simultaneously causes the wall jump
-				if (this.wallTouchTimer >= 1500) {
-					let movementVector = new Vector3(1, 0, 0);
-					movementVector.applyAxisAngle(new Vector3(0, 0, 1), this.level.yaw);
-					this.body.linearVelocity.addScaledVector(movementVector, 20);
-					this.level.audio.play('bounce_boing.wav');
-				} else {
-					// Not a wall jump, play special jump sound
-					this.level.audio.play('jump_special.wav');
-				}
+			// Only allow special jump if custom jump/dash is enabled
+			if (this.level.enableCustomJumpAndDash && this.wallBounceHappened) {
+				jumpStrength = this.specialJumpImpulse;
 			}
-			if (this.level.replay.canStore) this.level.replay.jumpSoundTimes.push(this.level.replay.currentTickIndex);
-		});
 
-		// Set up auto double jump if this was a normal ground jump
-		if (this.level.enableCustomJumpAndDash && jumpStrength === this.jumpImpulse && this.autoDoubleJumpPending) {
-			this.autoDoubleJumpPending = true;
-		//  this.lastJumpY = this.body.position.y; // or z, depending on your up axis
-		//  this.maxJumpHeight = this.body.position.y; // or z
-	   
-		// Estimate time to apex: t = v / g
-		// Use the up axis for gravity (usually 20 in the game or the default gravity)
-		const gravity = Math.abs(this.level.world.gravity.y || this.level.world.gravity.z || -10);
-		const timeToApex = this.jumpImpulse / gravity;
-
-		setTimeout(() => {
-		// Only do the second jump if we're not on the ground (still in air)
-		if (!this.isOnGround()) {
-			this.setLinearVelocityInDirection(
-				this.level.currentUp,
-				this.jumpImpulse + this.body.linearVelocity.dot(this.level.currentUp),
+			this.setLinearVelocityInDirection(contactNormal,
+				jumpStrength + contactShape.body.linearVelocity.dot(contactNormal),
 				true,
 				() => {
 					this.playJumpSound();
+					if (jumpStrength === this.specialJumpImpulse) {
+						// The Wall Jump...is done when continuously hugging the wall for 1.5 secs and jumping simultaneously causes the wall jump
+						if (this.wallTouchTimer >= 1500) {
+							let movementVector = new Vector3(1, 0, 0);
+							movementVector.applyAxisAngle(new Vector3(0, 0, 1), this.level.yaw);
+							this.body.linearVelocity.addScaledVector(movementVector, 20);
+							this.level.audio.play('bounce_boing.wav');
+						} else {
+							// Not a wall jump, play special jump sound
+							this.level.audio.play('jump_special.wav');
+						}
+					}
 					if (this.level.replay.canStore) this.level.replay.jumpSoundTimes.push(this.level.replay.currentTickIndex);
-					  }
-			);
-		}
-			 this.autoDoubleJumpPending = false;
-			 }, timeToApex * 1000); // Convert to ms
-		}
+				});
+
+			// Set up auto double jump if this was a normal ground jump
+			if (this.level.enableCustomJumpAndDash && jumpStrength === this.jumpImpulse && this.autoDoubleJumpPending) {
+				this.autoDoubleJumpPending = true;
+				//  this.lastJumpY = this.body.position.y; // or z, depending on your up axis
+				//  this.maxJumpHeight = this.body.position.y; // or z
+
+				// Estimate time to apex: t = v / g
+				// Use the up axis for gravity (usually 20 in the game or the default gravity)
+				const gravity = Math.abs(this.level.world.gravity.y || this.level.world.gravity.z || -10);
+				const timeToApex = this.jumpImpulse / gravity;
+
+				setTimeout(() => {
+					// Only do the second jump if we're not on the ground (still in air)
+					if (!this.isOnGround()) {
+						this.setLinearVelocityInDirection(
+							this.level.currentUp,
+							this.jumpImpulse + this.body.linearVelocity.dot(this.level.currentUp),
+							true,
+							() => {
+								this.playJumpSound();
+								if (this.level.replay.canStore) this.level.replay.jumpSoundTimes.push(this.level.replay.currentTickIndex);
+							}
+						);
+					}
+					this.autoDoubleJumpPending = false;
+				}, timeToApex * 1000); // Convert to ms
+			}
 		}
 
 		// Detect wall bounce (not ground)
 		if (this.level.enableCustomJumpAndDash && contactNormalUpDot < 0.5 && surfaceRelativeVelocity.length() > 2) {
-		   this.recentWallBounce = true;
-		   this.wallBounceTimer = this.WALL_BOUNCE_FORGIVENESS;
-		   this.wallBounceHappened = true;
+			this.recentWallBounce = true;
+			this.wallBounceTimer = this.WALL_BOUNCE_FORGIVENESS;
+			this.wallBounceHappened = true;
 		}
 		// Reset wall bounce if we landed on the ground (not a wall)
 		if (contactNormalUpDot > 0.5) {
-		   this.recentWallBounce = false;
-		   this.wallBounceTimer = 0;
-		   this.airjumpsLeft = 2;        
-		   this.airjumpAllowed = true;
-		   this.justLanded = true;
-		   this.wallBounceHappened = false;
+			this.recentWallBounce = false;
+			this.wallBounceTimer = 0;
+			this.airjumpsLeft = 2;
+			this.airjumpAllowed = true;
+			this.justLanded = true;
+			this.wallBounceHappened = false;
 		}
 
 		// Create bounce particles
@@ -994,7 +1012,7 @@ export class Marble {
 		if (impactVelocity > 6) this.showBounceParticles();
 
 		// Handle bounce sound
-		let volume = Util.clamp((impactVelocity / 12)**1.5, 0, 1);
+		let volume = Util.clamp((impactVelocity / 12) ** 1.5, 0, 1);
 		if (impactVelocity > 1) {
 			// Play a collision impact sound
 			this.playBounceSound(volume);
@@ -1040,7 +1058,7 @@ export class Marble {
 
 
 	tick(time: TimeState) {
-		if (time.currentAttemptTime - this.shockAbsorberEnableTime < this.level.ShockAbsorberTime || time.currentAttemptTime - this.shockAbsorberEnableTimex2 < this.level.ShockAbsorberTime * 2) { // Doubled Shock Absorber time is always doubled by 2
+		if (time.currentAttemptTime - this.shockAbsorberEnableTime < this.shockAbsorberTime || time.currentAttemptTime - this.shockAbsorberEnableTimex2 < this.shockAbsorberTime * 2) { // Doubled Shock Absorber time is always doubled by 2
 			// Show the shock absorber (takes precedence over super bounce)
 			this.forcefield.setOpacity(1);
 			this.shape.restitution = 0.01;  // Yep it's not actually zero
@@ -1050,10 +1068,10 @@ export class Marble {
 				this.shockAbsorberSound.setLoop(true);
 				this.shockAbsorberSound.play();
 			}
-		} else if (time.currentAttemptTime - this.superBounceEnableTime < this.level.SuperBounceTime || time.currentAttemptTime - this.superBounceEnableTimex2 < this.level.SuperBounceTime * 2) { // Doubled Super Bounce time is always doubled by 2
+		} else if (time.currentAttemptTime - this.superBounceEnableTime < this.superBounceTime || time.currentAttemptTime - this.superBounceEnableTimex2 < this.superBounceTime * 2) { // Doubled Super Bounce time is always doubled by 2
 			// Show the super bounce
 			this.forcefield.setOpacity(1);
-			this.shape.restitution = this.level.BounceRestitution; // Super bounce original bounce restitution
+			this.shape.restitution = this.superBounceBounceRestitution; // Super bounce original bounce restitution
 
 			this.shockAbsorberSound?.stop();
 			this.shockAbsorberSound = null;
@@ -1067,7 +1085,7 @@ export class Marble {
 			this.superBounceSound?.stop();
 			this.superBounceSound = null;
 		}
-		if (time.currentAttemptTime - this.superBounceEnableTime < this.level.SuperBounceTime || time.currentAttemptTime - this.superBounceEnableTimex2 < this.level.SuperBounceTime * 2) { // Doubled Super Bounce time is always doubled by 2
+		if (time.currentAttemptTime - this.superBounceEnableTime < this.superBounceTime || time.currentAttemptTime - this.superBounceEnableTimex2 < this.superBounceTime * 2) { // Doubled Super Bounce time is always doubled by 2
 			// Play the super bounce sound
 			if (!this.superBounceSound) {
 				this.superBounceSound = this.level.audio.createAudioSource('forcefield.wav');
@@ -1075,11 +1093,11 @@ export class Marble {
 				this.superBounceSound.play();
 			}
 		}
-		if (time.currentAttemptTime - this.helicopterEnableTime < this.level.GyrocopterTime) {
+		if (time.currentAttemptTime - this.helicopterEnableTime < this.gyrocopterTime) {
 			// Show the helicopter
 			this.helicopter.setOpacity(1);
 			this.helicopter.setTransform(new Vector3(0, 0, this.radius - DEFAULT_RADIUS).applyQuaternion(this.level.newOrientationQuat), this.level.newOrientationQuat, new Vector3(1, 1, 1));
-			this.level.setGravityIntensity(this.level.defaultGravity * this.level.GyrocopterGravityMultiplier); // Original gyrocopter gravity
+			this.level.setGravityIntensity(this.level.defaultGravity * this.gyrocopterGravityMultiplier); // Original gyrocopter gravity
 
 			if (!this.helicopterSound) {
 				this.helicopterSound = this.level.audio.createAudioSource('use_gyrocopter.wav');
@@ -1087,11 +1105,11 @@ export class Marble {
 				this.helicopterSound.play();
 			}
 
-		} else if (time.currentAttemptTime - this.helicopterEnableTimex2 < this.level.GyrocopterTime * 2) { // Doubled Gyrocopter's time is multiplied by 2 (i.e now it's 10 seconds)
+		} else if (time.currentAttemptTime - this.helicopterEnableTimex2 < this.gyrocopterTime * 2) { // Doubled Gyrocopter's time is multiplied by 2 (i.e now it's 10 seconds)
 			// Show the helicopter
 			this.helicopter.setOpacity(1);
 			this.helicopter.setTransform(new Vector3(0, 0, this.radius - DEFAULT_RADIUS).applyQuaternion(this.level.newOrientationQuat), this.level.newOrientationQuat, new Vector3(1, 1, 1));
-			this.level.setGravityIntensity(this.level.defaultGravity * this.level.GyrocopterGravityMultiplier * 0.5); // Doubled gyrocopter gravity (halfed to that of normal gyrocopter gravity)
+			this.level.setGravityIntensity(this.level.defaultGravity * this.gyrocopterGravityMultiplier * 0.5); // Doubled gyrocopter gravity (halfed to that of normal gyrocopter gravity)
 
 			if (!this.helicopterSound) {
 				this.helicopterSound = this.level.audio.createAudioSource('use_gyrocopter.wav');
@@ -1113,31 +1131,31 @@ export class Marble {
 			this.rollingSound.stop();
 			this.rollingMegaMarbleSound?.play();
 		} else if (time.currentAttemptTime - this.megaMarbleEnableTime >= 10000) {
-			this.setRadius(this.level.mission.hasUltraMarble? ULTRA_RADIUS : DEFAULT_RADIUS);
+			this.setRadius(this.level.mission.hasUltraMarble ? ULTRA_RADIUS : DEFAULT_RADIUS);
 			this.rollingSound.play();
 			this.rollingMegaMarbleSound?.stop();
 		}
-		if (time.currentAttemptTime - this.metalEnableTime < this.level.MetalTime) {
+		if (time.currentAttemptTime - this.metalEnableTime < this.metalTime) {
 			this.rollingSound.stop();
 			this.rollingMetalSound?.play();
 			if (!this.metalSound) {
 				this.metalSound = this.level.audio.createAudioSource('usemetal.wav');
 				this.metalSound.play();
-			} 
-		} else if (time.currentAttemptTime - this.metalEnableTime >= this.level.MetalTime) {
+			}
+		} else if (time.currentAttemptTime - this.metalEnableTime >= this.metalTime) {
 			this.rollingSound.play();
 			this.rollingMetalSound?.stop();
 			this.metalSound?.stop();
 			this.metalSound = null;
 		}
-		if (time.currentAttemptTime - this.paperEnableTime < this.level.PaperTime) {
+		if (time.currentAttemptTime - this.paperEnableTime < this.paperTime) {
 			this.rollingSound.stop();
 			this.rollingPaperSound?.play();
 			if (!this.paperSound) {
 				this.paperSound = this.level.audio.createAudioSource('usepaper.wav');
 				this.paperSound.play();
-			} 
-		} else if (time.currentAttemptTime - this.paperEnableTime >= this.level.PaperTime) {
+			}
+		} else if (time.currentAttemptTime - this.paperEnableTime >= this.paperTime) {
 			this.rollingSound.play();
 			this.rollingPaperSound?.stop();
 			this.paperSound?.stop();
@@ -1150,7 +1168,7 @@ export class Marble {
 			if (!this.oilSound) {
 				this.oilSound = this.level.audio.createAudioSource('useglue.wav');
 				this.oilSound.play();
-			} 
+			}
 		} else {
 			this.oilimage.setOpacity(0); // Stop the oil image
 			this.shape.friction = 1;
@@ -1158,17 +1176,17 @@ export class Marble {
 			this.oilSound = null;
 		}
 
-		if (time.currentAttemptTime - this.glueEnableTime < this.level.GlueTime) {
+		if (time.currentAttemptTime - this.glueEnableTime < this.glueTime) {
 			// Show the glue image
 			this.glueimage.setOpacity(1);
 			//this.level.setUp(this.lastContactNormal.clone().normalize());  // glue powerup sticks the marble on last contact with surface 
 			if (time.currentAttemptTime - this.lastGlueTouchTime > 620 && this.oldGravity) {
-					this.level.setUp(this.oldGravity);// Reset the up vector after 5 seconds or if marble is in open air..reset gravity immediately..
+				this.level.setUp(this.oldGravity);// Reset the up vector after 5 seconds or if marble is in open air..reset gravity immediately..
 			}
 			if (!this.glueSound) {
 				this.glueSound = this.level.audio.createAudioSource('useglue.wav');
 				this.glueSound.play();
-			} 
+			}
 		} else {
 			this.glueimage.setOpacity(0); // Stop the glue image
 			if (this.oldGravity) this.level.setUp(this.oldGravity); // safe now
@@ -1212,35 +1230,35 @@ export class Marble {
 		// Handle dynamic texture swapping based on metal powerup..marble's skin changes on activating metal.
 		if (this.metal && this.currentTexturePath !== "shapes/balls/metal.marble.png") {
 			ResourceManager.getTexture("shapes/balls/metal.marble.png").then(tex => {
-			if (this.sphere?.materials[0]) {
-				this.sphere.materials[0].diffuseMap = tex;
-				this.currentTexturePath = "shapes/balls/metal.marble.png";
-			}
-		});
+				if (this.sphere?.materials[0]) {
+					this.sphere.materials[0].diffuseMap = tex;
+					this.currentTexturePath = "shapes/balls/metal.marble.png";
+				}
+			});
 		} else if (!this.metal && this.currentTexturePath === "shapes/balls/metal.marble.png") {
 			ResourceManager.getTexture("shapes/balls/base.marble.png").then(tex => {
-			if (this.sphere?.materials[0]) {
-				this.sphere.materials[0].diffuseMap = tex;
-				this.currentTexturePath = "shapes/balls/base.marble.png";
-			}
-		});
+				if (this.sphere?.materials[0]) {
+					this.sphere.materials[0].diffuseMap = tex;
+					this.currentTexturePath = "shapes/balls/base.marble.png";
+				}
+			});
 		}
 
 		// Handle dynamic texture swapping based on paper powerup..marble's skin changes on activating paper.
 		if (this.paper && this.currentTexturePath !== "shapes/balls/paper.marble.png") {
 			ResourceManager.getTexture("shapes/balls/paper.marble.png").then(tex => {
-			if (this.sphere?.materials[0]) {
-				this.sphere.materials[0].diffuseMap = tex;
-				this.currentTexturePath = "shapes/balls/paper.marble.png";
-			}
-		});
+				if (this.sphere?.materials[0]) {
+					this.sphere.materials[0].diffuseMap = tex;
+					this.currentTexturePath = "shapes/balls/paper.marble.png";
+				}
+			});
 		} else if (!this.paper && this.currentTexturePath === "shapes/balls/paper.marble.png") {
 			ResourceManager.getTexture("shapes/balls/base.marble.png").then(tex => {
-			if (this.sphere?.materials[0]) {
-				this.sphere.materials[0].diffuseMap = tex;
-				this.currentTexturePath = "shapes/balls/base.marble.png";
-			}
-		});
+				if (this.sphere?.materials[0]) {
+					this.sphere.materials[0].diffuseMap = tex;
+					this.currentTexturePath = "shapes/balls/base.marble.png";
+				}
+			});
 		}
 	}
 	playJumpSound() {
@@ -1254,14 +1272,14 @@ export class Marble {
 		// Suppress Bounce sound in Simulacrum level
 		if (this.level.mission.title === "Simulacrum") return;
 		// Except it Everything's fine :)
-		let prefix = (this.radius === MEGA_MARBLE_RADIUS)? 'mega_' : '';
-		let metalbounce = (this.metal)? 'metal_' : '';
-		let paperbounce = (this.paper)? 'paper_' : '';
+		let prefix = (this.radius === MEGA_MARBLE_RADIUS) ? 'mega_' : '';
+		let metalbounce = (this.metal) ? 'metal_' : '';
+		let paperbounce = (this.paper) ? 'paper_' : '';
 		this.level.audio.play(['bouncehard1.wav', 'bouncehard2.wav', 'bouncehard3.wav', 'bouncehard4.wav'].map(x => prefix + x), volume);
-		if(this.metal) {
+		if (this.metal) {
 			this.level.audio.play(['bouncehard1.wav', 'bouncehard2.wav', 'bouncehard3.wav', 'bouncehard4.wav'].map(x => metalbounce + x), volume);
 		}
-		if(this.paper) {
+		if (this.paper) {
 			this.level.audio.play(['bouncehard1.wav', 'bouncehard2.wav', 'bouncehard3.wav', 'bouncehard4.wav'].map(x => paperbounce + x), volume);
 		}
 	}
@@ -1272,7 +1290,7 @@ export class Marble {
 	}
 
 	/** Sets linear velocity in a specific direction, but capped. Used for things like jumping and bumpers. */
-	setLinearVelocityInDirection(direction: Vector3, magnitude: number, onlyIncrease: boolean, onIncrease: () => any = () => {}) {
+	setLinearVelocityInDirection(direction: Vector3, magnitude: number, onlyIncrease: boolean, onIncrease: () => any = () => { }) {
 		let unitVelocity = this.body.linearVelocity.clone().normalize();
 		let dot = unitVelocity.dot(direction);
 		let directionalSpeed = dot * this.body.linearVelocity.length();
@@ -1294,7 +1312,7 @@ export class Marble {
 		let angVel = this.body.angularVelocity;
 
 		// Naive: Just assume the marble moves as if nothing was in its way and it continued with its current velocity.
-		let predictedPosition = pos.clone().addScaledVector(linVel, 1 / PHYSICS_TICK_RATE).addScaledVector(this.level.world.gravity, 1 / PHYSICS_TICK_RATE**2 / 2);
+		let predictedPosition = pos.clone().addScaledVector(linVel, 1 / PHYSICS_TICK_RATE).addScaledVector(this.level.world.gravity, 1 / PHYSICS_TICK_RATE ** 2 / 2);
 		let movementDiff = predictedPosition.clone().sub(pos);
 
 		let dRotation = angVel.clone().multiplyScalar(1 / PHYSICS_TICK_RATE);
@@ -1321,8 +1339,8 @@ export class Marble {
 
 		this.forcefield.render(time);
 		this.glueimage.render(time);
-		if (time.currentAttemptTime - this.helicopterEnableTime < this.level.GyrocopterTime) this.helicopter.render(time);
-		if (time.currentAttemptTime - this.helicopterEnableTimex2 < this.level.GyrocopterTime * 2) this.helicopter.render(time);
+		if (time.currentAttemptTime - this.helicopterEnableTime < this.gyrocopterTime) this.helicopter.render(time);
+		if (time.currentAttemptTime - this.helicopterEnableTimex2 < this.gyrocopterTime * 2) this.helicopter.render(time);
 
 		// Update the teleporting look:
 
@@ -1366,35 +1384,41 @@ export class Marble {
 		this.cubeMap.render(this.level.scene, this.cubeCamera, 4);
 	}
 
-	enableSuperBounce(time: TimeState) {
+	enableSuperBounce(time: TimeState, duration: number) {
 		this.superBounceEnableTime = time.currentAttemptTime;
+		this.superBounceTime = duration;
 	}
 
-	enableShockAbsorber(time: TimeState) {
+	enableShockAbsorber(time: TimeState, duration: number) {
 		this.shockAbsorberEnableTime = time.currentAttemptTime;
+		this.shockAbsorberTime = duration;
 	}
 
-	enableHelicopter(time: TimeState) {
+	enableHelicopter(time: TimeState, helicopterDuration: number) {
 		this.helicopterEnableTime = time.currentAttemptTime;
+		this.gyrocopterTime = helicopterDuration;
 	}
 
-	enableHelicopterDoubler(time: TimeState) {
+	enableHelicopterDoubler(time: TimeState, helicopterDuration: number) {
 		this.helicopterEnableTimex2 = time.currentAttemptTime;
+		this.gyrocopterTime = helicopterDuration;
 	}
 
-	enableSuperBounceDoubler(time: TimeState) {
+	enableSuperBounceDoubler(time: TimeState, duration: number) {
 		this.superBounceEnableTimex2 = time.currentAttemptTime;
+		this.superBounceTime = duration;
 	}
 
-	enableShockAbsorberDoubler(time: TimeState) {
+	enableShockAbsorberDoubler(time: TimeState, duration: number) {
 		this.shockAbsorberEnableTimex2 = time.currentAttemptTime;
+		this.shockAbsorberTime = duration;
 	}
 	enableOil(time: TimeState) {
 		this.oilEnableTime = time.currentAttemptTime;
 	}
 	enableGlue(time: TimeState, duration: number) {
 		this.glueEnableTime = time.currentAttemptTime;
-		this.level.GlueTime = duration; // Store how long glue should last...default or overridden from mis.
+		this.glueTime = duration; // Store how long glue should last...default or overridden from mis.
 		this.oldGravity = this.level.currentUp.clone();
 	}
 	enableAirplane() {
@@ -1403,18 +1427,18 @@ export class Marble {
 	}
 	enableMetal(time: TimeState, duration: number) {
 		this.metalEnableTime = time.currentAttemptTime;
-		this.level.MetalTime = duration; // Store how long metal should last...default or overridden from mis.
+		this.metalTime = duration; // Store how long metal should last...default or overridden from mis.
 	}
 	enablePaper(time: TimeState, duration: number) {
 		this.paperEnableTime = time.currentAttemptTime;
-		this.level.PaperTime = duration; // Store how long paper should last...default or overridden from mis.
+		this.paperTime = duration; // Store how long paper should last...default or overridden from mis.
 	}
 	enableIce(time: TimeState) {
 		this.iceEnableTime = time.currentAttemptTime;
 	}
 
 	enableTeleportingLook(time: TimeState) {
-		let completion = (this.teleportDisableTime !== null)? Util.clamp((time.currentAttemptTime - this.teleportDisableTime) / TELEPORT_FADE_DURATION, 0, 1) : 1;
+		let completion = (this.teleportDisableTime !== null) ? Util.clamp((time.currentAttemptTime - this.teleportDisableTime) / TELEPORT_FADE_DURATION, 0, 1) : 1;
 		this.teleportEnableTime = time.currentAttemptTime - TELEPORT_FADE_DURATION * (1 - completion);
 		this.teleportDisableTime = null;
 	}
@@ -1436,7 +1460,7 @@ export class Marble {
 		this.body.linearVelocity.add(impulse);
 		this.level.audio.play('blast.wav');
 		this.level.particles.createEmitter(
-			(this.level.blastAmount > 1)? blastMaxParticleOptions : blastParticleOptions,
+			(this.level.blastAmount > 1) ? blastMaxParticleOptions : blastParticleOptions,
 			null,
 			() => this.body.position.clone().addScaledVector(this.level.currentUp, -this.radius * 0.4),
 			new Vector3(1, 1, 1).addScaledVector(Util.absVector(this.level.currentUp.clone()), -0.8)
@@ -1495,7 +1519,7 @@ export class Marble {
 		this.slidingTimeout = 0;
 		this.predictedPosition.copy(this.body.position);
 		this.predictedOrientation.copy(this.body.orientation);
-		this.setRadius(this.level.mission.hasUltraMarble? ULTRA_RADIUS : DEFAULT_RADIUS);
+		this.setRadius(this.level.mission.hasUltraMarble ? ULTRA_RADIUS : DEFAULT_RADIUS);
 		this.airjumpAllowed = true;
 		this.airjumpsLeft = 2;
 		this.dashAllowed = true;

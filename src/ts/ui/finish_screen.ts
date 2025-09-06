@@ -123,39 +123,39 @@ export abstract class FinishScreen {
 	abstract generateNameEntryText(place: number): string;
 
 	show() {
-	let level = state.level;
-	this.div.classList.remove('hidden');
+		let level = state.level;
+		this.div.classList.remove('hidden');
 
-	let elapsedTime = Math.max(level.finishTime.currentAttemptTime - GO_TIME, 0);
-	let bonusTime = Util.roundToMultiple(Math.max(0, elapsedTime - level.finishTime.gameplayClock), 1e-8);
-	let failedToQualify = false;
+		let elapsedTime = Math.max(level.finishTime.currentAttemptTime - GO_TIME, 0);
+		let bonusTime = Util.roundToMultiple(Math.max(0, elapsedTime - level.finishTime.gameplayClock), 1e-8);
+		let failedToQualify = false;
 
-	// ✅ First, calculate failedToQualify correctly
-	this.updateTimeElements(elapsedTime, bonusTime, this.failedToQualify);
+		// ✅ First, calculate failedToQualify correctly
+		this.updateTimeElements(elapsedTime, bonusTime, this.failedToQualify);
 
-	// ✅ Then use the correct logic using updated this.failedToQualify
-	if (level.mission.backwardClock) {
-		if (this.failedToQualify) {
-			this.showMessage('failed');
-		} else {
+		// ✅ Then use the correct logic using updated this.failedToQualify
+		if (level.mission.backwardClock) {
+			if (this.failedToQualify) {
+				this.showMessage('failed');
+			} else {
+				this.showMessage('qualified');
+			}
+		} else if (level.finishTime.gameplayClock <= level.mission.ultimateTime) {
+			this.showMessage('ultimate');
+		} else if (level.finishTime.gameplayClock <= level.mission.goldTime) {
+			this.showMessage('gold');
+		} else if (level.finishTime.gameplayClock <= level.mission.qualifyTime) {
 			this.showMessage('qualified');
+		} else {
+			this.showMessage('failed');
 		}
-	} else if (level.finishTime.gameplayClock <= level.mission.ultimateTime) {
-		this.showMessage('ultimate');
-	} else if (level.finishTime.gameplayClock <= level.mission.goldTime) {
-		this.showMessage('gold');
-	} else if (level.finishTime.gameplayClock <= level.mission.qualifyTime) {
-		this.showMessage('qualified');
-	} else {
-		this.showMessage('failed');
-	}
 
-	this.drawBestTimes();
+		this.drawBestTimes();
 
-	let bestTimes = StorageManager.getBestTimesForMission(level.mission.path, this.bestTimeCount, this.scorePlaceholderName);
-	let place = bestTimes.filter((time) => time[1] <= level.finishTime.gameplayClock).length; // The place is determined by seeing how many scores there currently are faster than the achieved time.
+		let bestTimes = StorageManager.getBestTimesForMission(level.mission.path, this.bestTimeCount, this.scorePlaceholderName);
+		let place = bestTimes.filter((time) => time[1] <= level.finishTime.gameplayClock).length; // The place is determined by seeing how many scores there currently are faster than the achieved time.
 
-	if (place < this.bestTimeCount && (!failedToQualify || this.storeNotQualified)) {
+		if (place < this.bestTimeCount && (!failedToQualify || this.storeNotQualified)) {
 			// Prompt the user to enter their name
 			this.nameEntryScreenDiv.classList.remove('hidden');
 			this.nameEntryText.textContent = this.generateNameEntryText(place);
@@ -167,13 +167,13 @@ export abstract class FinishScreen {
 			this.div.style.pointerEvents = '';
 		}
 
-	if (!this.failedToQualify && level.mission.type !== 'custom') {
-		let levelSelect = state.menu.levelSelect;
-		if (levelSelect.currentMission === level.mission) levelSelect.cycleMission(1); // Cycle to that next level, but only if it isn't already selected
+		if (!this.failedToQualify && level.mission.type !== 'custom') {
+			let levelSelect = state.menu.levelSelect;
+			if (levelSelect.currentMission === level.mission) levelSelect.cycleMission(1); // Cycle to that next level, but only if it isn't already selected
+		}
+		// Hide the replay button if the replay's invalid
+		this.viewReplayButton.style.display = level.replay.isInvalid ? 'none' : '';
 	}
-    // Hide the replay button if the replay's invalid
-	this.viewReplayButton.style.display = level.replay.isInvalid ? 'none' : '';
-}
 
 	hide() {
 		this.div.classList.add('hidden');
@@ -183,7 +183,7 @@ export abstract class FinishScreen {
 	drawBestTimes() {
 		let bestTimes = StorageManager.getBestTimesForMission(state.level.mission.path, this.bestTimeCount, this.scorePlaceholderName);
 		for (let i = 0; i < this.bestTimeCount; i++) {
-			this.updateBestTimeElement(this.bestTimeContainer.children[i] as HTMLDivElement, bestTimes[i], i+1);
+			this.updateBestTimeElement(this.bestTimeContainer.children[i] as HTMLDivElement, bestTimes[i], i + 1);
 		}
 	}
 

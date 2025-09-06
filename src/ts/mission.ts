@@ -76,7 +76,7 @@ export class Mission {
 	hasBlast = false;
 	quietTornados = false;
 	requireGravity = false;
-	Competency = false;
+	competency = false;
 	backwardClock = false;
 	hasUltraMarble = false;
 	level: Level;
@@ -104,16 +104,16 @@ export class Mission {
 		if (missionInfo.goldtime) mission.goldTime = MisParser.parseNumber(missionInfo.goldtime);
 		if (missionInfo.platinumtime) mission.goldTime = MisParser.parseNumber(missionInfo.platinumtime);
 		if (missionInfo.ultimatetime) mission.ultimateTime = MisParser.parseNumber(missionInfo.ultimatetime);
-        if (missionInfo?.qualifyscore) mission.qualifyScore = MisParser.parseNumber(missionInfo.qualifyscore);
+		if (missionInfo?.qualifyscore) mission.qualifyScore = MisParser.parseNumber(missionInfo.qualifyscore);
 		if (missionInfo.goldscore) mission.goldScore = MisParser.parseNumber(missionInfo.goldscore);
 		mission.type = missionInfo.type.toLowerCase() as any;
-		mission.modification = path.startsWith('mbp/')? 'platinum' : path.startsWith('mbu/')? 'ultra' : 'gold';
+		mission.modification = path.startsWith('mbp/') ? 'platinum' : path.startsWith('mbu/') ? 'ultra' : 'gold';
 		mission.hasEasterEgg = mission.allElements.some(element => element._type === MissionElementType.Item && element.datablock?.toLowerCase() === 'easteregg');
 		mission.setUltraFlags();
 		mission.noLoudTornados();
 		mission.compulsoryGravity();
-		mission.CompetencyLevel();
-		mission.backwardTimer()
+		mission.competencyLevel();
+		mission.backwardTimer();
 
 		return mission;
 	}
@@ -212,18 +212,18 @@ export class Mission {
 			}
 		}
 		if (missionInfo?.qualifyscore) {
-        this.qualifyScore = MisParser.parseNumber(missionInfo.qualifyscore);
-		console.log("Parsed qualifyScore from MissionInfo:", this.qualifyScore);
-        }
+			this.qualifyScore = MisParser.parseNumber(missionInfo.qualifyscore);
+			console.log("Parsed qualifyScore from MissionInfo:", this.qualifyScore);
+		}
 		this.missionInfo = missionInfo;
 		console.log('MissionInfo keys:', Object.keys(this.missionInfo));
-        console.log('MissionInfo object:', this.missionInfo);
+		console.log('MissionInfo object:', this.missionInfo);
 
 		this.setUltraFlags();
 		this.noLoudTornados();
 		this.compulsoryGravity();
 		this.backwardTimer();
-		this.CompetencyLevel();
+		this.competencyLevel();
 	}
 
 	setUltraFlags() {
@@ -236,27 +236,27 @@ export class Mission {
 	}
 
 	noLoudTornados() {
-    if ((this.missionInfo.quiettornados ?? '').toLowerCase() === 'yes')
-        this.quietTornados = true;
+		if ((this.missionInfo.quiettornados ?? '').toLowerCase() === 'yes')
+			this.quietTornados = true;
 	}
 
 	compulsoryGravity() {
-    if ((this.missionInfo.requiregravity ?? '').toLowerCase() === '1')
-        this.requireGravity = true;
+		if ((this.missionInfo.requiregravity ?? '').toLowerCase() === '1')
+			this.requireGravity = true;
 	}
 
-	CompetencyLevel() {
-    if ((this.missionInfo.competency ?? '').toLowerCase() === '1')
-        this.Competency = true;
+	competencyLevel() {
+		if ((this.missionInfo.competency ?? '').toLowerCase() === '1')
+			this.competency = true;
 	}
 
 	backwardTimer() {
 		let val = (this.missionInfo.backwardclock ?? '').toString().toLowerCase();
-    this.backwardClock = (val === 'true' || val === '1' || val === 'yes');
-    //if ((this.missionInfo.backwardclock ?? '').toLowerCase() === 'true')
-        //this.backwardClock = true;
-    //else
-        //this.backwardClock = false;
+		this.backwardClock = (val === 'true' || val === '1' || val === 'yes');
+		//if ((this.missionInfo.backwardclock ?? '').toLowerCase() === 'true')
+		//this.backwardClock = true;
+		//else
+		//this.backwardClock = false;
 	}
 
 	getDirectoryMissionPath() {
@@ -340,7 +340,7 @@ export class Mission {
 	async getDts(path: string) {
 		let dts: DtsFile = null;
 
-		let base = (state.modification === 'gold')? 'data/' : 'data_mbp/';
+		let base = (state.modification === 'gold') ? 'data/' : 'data_mbp/';
 
 		if (this.zipDirectory && this.zipDirectory.files['data/' + path]) {
 			// Get it from the zip
@@ -388,7 +388,7 @@ export class Mission {
 			}
 		}
 
-		result.push(...ResourceManager.getFullNamesOf(path, fallBackToCurrentModification? undefined : this.modification !== 'gold'));
+		result.push(...ResourceManager.getFullNamesOf(path, fallBackToCurrentModification ? undefined : this.modification !== 'gold'));
 
 		return result;
 	}
@@ -408,7 +408,7 @@ export class Mission {
 	async getTexture(path: string, fallBackToMainDataPath = false) {
 		path = path.toLowerCase();
 
-		let base = (this.modification === 'gold')? 'data/' : 'data_mbp/';
+		let base = (this.modification === 'gold') ? 'data/' : 'data_mbp/';
 
 		if (this.zipDirectory && this.zipDirectory.files[base + path]) {
 			let blob = await this.getBlobForFile(base + path);
@@ -417,7 +417,7 @@ export class Mission {
 
 			return texture;
 		} else {
-			let texture = await ResourceManager.getTexture(path, fallBackToMainDataPath? undefined : 'assets/' + base);
+			let texture = await ResourceManager.getTexture(path, fallBackToMainDataPath ? undefined : 'assets/' + base);
 
 			return texture;
 		}
@@ -426,7 +426,7 @@ export class Mission {
 	/** Gets a general resource from the mission resources. */
 	async getResource(path: string) {
 		path = path.toLowerCase();
-		let base = (this.modification === 'gold')? 'data/' : 'data_mbp/';
+		let base = (this.modification === 'gold') ? 'data/' : 'data_mbp/';
 
 		if (this.zipDirectory && this.zipDirectory.files[base + path]) {
 			let blob = await this.getBlobForFile(base + path);
@@ -439,7 +439,7 @@ export class Mission {
 	/** Gets an image from the mission resources. */
 	async getImage(path: string) {
 		path = path.toLowerCase();
-		let base = (this.modification === 'gold')? 'data/' : 'data_mbp/';
+		let base = (this.modification === 'gold') ? 'data/' : 'data_mbp/';
 
 		if (this.zipDirectory && this.zipDirectory.files[base + path]) {
 			let blob = await this.getBlobForFile(base + path);

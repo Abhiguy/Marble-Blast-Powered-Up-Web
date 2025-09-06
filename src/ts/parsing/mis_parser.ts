@@ -157,27 +157,27 @@ export interface MissionElementStaticShape extends MissionElementBase {
 	resettime?: string,
 	timeout?: string
 	index?: string;
-	chasespeed?: number | string;
-	x_axisrot?: number | string; // for rotating platforms
-	y_axisrot?: number | string;
-	z_axisrot?: number | string;
+	chasespeed?: string;
+	x_axisrot?: string; // for rotating platforms
+	y_axisrot?: string;
+	z_axisrot?: string;
 	keepgravity?: string;
 	keeppauses?: string;
-	rotmultiplier?: number | string;
-	my_x?: number | string; // for moving skymines
-    my_y?: number | string;
-    my_z?: number | string;
-	myspeed?: number | string;
+	rotmultiplier?: string;
+	my_x?: string; // for moving skymines
+	my_y?: string;
+	my_z?: string;
+	myspeed?: string;
 }
 
 /** Represents an item. */
 export interface MissionElementItem extends MissionElementBase {
 	/** Is unique for every element in the mission file. */
 	myindex?: string;
-	my_x?: number | string;
-    my_y?: number | string;
-    my_z?: number | string;
-	myspeed?: number | string;
+	my_x?: string;
+	my_y?: string;
+	my_z?: string;
+	myspeed?: string;
 	_type: MissionElementType.Item,
 	position: string,
 	rotation: string,
@@ -190,18 +190,18 @@ export interface MissionElementItem extends MissionElementBase {
 	timebonus?: string,
 	timepenalty?: string,
 	add?: string,
-	superjumpheight?: number | string;
-	superspeedstrength?: number | string;
-	gyrocoptergravitymultiplier?: number | string;
-	gyrocoptertime?: number | string;
-	airacceleration?: number | string;
-	bouncerestitution?: number | string;
-	superbouncetime?: number | string;
-	shockabsorbertime?: number | string;
-	stopwatchtime?: number | string;
-	gluetime?: number | string;
-	metaltime?: number | string;
-	papertime?: number | string;
+	superjumpheight?: string;
+	superspeedstrength?: string;
+	gyrocoptergravitymultiplier?: string;
+	gyrocoptertime?: string;
+	airacceleration?: string;
+	bouncerestitution?: string;
+	superbouncetime?: string;
+	shockabsorbertime?: string;
+	stopwatchtime?: string;
+	gluetime?: string;
+	metaltime?: string;
+	papertime?: string;
 }
 
 /** Holds the markers used for the path of a pathed interior. */
@@ -273,6 +273,10 @@ export interface MissionElementTrigger extends MissionElementBase {
 	// seamless motion trigger stuff:
 	offset?: string,
 	yaw?: string
+	// whirlitrigger
+	order?: string;
+	prev?: string;
+	lap?: string;
 }
 
 /** Represents the song choice. */

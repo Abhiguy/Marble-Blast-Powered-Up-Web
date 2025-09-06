@@ -7,7 +7,7 @@ import { PathedInterior } from "../pathed_interior";
 export class KaitenSupport extends Shape {
 	dtsPath = "shapes/dts_interiors/kaitensupport.dts";
 	collideable = false;
-	
+
 	tick(time: TimeState, onlyVisual = false) {
 		super.tick(time, onlyVisual);
 

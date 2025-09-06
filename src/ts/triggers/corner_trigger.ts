@@ -1,7 +1,6 @@
 import { Trigger } from "./trigger";
 import { state } from "../state";
 import { MissionElementTrigger } from "../parsing/mis_parser";
-import { addTrick, finishCombo } from "./tricks";
 
 interface CornerTriggerElement extends MissionElementTrigger {
 	pos?: string;
@@ -23,8 +22,13 @@ const invalidLapSequences = [
 export class CornerTrigger extends Trigger {
 	element: CornerTriggerElement;
 
-	static lapSequence: string = "";
-	static lapStartTime: number = 0;
+	static lapSequence = "";
+	static lapStartTime = 0;
+
+	reset(): void {
+		CornerTrigger.lapSequence = "";
+		CornerTrigger.lapStartTime = 0;
+	}
 
 	onMarbleEnter() {
 		if (!state.level?.mission.backwardClock) return;
@@ -50,13 +54,13 @@ export class CornerTrigger extends Trigger {
 			let delta = Math.max(1, Math.abs(CornerTrigger.lapStartTime - timeNow)); // avoid 0
 
 			const points = Math.floor(200000000 / delta);
-			addTrick("<spush><color:0000ff>Full Lap<spop>", points);
-			finishCombo();
+			this.level.trickState.addTrick("<spush><color:0000ff>Full Lap<spop>", points);
+			this.level.trickState.finishCombo();
 			state.menu.hud.displayAlert(`Full Lap\n${points.toLocaleString()}`, "#0000ffd0");
 
 			if (delta < 3000) {
-				addTrick("<spush><color:00ff00>Septic Eye<spop>", 50000);
-				finishCombo();
+				this.level.trickState.addTrick("<spush><color:00ff00>Septic Eye<spop>", 50000);
+				this.level.trickState.finishCombo();
 				state.menu.hud.displayAlert("Septic Eye\n50,000", "#00ff00d0");
 			}
 

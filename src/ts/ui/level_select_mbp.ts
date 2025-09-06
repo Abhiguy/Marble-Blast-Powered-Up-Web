@@ -168,7 +168,7 @@ export class MbpLevelSelect extends LevelSelect {
 			this.menu.setButtonVariant(this.difficultySelectorCollapsed,
 				['beginner', 'intermediate', 'advanced', 'expert', 'custom', 'sandbox'].indexOf(MissionLibrary.getDifficulty(arr))
 			);
-			this.difficultySelectorModificationIcon.src = "./assets/ui_mbp/play/" + ((MissionLibrary.getModification(arr) === 'gold')? "marble_gold.png" : (MissionLibrary.getModification(arr) === 'ultra')? "marble_ultra.png" : "marble_platinum.png");
+			this.difficultySelectorModificationIcon.src = "./assets/ui_mbp/play/" + ((MissionLibrary.getModification(arr) === 'gold') ? "marble_gold.png" : (MissionLibrary.getModification(arr) === 'ultra') ? "marble_ultra.png" : "marble_platinum.png");
 		}
 
 		this.updateBackground();
@@ -177,20 +177,20 @@ export class MbpLevelSelect extends LevelSelect {
 	displayMetadata() {
 		let mission = this.currentMission;
 
-		this.levelTitle.textContent = `#${this.currentMissionIndex+1}: ${mission.title}`;
+		this.levelTitle.textContent = `#${this.currentMissionIndex + 1}: ${mission.title}`;
 		this.levelArtist.textContent = 'Author: ' + mission.artist.trim();
 		this.levelDescription.textContent = mission.description;
 		// Hide Qualify/Par Time if backwardClock is set
-        if (mission.backwardClock) {
-           this.levelQualifyTime.innerHTML = '';
-        } else {
-		let qualifyTime = (mission.qualifyTime !== 0)? mission.qualifyTime : Infinity;
-		this.levelQualifyTime.innerHTML = `<span style="opacity: 0.8;">${mission.modification === 'gold'? 'Qualify' : 'Par'} Time: </span>` + (isFinite(qualifyTime)? Util.secondsToTimeString(qualifyTime / 1000) : 'N/A');
+		if (mission.backwardClock) {
+			this.levelQualifyTime.innerHTML = '';
+		} else {
+			let qualifyTime = (mission.qualifyTime !== 0) ? mission.qualifyTime : Infinity;
+			this.levelQualifyTime.innerHTML = `<span style="opacity: 0.8;">${mission.modification === 'gold' ? 'Qualify' : 'Par'} Time: </span>` + (isFinite(qualifyTime) ? Util.secondsToTimeString(qualifyTime / 1000) : 'N/A');
 		}
 
 		if (mission.hasEasterEgg) {
 			this.easterEggIcon.classList.remove('hidden');
-			this.easterEggIcon.src = StorageManager.data.collectedEggs.includes(mission.path)? './assets/ui_mbp/play/eggfound.png' : './assets/ui_mbp/play/eggnotfound.png';
+			this.easterEggIcon.src = StorageManager.data.collectedEggs.includes(mission.path) ? './assets/ui_mbp/play/eggfound.png' : './assets/ui_mbp/play/eggnotfound.png';
 		} else {
 			this.easterEggIcon.classList.add('hidden');
 		}
@@ -231,7 +231,7 @@ export class MbpLevelSelect extends LevelSelect {
 		element.style.color = '';
 		if (!this.currentMission) return;
 
-		if (score[1] <= this.currentMission.goldTime) element.style.color = (this.currentMission.modification === 'gold')? MBP_GOLD_COLOR : MBP_PLATINUM_COLOR;
+		if (score[1] <= this.currentMission.goldTime) element.style.color = (this.currentMission.modification === 'gold') ? MBP_GOLD_COLOR : MBP_PLATINUM_COLOR;
 		if (score[1] <= this.currentMission.ultimateTime) element.style.color = MBP_ULTIMATE_COLOR;
 	}
 
@@ -244,8 +244,8 @@ export class MbpLevelSelect extends LevelSelect {
 	updateBackground() {
 		let arr = this.currentMissionArray;
 		state.menu.backgroundImage.src =
-			(MissionLibrary.getModification(arr) === 'gold')? (state.menu as MbpMenu).mbgBg :
-			(MissionLibrary.getModification(arr) === 'ultra')? (state.menu as MbpMenu).mbuBg :
-			(state.menu as MbpMenu).mbpBg;
+			(MissionLibrary.getModification(arr) === 'gold') ? (state.menu as MbpMenu).mbgBg :
+				(MissionLibrary.getModification(arr) === 'ultra') ? (state.menu as MbpMenu).mbuBg :
+					(state.menu as MbpMenu).mbpBg;
 	}
 }

@@ -7,8 +7,7 @@ const GEM_COLORS = ["blue", "red", "yellow", "purple", "green", "turquoise", "or
 
 /** Dummy Gems */
 export class DummyGem extends Shape {
-	static all: DummyGem[] = [];
-	myindex:  number | undefined; // Index of the gem, used for hiding it
+	index: number | undefined; // Index of the gem, used for hiding it
 	dtsPath = "shapes/spareparts/gem.dts";
 	ambientRotate = true;
 	collideable = false;
@@ -20,41 +19,20 @@ export class DummyGem extends Shape {
 		super();
 
 		// Only assign myIndex if it exists in the element
-    
-        const parsed = MisParser.parseNumber(String(element.myindex));
-        this.myindex = (typeof parsed === "number" && !isNaN(parsed)) ? parsed : undefined;
+
+		const parsed = MisParser.parseNumber(element.myindex);
+		this.index = parsed;
 
 		// Determine the color of the gem:
 		let color = element.datablock.slice("DummyGemItem".length);
 		if (color.length === 0) color = DummyGem.pickRandomColor(); // Random if no color specified
 
 		this.matNamesOverride["base.gem"] = color.toLowerCase() + ".gem";
-		DummyGem.all.push(this);
-
 	}
 
 	hide() {
-        this.setOpacity?.(0);
-    }
-
-	static hideByIndex(index: number) {
-    const idx = Number(index);
-    for (const gem of DummyGem.all) {
-        // Debug log to see what's happening
-        console.log(
-            `[DummyGem.hideByIndex] gem.myIndex:`, gem.myindex,
-            '| typeof:', typeof gem.myindex,
-            '| idx:', idx,
-            '| will hide:', gem.myindex !== undefined && Number(gem.myindex) === idx
-        );
-        if (
-            gem.myindex !== undefined &&
-            Number(gem.myindex) === idx
-        ) {
-            gem.hide();
-        }
-    }
-}
+		this.setOpacity?.(0);
+	}
 
 	reset() {
 		super.reset();
@@ -63,7 +41,7 @@ export class DummyGem extends Shape {
 		this.setOpacity(1);
 		this.setCollisionEnabled(true);
 	}
-	
+
 	static pickRandomColor() {
 		return Util.randomFromArray(GEM_COLORS);
 	}

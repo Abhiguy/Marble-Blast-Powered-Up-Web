@@ -8,11 +8,11 @@ import { Matrix4 } from "../math/matrix4";
 export abstract class ForceShape extends Shape {
 	/** Creates a cone-shaped force area that widens as it gets farther away its origin. */
 	addConicForce(distance: number, arcangle: number, strength: number) {
-		let semiverticalangle = arcangle/2; // Self explanatory, the semi-vertical angle of the right circular cone
+		let semiverticalangle = arcangle / 2; // Self explanatory, the semi-vertical angle of the right circular cone
 		// Apparently, the tip of the cone in MB is a bit behind the center of the fan,
 		// we are not handling the cases the marble is just a little bit behind the fan, so we must adjust the strength accordingly.
 		// Strength of the fan is inversely proportional to the distance between the tip of the cone and the marble
-		let actualStrength = strength - (strength * (0.7/distance));
+		let actualStrength = strength - (strength * (0.7 / distance));
 		let actualDistance = distance - 0.7;
 
 		// Create a cone-shaped collider
@@ -29,7 +29,7 @@ export abstract class ForceShape extends Shape {
 			if (vec.length() > actualDistance) return; // Our distance is greater than the allowed distance, so we stop right here
 
 			// Maximum force is proportional to the negative of the distance between the marble and the tip of the cone
-			let maxF = Util.lerp(actualStrength, 0, vec.length()/actualDistance);
+			let maxF = Util.lerp(actualStrength, 0, vec.length() / actualDistance);
 
 			// Calculate the angle between the perpendicular and the relative position of the marble to the tip of the cone
 			let theta = perpendicular.angleTo(vec);
@@ -45,19 +45,19 @@ export abstract class ForceShape extends Shape {
 			let force = vec.clone();
 			force.normalize();
 
-			if(marble.metal) {
-				marble.body.linearVelocity.addScaledVector(force, forcemag * dt* 0.125);
+			if (marble.metal) {
+				marble.body.linearVelocity.addScaledVector(force, forcemag * dt * 0.125);
 			}
 			else if (level.stopWatchActive) {
 				// If the stopwatch is active, no force
 				marble.body.linearVelocity.addScaledVector(force, forcemag * dt * 0);
 			}
-			else if(marble.paper) {
-				marble.body.linearVelocity.addScaledVector(force, forcemag * dt* 2.5);
+			else if (marble.paper) {
+				marble.body.linearVelocity.addScaledVector(force, forcemag * dt * 2.5);
 			}
 			else {
 				// Now we apply it
-			    marble.body.linearVelocity.addScaledVector(force, forcemag * dt);
+				marble.body.linearVelocity.addScaledVector(force, forcemag * dt);
 			}
 		}, new Matrix4());
 	}
@@ -117,25 +117,18 @@ export abstract class ForceShape extends Shape {
 			let vec = marble.body.position.clone().sub(this.worldPosition);
 			if (vec.length() === 0) return;
 
-			let strengthFac = 1 - Util.clamp(vec.length() / radius, 0, 1)**2; // Quadratic falloff with distance
+			let strengthFac = 1 - Util.clamp(vec.length() / radius, 0, 1) ** 2; // Quadratic falloff with distance
 
-			if(marble.metal) {
-				marble.body.linearVelocity.addScaledVector(vec.normalize(), strength * strengthFac * dt * 0.125);
-			}
-			else if (level.stopWatchActive) {
-				marble.body.linearVelocity.addScaledVector(vec.normalize(), strength * strengthFac * dt * 0);
-			}
-			else if(marble.paper) {
-				marble.body.linearVelocity.addScaledVector(vec.normalize(), strength * strengthFac * dt * 2.5);
-			}
-			else if (level.levelFinished) {
-			// Especially for chasing tornado...which would carry off the marble with it when finished the level..but now it won't
-				marble.body.linearVelocity.addScaledVector(vec.normalize(), strength * strengthFac * dt * 0);
-			}
-			else {
-                marble.body.linearVelocity.addScaledVector(vec.normalize(), strength * strengthFac * dt);
-			}
-			
+			let subFactor = 1;
+			if (marble.metal)
+				subFactor = 0.125;
+			else if (marble.paper)
+				subFactor = 2.5;
+			if (level.stopWatchActive || level.levelFinished)
+				subFactor = 0;
+
+			marble.body.linearVelocity.addScaledVector(vec.normalize(), strength * strengthFac * dt * subFactor);
+
 		}, new Matrix4());
 	}
 
@@ -145,23 +138,17 @@ export abstract class ForceShape extends Shape {
 			let marble = this.level.marble;
 			let level = this.level;
 			if (marble.body.position.distanceTo(this.worldPosition) >= radius) return;
-			if(marble.metal) {
-				marble.body.linearVelocity.addScaledVector(forceVector, dt*0.125);
-			}
-			else if(marble.paper) {
-				marble.body.linearVelocity.addScaledVector(forceVector, dt*2.5);
-			}	
-			else if (level.stopWatchActive) {
-				marble.body.linearVelocity.addScaledVector(forceVector, dt*0);
-			}
-			else if (level.levelFinished) {
-			// Especially for chasing tornado...which would carry off the marble with it when finished the level..but now it won't
-				marble.body.linearVelocity.addScaledVector(forceVector, dt*0);
-			}
-            else {
-			// Simply add the force
-			marble.body.linearVelocity.addScaledVector(forceVector, dt);
-			}
+
+			let subFactor = 1;
+			if (marble.metal)
+				subFactor = 0.125;
+			else if (marble.paper)
+				subFactor = 2.5;
+			if (level.stopWatchActive || level.levelFinished)
+				subFactor = 0;
+
+			marble.body.linearVelocity.addScaledVector(forceVector, dt * subFactor);
+
 		}, new Matrix4());
 	}
 }
