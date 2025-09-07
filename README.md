@@ -3,7 +3,7 @@ A Web port of Marble Blast Powered Up. The marble physics code was taken from MB
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L4L71J89I2)
 
-Play it here: <br>
+Play it here: https://marbleblast-abhiverse.dedyn.io/<br>
 Support me on Discord: http://discordapp.com/users/1309941913956122645
 
 ## Features
